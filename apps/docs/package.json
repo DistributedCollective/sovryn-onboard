@@ -17,9 +17,9 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "eslint": "7.32.0",
-    "eslint-config-custom": "*",
+    "@sovryn/onboard-eslint-config": "*",
     "next-transpile-modules": "9.0.0",
-    "tsconfig": "*",
+    "@sovryn/onboard-tsconfig": "*",
     "@types/node": "^17.0.12",
     "@types/react": "17.0.48",
     "typescript": "^4.5.3"

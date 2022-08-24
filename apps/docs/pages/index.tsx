@@ -1,4 +1,4 @@
-import { Button } from "ui";
+import { Button } from "@sovryn/onboard-react";
 
 export default function Docs() {
   return (
