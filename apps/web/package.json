@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@sovryn/onboard-eslint-config": "*",
+    "eslint-config-custom": "*",
     "@sovryn/onboard-tsconfig": "*",
     "eslint": "7.32.0",
     "next-transpile-modules": "9.0.0",

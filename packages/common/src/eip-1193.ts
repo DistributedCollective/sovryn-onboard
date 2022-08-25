@@ -48,7 +48,6 @@ export const createEIP1193Provider = (
     }
 
     if (requestPatch && requestPatch[key]) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore // @TODO - Fix this type error
       return requestPatch[key]({ baseRequest, params });
     } else if (baseRequest) {
