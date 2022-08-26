@@ -227,6 +227,7 @@ function ledger({
           return eth
             .signPersonalMessage(
               account.derivationPath,
+              // @ts-ignore
               ethUtil.stripHexPrefix(message)
             )
             .then((result) => {
@@ -317,6 +318,7 @@ function ledger({
             populatedTransaction =
               bigNumberFieldsToStrings(populatedTransaction);
 
+            // @ts-ignore
             const transaction = Transaction.fromTxData(populatedTransaction, {
               common,
             });
@@ -336,6 +338,7 @@ function ledger({
 
             // Reconstruct the signed transaction
             const signedTx = Transaction.fromTxData(
+              // @ts-ignore
               {
                 ...populatedTransaction,
                 v: `0x${v}`,
