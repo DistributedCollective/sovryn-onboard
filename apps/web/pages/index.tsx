@@ -2,12 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { OnboardProvider } from "@sovryn/onboard-react";
 import Onboard from "@sovryn/onboard-core";
 import dummyModule from "@sovryn/onboard-dummy-wallet";
+import ledgerModule from "@sovryn/onboard-ledger";
 import { WalletState } from "@sovryn/onboard-core/dist/types";
 
 const dummy = dummyModule();
+const ledger = ledgerModule();
 
 const onboard = Onboard({
-  wallets: [dummy],
+  wallets: [dummy, ledger],
   chains: [
     {
       id: "0x1e",
@@ -41,10 +43,9 @@ export default function Web() {
       wallet.provider
         .request({
           method: "personal_sign",
-          params: ["test", wallet.accounts[0].address],
+          params: ["0x123456", wallet.accounts[0].address],
         })
-        .then((result: any) => alert(result))
-        .catch((error: any) => alert(error.message));
+        .then((result: any) => alert(result));
     },
     []
   );
@@ -65,7 +66,7 @@ export default function Web() {
           {wallets.map((wallet, index) => (
             <div key={wallet.label}>
               <div>
-                #{index}: {wallet.accounts[0].address}
+                #{index}: {wallet.accounts[0].address} [{wallet.label}]
               </div>
               <div>
                 <button onClick={handleMsgSign(wallet)}>Sign Message</button>

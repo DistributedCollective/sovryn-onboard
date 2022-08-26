@@ -9,10 +9,7 @@ export function useSubscription<T>(subject: BehaviorSubject<T>): T {
     const sub = subject
       .asObservable()
       .pipe(startWith(subject.value), shareReplay(1))
-      .subscribe((result) => {
-        console.log("sub result:", result);
-        setValue(result);
-      });
+      .subscribe(setValue);
 
     return () => {
       sub.unsubscribe();
