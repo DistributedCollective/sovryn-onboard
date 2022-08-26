@@ -1,5 +1,5 @@
 import { updateConfiguration } from "./configuration";
-import connectWallet from "./connect";
+import connect, { connectWallet, loadWalletModule } from "./connect";
 import disconnectWallet from "./disconnect";
 import { state } from "./store";
 import { addChains, setPrimaryWallet, setWalletModules } from "./store/actions";
@@ -8,7 +8,7 @@ import { chainIdToHex } from "./utils";
 import { validateInitOptions } from "./validation";
 
 const API = {
-  connectWallet,
+  connectWallet: connect,
   disconnectWallet,
   state: {
     get: state.get,
@@ -18,6 +18,11 @@ const API = {
       setPrimaryWallet,
     },
   },
+};
+
+const helpers = {
+  loadWalletModule,
+  connectWallet,
 };
 
 export type OnboardAPI = typeof API;
@@ -46,3 +51,5 @@ function init(options: InitOptions): OnboardAPI {
 }
 
 export default init;
+
+export { state, helpers };
