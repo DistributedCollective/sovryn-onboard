@@ -12,11 +12,13 @@
     "next": "12.2.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "@sovryn/onboard-react": "*"
+    "@sovryn/onboard-react": "*",
+    "@sovryn/onboard-core": "*",
+    "@sovryn/onboard-dummy-wallet": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@sovryn/onboard-eslint-config": "*",
+    "eslint-config-custom": "*",
     "@sovryn/onboard-tsconfig": "*",
     "eslint": "7.32.0",
     "next-transpile-modules": "9.0.0",
