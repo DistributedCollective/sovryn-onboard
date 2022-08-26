@@ -12,6 +12,11 @@
     "build": "tsc",
     "lint": "eslint *.ts*"
   },
+  "dependencies": {
+    "@sovryn/onboard-core": "*",
+    "@sovryn/onboard-common": "*",
+    "@sovryn/onboard-hw-common": "*"
+  },
   "devDependencies": {
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
