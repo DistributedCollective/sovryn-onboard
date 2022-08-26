@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { OnboardProvider } from "@sovryn/onboard-react";
 import Onboard from "@sovryn/onboard-core";
 import dummyModule from "@sovryn/onboard-dummy-wallet";
 import ledgerModule from "@sovryn/onboard-ledger";
 import { WalletState } from "@sovryn/onboard-core/dist/types";
+import { OnboardProvider } from "@sovryn/onboard-react/dist/OnboardProvider";
 
 const dummy = dummyModule();
 const ledger = ledgerModule();
