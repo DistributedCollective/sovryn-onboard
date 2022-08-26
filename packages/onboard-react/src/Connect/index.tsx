@@ -36,8 +36,6 @@ export const Connect: FC<ConnectProps> = ({ module: autoSelect }) => {
 
   const handleOnClick = useCallback(
     (label: string) => async () => {
-      console.log("clicked", label);
-
       const wallet = walletModules.find(
         (m) => m.label === label
       ) as WalletModule;

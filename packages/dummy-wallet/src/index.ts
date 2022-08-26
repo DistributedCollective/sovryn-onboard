@@ -14,7 +14,6 @@ export default function dummyWalletModule(): WalletInit {
     getInterface: async (
       helpers: GetInterfaceHelpers
     ): Promise<WalletInterface> => {
-      console.log("dummyWalletModule getInterface helpers", helpers);
       return {
         provider: (window as any).ethereum as EIP1193Provider,
       };
