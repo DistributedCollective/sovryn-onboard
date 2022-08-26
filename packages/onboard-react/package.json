@@ -1,13 +1,21 @@
 {
   "name": "@sovryn/onboard-react",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
     "lint": "eslint *.ts*"
+  },
+  "dependencies": {
+    "@sovryn/onboard-core": "*",
+    "@sovryn/onboard-common": "*",
+    "@sovryn/onboard-hw-common": "*"
   },
   "devDependencies": {
     "@types/react": "^17.0.37",
