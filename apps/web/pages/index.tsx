@@ -10,10 +10,16 @@ const onboard = Onboard({
   wallets: [dummy],
   chains: [
     {
-      id: "0x1f",
-      rpcUrl: "https://public-node.testnet.rsk.co",
+      id: "0x1e",
+      rpcUrl: "https://public-node.rsk.co",
       label: "RSK",
       token: "RBTC",
+    },
+    {
+      id: "0x1f",
+      rpcUrl: "https://public-node.testnet.rsk.co",
+      label: "RSK testnet",
+      token: "tRBTC",
     },
   ],
 });
@@ -48,7 +54,9 @@ export default function Web() {
       <h1>Connection Example</h1>
 
       <div>
-        <button onClick={handleConnectClick}>Connect</button>
+        <button onClick={handleConnectClick}>
+          {wallets.length > 0 ? "Connect another wallet" : "Connect"}
+        </button>
       </div>
 
       {wallets.length > 0 && (
