@@ -1,0 +1,79 @@
+import type {
+  Chain,
+  ChainWithDecimalId,
+  EIP1193Provider,
+  WalletInit,
+  WalletModule,
+} from "@sovryn/onboard-common";
+
+export interface InitOptions {
+  wallets: WalletInit[];
+  chains: Chain[] | ChainWithDecimalId[];
+}
+
+export type Configuration = {
+  initialWalletInit: WalletInit[];
+  device: any;
+};
+
+export interface AppState {
+  chains: Chain[];
+  walletModules: WalletModule[];
+  wallets: WalletState[];
+}
+
+export type Address = string;
+
+export type ConnectedChain = {
+  id: Chain["id"];
+  namespace: Chain["namespace"];
+};
+
+export interface WalletState {
+  label: string; //  wallet name
+  icon: string; // wallet icon svg string
+  provider: EIP1193Provider;
+  accounts: Account[];
+  chains: ConnectedChain[];
+  instance?: unknown;
+}
+
+export type Account = {
+  address: Address;
+};
+
+// ==== ACTIONS ==== //
+export type Action =
+  | AddChainsAction
+  | AddWalletAction
+  | UpdateWalletAction
+  | RemoveWalletAction
+  | ResetStoreAction
+  | UpdateAccountAction
+  | SetWalletModulesAction;
+
+export type AddChainsAction = { type: "add_chains"; payload: Chain[] };
+export type AddWalletAction = { type: "add_wallet"; payload: WalletState };
+export type UpdateWalletAction = {
+  type: "update_wallet";
+  payload: { id: string } & Partial<WalletState>;
+};
+export type RemoveWalletAction = {
+  type: "remove_wallet";
+  payload: { id: string };
+};
+
+export type ResetStoreAction = {
+  type: "reset_store";
+  payload: unknown;
+};
+
+export type UpdateAccountAction = {
+  type: "update_account";
+  payload: { id: string; address: string } & Partial<Account>;
+};
+
+export type SetWalletModulesAction = {
+  type: "set_wallet_modules";
+  payload: WalletModule[];
+};
