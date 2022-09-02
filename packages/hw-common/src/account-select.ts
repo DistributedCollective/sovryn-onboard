@@ -1,9 +1,10 @@
-import { firstValueFrom, Subject, take } from "rxjs";
+import { firstValueFrom, take } from "rxjs";
 import {} from "@sovryn/onboard-core";
-import { accounts$, selectAccounts$ } from "./streams";
+import { accounts$ } from "./streams";
 import { validateSelectAccountOptions } from "./validation";
 
 import type { SelectAccountOptions, Account } from "./types";
+import { closeAccountSelect, openAccountSelect } from "./actions";
 
 export let selectAccountOptions: SelectAccountOptions;
 
@@ -20,15 +21,9 @@ const accountSelect = async (
 
   selectAccountOptions = options;
 
-  selectAccounts$.next({
-    inProgress: true,
-  });
+  openAccountSelect();
 
-  accounts$.pipe(take(1)).subscribe((e) => {
-    selectAccounts$.next({
-      inProgress: false,
-    });
-  });
+  accounts$.pipe(take(1)).subscribe(() => closeAccountSelect());
 
   return firstValueFrom(accounts$);
 };
