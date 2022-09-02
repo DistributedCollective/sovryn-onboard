@@ -20,7 +20,7 @@ export const OnboardProvider: FC<PropsWithChildren<OnboardProviderProps>> = ({
     <>
       {children}
 
-      {inProgress && <Connect module={module} />}
+      {inProgress && !hwInProgress && <Connect module={module} />}
       {hwInProgress && <SelectAccount />}
     </>
   );

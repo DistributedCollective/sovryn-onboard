@@ -1,8 +1,9 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import {
   Account,
   selectAccountOptions,
   selectAccount,
+  closeAccountSelect,
 } from "@sovryn/onboard-hw-common";
 
 type SelectAccountProps = {};
@@ -10,8 +11,11 @@ type SelectAccountProps = {};
 export const SelectAccount: FC<SelectAccountProps> = () => {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [scanning, setScanning] = useState(false);
+  const [error, setError] = useState<string>();
 
-  useEffect(() => {}, []);
+  const handleClose = useCallback(() => {
+    closeAccountSelect();
+  }, []);
 
   const handleScan = useCallback(async () => {
     setScanning(true);
@@ -24,7 +28,10 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
       });
       setAccounts(list);
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        console.error(error);
+        setError(error.message);
+      }
     } finally {
       setScanning(false);
     }
@@ -43,7 +50,9 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
     >
       <h1>Choose Address</h1>
       <button onClick={handleScan}>Scan Accounts</button>
+      <button onClick={handleClose}>Close</button>
       {scanning && <div>Scanning...</div>}
+      {error && <div>Error: {error}</div>}
       <ul>
         {accounts.map((account, index) => (
           <li key={account.address}>
