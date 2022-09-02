@@ -10,13 +10,13 @@ import type {
   InjectedWalletModule,
   CustomWindow,
   BinanceProvider,
-} from "./types.js";
+} from "./types";
 
 import {
   InjectedNameSpace,
   ProviderIdentityFlag,
   ProviderLabel,
-} from "./types.js";
+} from "./types";
 
 declare const window: CustomWindow;
 

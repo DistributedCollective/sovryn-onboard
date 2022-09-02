@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { InjectedWalletOptions } from "./types.js";
+import { InjectedWalletOptions } from "./types";
 import { validate, type ValidateReturn } from "@sovryn/onboard-common";
 
 const walletModule = Joi.object({

@@ -1,5 +1,5 @@
 import { ProviderRpcErrorCode, WalletModule } from "@sovryn/onboard-common";
-import { ProviderLabel } from "./types.js";
+import { ProviderLabel } from "./types";
 
 export class ProviderRpcError extends Error {
   message: string;

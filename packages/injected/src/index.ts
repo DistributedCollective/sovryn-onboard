@@ -1,16 +1,16 @@
 import uniqBy from "lodash.uniqby";
 
 import type { WalletInit } from "@sovryn/onboard-common";
-import type { InjectedWalletOptions, CustomWindow } from "./types.js";
-import { ProviderLabel } from "./types.js";
+import type { InjectedWalletOptions, CustomWindow } from "./types";
+import { ProviderLabel } from "./types";
 
-import standardWallets from "./wallets.js";
-import { remove } from "./helpers.js";
-import { validateWalletOptions } from "./validation.js";
+import standardWallets from "./wallets";
+import { remove } from "./helpers";
+import { validateWalletOptions } from "./validation";
 
 declare const window: CustomWindow;
 
-export { ProviderIdentityFlag, ProviderLabel } from "./types.js";
+export { ProviderIdentityFlag, ProviderLabel } from "./types";
 
 function injected(options?: InjectedWalletOptions): WalletInit {
   if (typeof window === "undefined") return () => null;
