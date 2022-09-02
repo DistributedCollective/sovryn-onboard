@@ -1,5 +1,5 @@
-import type { Configuration } from './types';
-import { getDevice } from './utils.js';
+import type { Configuration } from "./types";
+import { getDevice } from "./utils.js";
 
 export let configuration: Configuration = {
   initialWalletInit: [],

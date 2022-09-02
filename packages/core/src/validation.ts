@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from "joi";
 
 import {
   type ChainId,
@@ -10,9 +10,9 @@ import {
   chainIdValidation,
   chainValidation,
   validate,
-} from '@sovryn/onboard-common';
+} from "@sovryn/onboard-common";
 
-import type { InitOptions, WalletState } from './types.js';
+import type { InitOptions, WalletState } from "./types.js";
 
 const unknownObject = Joi.object().unknown();
 
@@ -37,7 +37,7 @@ const wallet = Joi.object({
   chains: Joi.array().items(connectedChain),
 })
   .required()
-  .error(new Error('wallet must be defined'));
+  .error(new Error("wallet must be defined"));
 
 const wallets = Joi.array().items(wallet);
 
@@ -61,7 +61,7 @@ const setChainOptions = Joi.object({
 });
 
 export function validateWallet(
-  data: WalletState | Partial<WalletState>,
+  data: WalletState | Partial<WalletState>
 ): ValidateReturn {
   return validate(wallet, data);
 }
@@ -78,15 +78,15 @@ export function validateString(str: string, label?: string): ValidateReturn {
   return validate(
     Joi.string()
       .required()
-      .label(label || 'value'),
-    str,
+      .label(label || "value"),
+    str
   );
 }
 
 export function validateSetChainOptions(data: {
   chainId: ChainId | DecimalChainId;
   chainNamespace?: string;
-  wallet?: WalletState['label'];
+  wallet?: WalletState["label"];
 }): ValidateReturn {
   return validate(setChainOptions, data);
 }

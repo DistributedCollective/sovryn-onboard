@@ -4,8 +4,8 @@ import type {
   ChainId,
   EIP1193Provider,
   ProviderAccounts,
-} from './types';
-import { ProviderRpcError } from './errors';
+} from "./types";
+import { ProviderRpcError } from "./errors";
 
 /**
  * Takes a provider instance along with events
@@ -25,7 +25,7 @@ import { ProviderRpcError } from './errors';
  */
 export const createEIP1193Provider = (
   provider: any,
-  requestPatch?: RequestPatch,
+  requestPatch?: RequestPatch
 ): EIP1193Provider => {
   let baseRequest: any;
   if (provider.request) {
@@ -35,7 +35,7 @@ export const createEIP1193Provider = (
     baseRequest = createRequest(provider);
   }
 
-  const request: EIP1193Provider['request'] = async ({ method, params }) => {
+  const request: EIP1193Provider["request"] = async ({ method, params }) => {
     const key = method as keyof RequestPatch;
 
     // If the request method is set to null
@@ -65,19 +65,19 @@ export const createEIP1193Provider = (
 };
 interface JsonRpcResponse {
   id: string | undefined;
-  jsonrpc: '2.0';
+  jsonrpc: "2.0";
   method: string;
   result?: ProviderAccounts | Balance | ProviderAccounts | ChainId | null;
   error?: string;
 }
 
-const createRequest = (provider: any): EIP1193Provider['request'] =>
+const createRequest = (provider: any): EIP1193Provider["request"] =>
   (({ method, params }) =>
     new Promise((resolve, reject) => {
       provider.sendAsync(
         {
           id: 0,
-          jsonrpc: '2.0',
+          jsonrpc: "2.0",
           method,
           params,
         },
@@ -87,6 +87,6 @@ const createRequest = (provider: any): EIP1193Provider['request'] =>
           } else {
             resolve(result == undefined ? null : (result as any));
           }
-        },
+        }
       );
-    })) as EIP1193Provider['request'];
+    })) as EIP1193Provider["request"];
