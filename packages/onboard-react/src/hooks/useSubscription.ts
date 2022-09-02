@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import type { BehaviorSubject, OperatorFunction } from "rxjs";
-import { shareReplay, startWith } from "rxjs/operators";
+import { useState, useEffect } from 'react';
+import type { BehaviorSubject } from 'rxjs';
+import { shareReplay, startWith } from 'rxjs/operators';
 
 export function useSubscription<T>(subject: BehaviorSubject<T>): T {
   const [value, setValue] = useState<T>(subject.value);

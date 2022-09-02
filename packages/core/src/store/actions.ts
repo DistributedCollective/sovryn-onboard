@@ -1,6 +1,6 @@
-import type { Chain, WalletInit, WalletModule } from "@sovryn/onboard-common";
-import { dispatch } from "./index";
-import { configuration } from "../configuration";
+import type { Chain, WalletInit, WalletModule } from '@sovryn/onboard-common';
+import { dispatch } from './index';
+import { configuration } from '../configuration';
 
 import type {
   Account,
@@ -12,13 +12,13 @@ import type {
   UpdateAccountAction,
   UpdateWalletAction,
   WalletState,
-} from "../types";
+} from '../types';
 
 import {
   validateString,
   validateWallet,
   validateWalletInit,
-} from "../validation";
+} from '../validation';
 
 import {
   ADD_CHAINS,
@@ -28,13 +28,13 @@ import {
   SET_WALLET_MODULES,
   UPDATE_ACCOUNT,
   UPDATE_WALLET,
-} from "./constants";
+} from './constants';
 
 export function addChains(chains: Chain[]): void {
   // chains are validated on init
   const action = {
     type: ADD_CHAINS,
-    payload: chains.map(({ namespace = "evm", id, ...rest }) => ({
+    payload: chains.map(({ namespace = 'evm', id, ...rest }) => ({
       ...rest,
       namespace,
       id: id.toLowerCase(),
@@ -80,7 +80,7 @@ export function updateWallet(id: string, update: Partial<WalletState>): void {
 }
 
 export function removeWallet(id: string): void {
-  const error = validateString(id, "wallet id");
+  const error = validateString(id, 'wallet id');
 
   if (error) {
     throw error;
@@ -98,7 +98,7 @@ export function removeWallet(id: string): void {
 
 export function setPrimaryWallet(wallet: WalletState, address?: string): void {
   const error =
-    validateWallet(wallet) || (address && validateString(address, "address"));
+    validateWallet(wallet) || (address && validateString(address, 'address'));
 
   if (error) {
     throw error;
@@ -106,7 +106,7 @@ export function setPrimaryWallet(wallet: WalletState, address?: string): void {
 
   // if also setting the primary account
   if (address) {
-    const account = wallet.accounts.find((ac) => ac.address === address);
+    const account = wallet.accounts.find(ac => ac.address === address);
 
     if (account) {
       wallet.accounts = [
@@ -123,7 +123,7 @@ export function setPrimaryWallet(wallet: WalletState, address?: string): void {
 export function updateAccount(
   id: string,
   address: string,
-  update: Partial<Account>
+  update: Partial<Account>,
 ): void {
   const action = {
     type: UPDATE_ACCOUNT,
@@ -167,6 +167,7 @@ export function setWalletModules(wallets: WalletInit[]): void {
 export function initializeWalletModules(modules: WalletInit[]): WalletModule[] {
   const { device } = configuration;
   return modules.reduce((acc, walletInit) => {
+    //@ts-ignore
     const initialized = walletInit({ device });
 
     if (initialized) {
@@ -179,12 +180,12 @@ export function initializeWalletModules(modules: WalletInit[]): WalletModule[] {
 }
 
 export function uniqueWalletsByLabel(
-  walletModuleList: WalletModule[]
+  walletModuleList: WalletModule[],
 ): WalletModule[] {
   return walletModuleList.filter(
     (wallet, i) =>
       walletModuleList.findIndex(
-        (innerWallet: WalletModule) => innerWallet.label === wallet.label
-      ) === i
+        (innerWallet: WalletModule) => innerWallet.label === wallet.label,
+      ) === i,
   );
 }

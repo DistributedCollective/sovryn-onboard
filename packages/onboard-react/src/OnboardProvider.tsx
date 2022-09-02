@@ -1,10 +1,10 @@
-import { FC, PropsWithChildren } from "react";
-import { OnboardAPI } from "@sovryn/onboard-core";
-import { selectAccounts$ } from "@sovryn/onboard-hw-common";
-import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
-import { Connect } from "./Connect";
-import { useSubscription } from "./hooks/useSubscription";
-import { SelectAccount } from "./SelectAccount";
+import { FC, PropsWithChildren } from 'react';
+import { OnboardAPI } from '@sovryn/onboard-core';
+import { selectAccounts$ } from '@sovryn/onboard-hw-common';
+import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
+import { Connect } from './Connect';
+import { useSubscription } from './hooks/useSubscription';
+import { SelectAccount } from './SelectAccount';
 
 export type OnboardProviderProps = {
   onboard: OnboardAPI;

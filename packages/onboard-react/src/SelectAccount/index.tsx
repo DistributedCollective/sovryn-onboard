@@ -1,9 +1,9 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from 'react';
 import {
   Account,
   selectAccountOptions,
   selectAccount,
-} from "@sovryn/onboard-hw-common";
+} from '@sovryn/onboard-hw-common';
 
 type SelectAccountProps = {};
 
@@ -34,12 +34,12 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
     (account: Account) => () => {
       selectAccount(account);
     },
-    []
+    [],
   );
 
   return (
     <div
-      style={{ backgroundColor: "#dedede", padding: "14px", margin: "14px" }}
+      style={{ backgroundColor: '#dedede', padding: '14px', margin: '14px' }}
     >
       <h1>Choose Address</h1>
       <button onClick={handleScan}>Scan Accounts</button>

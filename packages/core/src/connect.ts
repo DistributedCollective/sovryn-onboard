@@ -1,22 +1,22 @@
-import { firstValueFrom } from "rxjs";
-import { filter, withLatestFrom, map } from "rxjs/operators";
-import EventEmitter from "eventemitter3";
-import { BigNumber } from "ethers";
-import { configuration } from "./configuration";
-import { state } from "./store";
-import { addWallet, setWalletModules } from "./store/actions";
-import type { WalletState } from "./types";
-import { wait } from "./utils";
-import { connectWallet$, wallets$ } from "./streams";
-import { ProviderRpcErrorCode, WalletModule } from "@sovryn/onboard-common";
-import { getChainId, requestAccounts } from "./provider";
+import { firstValueFrom } from 'rxjs';
+import { filter, withLatestFrom, map } from 'rxjs/operators';
+import EventEmitter from 'eventemitter3';
+import { BigNumber } from 'ethers';
+import { configuration } from './configuration';
+import { state } from './store';
+import { addWallet, setWalletModules } from './store/actions';
+import type { WalletState } from './types';
+import { wait } from './utils';
+import { connectWallet$, wallets$ } from './streams';
+import { ProviderRpcErrorCode, WalletModule } from '@sovryn/onboard-common';
+import { getChainId, requestAccounts } from './provider';
 
 export default async function connect(wallet?: string): Promise<WalletState[]> {
   const { chains } = state.get();
 
   if (!chains.length) {
     throw new Error(
-      "At least one chain must be set before attempting to connect a wallet"
+      'At least one chain must be set before attempting to connect a wallet',
     );
   }
 
@@ -36,22 +36,22 @@ export default async function connect(wallet?: string): Promise<WalletState[]> {
   const result$ = connectWallet$.pipe(
     filter(
       ({ inProgress, actionRequired }) =>
-        inProgress === false && !actionRequired
+        inProgress === false && !actionRequired,
     ),
     withLatestFrom(wallets$),
-    map((x) => x?.[1])
+    map(x => x?.[1]),
   );
 
   return firstValueFrom(result$);
 }
 
 export const loadWalletModule = async (
-  walletModule: WalletModule
+  walletModule: WalletModule,
 ): Promise<WalletState> => {
   try {
     const existingWallet = state
       .get()
-      .wallets.find((wallet) => wallet.label === walletModule.label);
+      .wallets.find(wallet => wallet.label === walletModule.label);
 
     if (existingWallet) {
       // set as first wallet
@@ -93,7 +93,7 @@ export const loadWalletModule = async (
       provider,
       instance,
       accounts: [],
-      chains: [{ namespace: "evm", id: "0x1" }],
+      chains: [{ namespace: 'evm', id: '0x1' }],
     };
   } catch (error) {
     throw error;
@@ -115,9 +115,9 @@ export const connectWallet = async (walletModule: WalletModule) => {
 
     const chain = await getChainId(provider);
 
-    const update: Pick<WalletState, "accounts" | "chains"> = {
+    const update: Pick<WalletState, 'accounts' | 'chains'> = {
       accounts: [{ address }],
-      chains: [{ namespace: "evm", id: chain }],
+      chains: [{ namespace: 'evm', id: chain }],
     };
 
     addWallet({ ...selectedWallet, ...update });

@@ -1,7 +1,7 @@
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { distinctUntilKeyChanged, map, filter } from "rxjs/operators";
-import { Chain, WalletModule } from "@sovryn/onboard-common";
-import { APP_INITIAL_STATE } from "../constants";
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { distinctUntilKeyChanged, map, filter } from 'rxjs/operators';
+import { Chain, WalletModule } from '@sovryn/onboard-common';
+import { APP_INITIAL_STATE } from '../constants';
 import type {
   Action,
   AddWalletAction,
@@ -9,7 +9,7 @@ import type {
   UpdateAccountAction,
   UpdateWalletAction,
   WalletState,
-} from "../types";
+} from '../types';
 import {
   ADD_CHAINS,
   ADD_WALLET,
@@ -18,8 +18,8 @@ import {
   SET_WALLET_MODULES,
   UPDATE_ACCOUNT,
   UPDATE_WALLET,
-} from "./constants";
-import { notNullish } from "../utils";
+} from './constants';
+import { notNullish } from '../utils';
 
 const _store = new BehaviorSubject<AppState>(APP_INITIAL_STATE);
 const _stateUpdates = new Subject<AppState>();
@@ -37,9 +37,9 @@ function reducer(state: AppState, action: Action): AppState {
       };
 
     case ADD_WALLET: {
-      const wallet = payload as AddWalletAction["payload"];
+      const wallet = payload as AddWalletAction['payload'];
       const existingWallet = state.wallets.find(
-        ({ label }) => label === wallet.label
+        ({ label }) => label === wallet.label,
       );
 
       return {
@@ -54,11 +54,11 @@ function reducer(state: AppState, action: Action): AppState {
     }
 
     case UPDATE_WALLET: {
-      const update = payload as UpdateWalletAction["payload"];
+      const update = payload as UpdateWalletAction['payload'];
       const { id, ...walletUpdate } = update;
 
-      const updatedWallets = state.wallets.map((wallet) =>
-        wallet.label === id ? { ...wallet, ...walletUpdate } : wallet
+      const updatedWallets = state.wallets.map(wallet =>
+        wallet.label === id ? { ...wallet, ...walletUpdate } : wallet,
       );
 
       return {
@@ -77,12 +77,12 @@ function reducer(state: AppState, action: Action): AppState {
     }
 
     case UPDATE_ACCOUNT: {
-      const update = payload as UpdateAccountAction["payload"];
+      const update = payload as UpdateAccountAction['payload'];
       const { id, address, ...accountUpdate } = update;
 
-      const updatedWallets = state.wallets.map((wallet) => {
+      const updatedWallets = state.wallets.map(wallet => {
         if (wallet.label === id) {
-          wallet.accounts = wallet.accounts.map((account) => {
+          wallet.accounts = wallet.accounts.map(account => {
             if (account.address === address) {
               return { ...account, ...accountUpdate };
             }
@@ -123,7 +123,7 @@ export function dispatch(action: Action): void {
 function select(): Observable<AppState>;
 function select<T extends keyof AppState>(stateKey: T): Observable<AppState[T]>;
 function select<T extends keyof AppState>(
-  stateKey?: keyof AppState
+  stateKey?: keyof AppState,
 ): Observable<AppState[T]> | Observable<AppState> {
   if (!stateKey) return _stateUpdates.asObservable();
 
@@ -135,8 +135,8 @@ function select<T extends keyof AppState>(
 
   return _stateUpdates.asObservable().pipe(
     distinctUntilKeyChanged(stateKey),
-    map((x) => x?.[stateKey]),
-    filter(notNullish)
+    map(x => x?.[stateKey]),
+    filter(notNullish),
   ) as Observable<AppState[T]>;
 }
 

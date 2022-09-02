@@ -1,27 +1,27 @@
-import { useCallback, useEffect, useState } from "react";
-import Onboard from "@sovryn/onboard-core";
-import dummyModule from "@sovryn/onboard-dummy-wallet";
-import ledgerModule from "@sovryn/onboard-ledger";
-import { WalletState } from "@sovryn/onboard-core/dist/types";
-import { OnboardProvider } from "@sovryn/onboard-react/dist/OnboardProvider";
+import { useCallback, useEffect, useState } from 'react';
+import Onboard from '@sovryn/onboard-core';
+import injectedModule from '@sovryn/onboard-injected';
+import ledgerModule from '@sovryn/onboard-ledger';
+import { WalletState } from '@sovryn/onboard-core/dist/types';
+import { OnboardProvider } from '@sovryn/onboard-react/dist/OnboardProvider';
 
-const dummy = dummyModule();
+const injected = injectedModule();
 const ledger = ledgerModule();
 
 const onboard = Onboard({
-  wallets: [dummy, ledger],
+  wallets: [injected, ledger],
   chains: [
     {
-      id: "0x1e",
-      rpcUrl: "https://public-node.rsk.co",
-      label: "RSK",
-      token: "RBTC",
+      id: '0x1e',
+      rpcUrl: 'https://public-node.rsk.co',
+      label: 'RSK',
+      token: 'RBTC',
     },
     {
-      id: "0x1f",
-      rpcUrl: "https://public-node.testnet.rsk.co",
-      label: "RSK testnet",
-      token: "tRBTC",
+      id: '0x1f',
+      rpcUrl: 'https://public-node.testnet.rsk.co',
+      label: 'RSK testnet',
+      token: 'tRBTC',
     },
   ],
 });
@@ -34,7 +34,7 @@ export default function Web() {
   const [wallets, setWallets] = useState<WalletState[]>([]);
 
   useEffect(() => {
-    const sub = onboard.state.select("wallets").subscribe(setWallets);
+    const sub = onboard.state.select('wallets').subscribe(setWallets);
     return () => sub.unsubscribe();
   }, []);
 
@@ -42,12 +42,12 @@ export default function Web() {
     (wallet: WalletState) => () => {
       wallet.provider
         .request({
-          method: "personal_sign",
-          params: ["0x123456", wallet.accounts[0].address],
+          method: 'personal_sign',
+          params: ['0x123456', wallet.accounts[0].address],
         })
         .then((result: any) => alert(result));
     },
-    []
+    [],
   );
 
   return (
@@ -56,7 +56,7 @@ export default function Web() {
 
       <div>
         <button onClick={handleConnectClick}>
-          {wallets.length > 0 ? "Connect another wallet" : "Connect"}
+          {wallets.length > 0 ? 'Connect another wallet' : 'Connect'}
         </button>
       </div>
 
