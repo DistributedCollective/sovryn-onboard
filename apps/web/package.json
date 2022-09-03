@@ -14,7 +14,7 @@
     "react-dom": "17.0.2",
     "@sovryn/onboard-react": "*",
     "@sovryn/onboard-core": "*",
-    "@sovryn/onboard-dummy-wallet": "*",
+    "@sovryn/onboard-injected": "*",
     "@sovryn/onboard-ledger": "*"
   },
   "devDependencies": {

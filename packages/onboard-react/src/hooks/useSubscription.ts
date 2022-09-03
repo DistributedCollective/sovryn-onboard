@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { BehaviorSubject, OperatorFunction } from "rxjs";
+import type { BehaviorSubject } from "rxjs";
 import { shareReplay, startWith } from "rxjs/operators";
 
 export function useSubscription<T>(subject: BehaviorSubject<T>): T {
