@@ -167,6 +167,7 @@ export function setWalletModules(wallets: WalletInit[]): void {
 export function initializeWalletModules(modules: WalletInit[]): WalletModule[] {
   const { device } = configuration;
   return modules.reduce((acc, walletInit) => {
+    //@ts-ignore
     const initialized = walletInit({ device });
 
     if (initialized) {

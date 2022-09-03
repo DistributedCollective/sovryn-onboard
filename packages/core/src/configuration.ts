@@ -1,8 +1,9 @@
 import type { Configuration } from "./types";
+import { getDevice } from "./utils.js";
 
 export let configuration: Configuration = {
   initialWalletInit: [],
-  device: null,
+  device: getDevice(),
 };
 
 export function updateConfiguration(update: Partial<Configuration>): void {

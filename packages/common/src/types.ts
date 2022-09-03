@@ -121,7 +121,7 @@ export type WalletInit = (
 ) => WalletModule | WalletModule[] | null;
 
 export type WalletHelpers = {
-  device?: Device;
+  device: Device;
 };
 
 export interface APIKey {

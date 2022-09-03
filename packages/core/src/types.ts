@@ -1,6 +1,7 @@
 import type {
   Chain,
   ChainWithDecimalId,
+  Device,
   EIP1193Provider,
   WalletInit,
   WalletModule,
@@ -13,7 +14,7 @@ export interface InitOptions {
 
 export type Configuration = {
   initialWalletInit: WalletInit[];
-  device: any;
+  device: Device | DeviceNotBrowser;
 };
 
 export interface AppState {
@@ -76,4 +77,10 @@ export type UpdateAccountAction = {
 export type SetWalletModulesAction = {
   type: "set_wallet_modules";
   payload: WalletModule[];
+};
+
+export type DeviceNotBrowser = {
+  type: null;
+  os: null;
+  browser: null;
 };
