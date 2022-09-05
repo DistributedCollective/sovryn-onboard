@@ -1,0 +1,24 @@
+.container {
+    margin: 0.3rem 0;
+    padding: 0.3rem;
+    background-color: #dedede;
+}
+
+.label {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+}
+
+.sublabel {
+    color: #666;
+    font-weight: 400;
+}
+
+.address {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.button {
+    margin: 0.1rem;
+}

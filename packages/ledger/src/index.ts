@@ -377,6 +377,10 @@ function ledger({
               accounts.find((account) => account.address === address) ||
               accounts[0];
 
+            if (typeof typedData === "string") {
+              typedData = JSON.parse(typedData);
+            }
+
             const domainHash = TypedDataUtils.hashStruct(
               "EIP712Domain",
               typedData.domain,
@@ -389,6 +393,49 @@ function ledger({
               typedData.message,
               typedData.types,
               SignTypedDataVersion.V3
+            ).toString("hex");
+
+            return eth
+              .signEIP712HashedMessage(
+                account.derivationPath,
+                domainHash,
+                messageHash
+              )
+              .then((result) => {
+                let v = (result["v"] - 27).toString(16);
+                if (v.length < 2) {
+                  v = "0" + v;
+                }
+
+                return `0x${result["r"]}${result["s"]}${v}`;
+              });
+          },
+          eth_signTypedData_v4: async ({ params: [address, typedData] }) => {
+            if (!(accounts && accounts.length && accounts.length > 0))
+              throw new Error(
+                "No account selected. Must call eth_requestAccounts first."
+              );
+
+            const account =
+              accounts.find((account) => account.address === address) ||
+              accounts[0];
+
+            if (typeof typedData === "string") {
+              typedData = JSON.parse(typedData);
+            }
+
+            const domainHash = TypedDataUtils.hashStruct(
+              "EIP712Domain",
+              typedData.domain,
+              typedData.types,
+              SignTypedDataVersion.V4
+            ).toString("hex");
+
+            const messageHash = TypedDataUtils.hashStruct(
+              typedData.primaryType,
+              typedData.message,
+              typedData.types,
+              SignTypedDataVersion.V4
             ).toString("hex");
 
             return eth
