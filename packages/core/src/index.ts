@@ -7,6 +7,8 @@ import { InitOptions } from "./types";
 import { chainIdToHex } from "./utils";
 import { validateInitOptions } from "./validation";
 
+export * from "./types";
+
 const API = {
   connectWallet: connect,
   disconnectWallet,

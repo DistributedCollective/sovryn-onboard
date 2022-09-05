@@ -62,6 +62,12 @@ export type RequestPatch = {
         params: EIP712Request["params"];
       }) => Promise<string>)
     | null;
+  eth_signTypedData_v4?:
+    | ((args: {
+        baseRequest: EIP1193Provider["request"];
+        params: EIP712Request["params"];
+      }) => Promise<string>)
+    | null;
   wallet_switchEthereumChain?:
     | ((args: {
         baseRequest: EIP1193Provider["request"];
@@ -305,7 +311,7 @@ export interface PersonalSignMessageRequest {
 
 // request -> signTypedData_v3`
 export interface EIP712Request {
-  method: "eth_signTypedData";
+  method: "eth_signTypedData" | "eth_signTypedData_v4";
   params: [Address, EIP712TypedData];
 }
 
