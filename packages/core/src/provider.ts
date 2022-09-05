@@ -227,8 +227,8 @@ export function trackWallet(
             // const [balance, ens] = await Promise.all([balanceProm, ensProm])
             return {
               address,
-              //   balance,
-              //   ens
+              balance: null,
+              ens: null,
             };
           })
         );

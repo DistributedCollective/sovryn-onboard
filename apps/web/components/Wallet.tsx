@@ -106,38 +106,17 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
       console.error(error);
       setTx(undefined);
     }
-  }, [address, chainId, wallet.provider]);
+  }, [address, wallet.provider]);
 
   const switchNetwork = useCallback(
     (chain: Chain) => async () => {
-      try {
-        await wallet.provider.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: chain.id }], // chainId must be in hexadecimal numbers
-        });
-      } catch (error) {
-        // This error code indicates that the chain has not been added to MetaMask
-        // if it is not, then install it into the user MetaMask
-        if ((error as any).code === 4902) {
-          try {
-            await wallet.provider.request({
-              method: "wallet_addEthereumChain",
-              params: [
-                {
-                  chainId: chain.id,
-                  rpcUrl: chain.rpcUrl,
-                },
-              ],
-            });
-          } catch (addError) {
-            alert((addError as Error).message);
-          }
-        } else {
-          alert((error as Error).message);
-        }
-      }
+      const result = await onboard.setChain({
+        chainId: chain.id,
+        wallet: wallet.label,
+      });
+      console.log(result);
     },
-    [wallet.provider]
+    [wallet.label]
   );
 
   useEffect(() => {
