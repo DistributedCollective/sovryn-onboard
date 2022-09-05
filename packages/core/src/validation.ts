@@ -21,8 +21,27 @@ const connectedChain = Joi.object({
   id: chainIdValidation.required(),
 });
 
+const ens = Joi.any().allow(
+  Joi.object({
+    name: Joi.string().required(),
+    avatar: Joi.string(),
+    contentHash: Joi.any().allow(Joi.string(), null),
+    getText: Joi.function().arity(1).required(),
+  }),
+  null
+);
+
+const balance = Joi.any().allow(
+  Joi.object({
+    eth: Joi.number(),
+  }).unknown(),
+  null
+);
+
 const account = Joi.object({
   address: Joi.string().required(),
+  ens,
+  balance,
 });
 
 const chains = Joi.array().items(chainValidation);
@@ -35,9 +54,7 @@ const wallet = Joi.object({
   instance: unknownObject,
   accounts,
   chains: Joi.array().items(connectedChain),
-})
-  .required()
-  .error(new Error("wallet must be defined"));
+}).required();
 
 const wallets = Joi.array().items(wallet);
 

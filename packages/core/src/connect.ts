@@ -9,7 +9,7 @@ import type { WalletState } from "./types";
 import { wait } from "./utils";
 import { connectWallet$, wallets$ } from "./streams";
 import { ProviderRpcErrorCode, WalletModule } from "@sovryn/onboard-common";
-import { getChainId, requestAccounts } from "./provider";
+import { getChainId, requestAccounts, trackWallet } from "./provider";
 
 export default async function connect(wallet?: string): Promise<WalletState[]> {
   const { chains } = state.get();
@@ -103,7 +103,7 @@ export const loadWalletModule = async (
 export const connectWallet = async (walletModule: WalletModule) => {
   const selectedWallet = await loadWalletModule(walletModule);
 
-  const { provider } = selectedWallet;
+  const { provider, label } = selectedWallet;
 
   try {
     const [address] = await requestAccounts(provider);
@@ -121,6 +121,7 @@ export const connectWallet = async (walletModule: WalletModule) => {
     };
 
     addWallet({ ...selectedWallet, ...update });
+    trackWallet(provider, label);
 
     connectWallet$.next({
       inProgress: false,

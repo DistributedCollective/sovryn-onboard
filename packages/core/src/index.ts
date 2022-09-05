@@ -1,6 +1,7 @@
 import { updateConfiguration } from "./configuration";
 import connect, { connectWallet, loadWalletModule } from "./connect";
 import disconnectWallet from "./disconnect";
+import setChain from "./chain";
 import { state } from "./store";
 import { addChains, setPrimaryWallet, setWalletModules } from "./store/actions";
 import { InitOptions } from "./types";
@@ -12,6 +13,7 @@ export * from "./types";
 const API = {
   connectWallet: connect,
   disconnectWallet,
+  setChain,
   state: {
     get: state.get,
     select: state.select,
