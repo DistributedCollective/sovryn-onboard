@@ -1,1 +1,1 @@
-# @sovryn/onboard-core
+# @sovryn/onboard-ledger

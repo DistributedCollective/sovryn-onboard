@@ -22,7 +22,7 @@
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
     "typescript": "^4.5.2",
-    "prettier": "latest",
+    "prettier": "^2.7.1",
     "turbo": "latest"
   },
   "engines": {
