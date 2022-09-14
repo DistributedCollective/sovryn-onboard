@@ -11,7 +11,10 @@ const basePaths: BasePath[] = [
 const assets: Asset[] = [{ label: "RBTC" }, { label: "ETH" }];
 
 const injected = injectedModule();
-const ledger = ledgerModule();
+const ledger = ledgerModule({
+  basePaths,
+  assets,
+});
 const trezor = trezorModule({
   email: "victor@sovryn.app",
   appUrl: "https://sovryn.app",

@@ -1,7 +1,7 @@
 import {
   Account,
   Asset,
-  BasePath,
+  HwConfig,
   ScanAccountsOptions,
 } from "@sovryn/onboard-hw-common";
 import type { StaticJsonRpcProvider } from "@ethersproject/providers";
@@ -25,11 +25,9 @@ import type {
 } from "@sovryn/onboard-common";
 import { SignTypedDataVersion, TypedDataUtils } from "@metamask/eth-sig-util";
 
-interface TrezorOptions {
+interface TrezorOptions extends HwConfig {
   email: string;
   appUrl: string;
-  basePaths: BasePath[];
-  assets: Asset[];
   customNetwork?: CustomNetwork;
   filter?: Platform[];
 }
