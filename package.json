@@ -18,12 +18,13 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.3",
+    "commitlint": "^17.1.2",
     "eslint-config-custom": "*",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
-    "typescript": "^4.5.2",
-    "prettier": "latest",
-    "turbo": "latest"
+    "prettier": "^2.7.1",
+    "turbo": "latest",
+    "typescript": "^4.5.2"
   },
   "engines": {
     "npm": ">=7.0.0",
