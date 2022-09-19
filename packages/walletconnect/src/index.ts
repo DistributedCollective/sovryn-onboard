@@ -39,7 +39,7 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
           "@walletconnect/client"
         );
 
-        // This is a cjs module and therefor depending on build tooling
+        // This is a cjs module and therefore depending on build tooling
         // sometimes it will be nested in the { default } object and
         // other times it will be the actual import
         // @ts-ignore - It thinks it is missing properties since it expect it to be nested under default
