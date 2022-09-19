@@ -239,7 +239,7 @@ function trezor(options: TrezorOptions): WalletInit {
               throw new Error(errorMsg);
             }
 
-            return result.payload.address;
+            return result.payload.address.toLowerCase();
           } catch (error) {
             console.error(error);
             throw new Error(errorMsg);
@@ -637,5 +637,5 @@ function trezor(options: TrezorOptions): WalletInit {
     };
   };
 }
-
+``;
 export default trezor;

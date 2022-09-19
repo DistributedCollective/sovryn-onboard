@@ -15,16 +15,14 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
   const [scanning, setScanning] = useState(false);
   const [error, setError] = useState<string>();
 
-  const [derivationPathSelect, setDerivationPath] = useState<string>(
+  const [derivationPathSelect, setDerivationPathSelect] = useState(
     selectAccountOptions.basePaths[0].value
   );
-  const [chainId, setChainId] = useState<string>(
-    selectAccountOptions.chains[0].id
-  );
-  const [customPath, setCustomPath] = useState<string>(
+  const [chainId, setChainId] = useState(selectAccountOptions.chains[0].id);
+  const [customPath, setCustomPath] = useState(
     selectAccountOptions.basePaths[0].value
   );
-  const [asset, setAsset] = useState<Asset>(selectAccountOptions.assets[0]);
+  const [asset, setAsset] = useState(selectAccountOptions.assets[0]);
 
   const derivationPath = useMemo(() => {
     if (derivationPathSelect === "custom") {
@@ -62,36 +60,29 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
         // update custom path to the last used path from dropdown
         setCustomPath(event.target.value);
       }
-      setDerivationPath(event.target.value);
+      setDerivationPathSelect(event.target.value);
     },
     []
   );
 
   const handleCustomPathChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setCustomPath(event.target.value);
-    },
+    (event: ChangeEvent<HTMLInputElement>) => setCustomPath(event.target.value),
     []
   );
 
   const handleChainChange = useCallback(
-    (event: ChangeEvent<HTMLSelectElement>) => {
-      setChainId(event.target.value);
-    },
+    (event: ChangeEvent<HTMLSelectElement>) => setChainId(event.target.value),
     []
   );
 
   const handleAssetChange = useCallback(
-    (event: ChangeEvent<HTMLSelectElement>) => {
-      setAsset({ label: event.target.value });
-    },
+    (event: ChangeEvent<HTMLSelectElement>) =>
+      setAsset({ label: event.target.value }),
     []
   );
 
   const handleAccountSelect = useCallback(
-    (account: Account) => () => {
-      selectAccount(account);
-    },
+    (account: Account) => () => selectAccount(account),
     []
   );
 
