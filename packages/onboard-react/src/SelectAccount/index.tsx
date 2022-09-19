@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, FC, useCallback, useMemo, useState } from "react";
 import {
   Account,
   selectAccountOptions,
@@ -56,7 +56,18 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
     }
   }, [asset, chainId, derivationPath]);
 
-  const handleSelect = useCallback(
+  const handleDerivationPathChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      if (event.target.value !== "custom") {
+        // update custom path to the last used path from dropdown
+        setCustomPath(event.target.value);
+      }
+      setDerivationPath(event.target.value);
+    },
+    []
+  );
+
+  const handleAccountSelect = useCallback(
     (account: Account) => () => {
       selectAccount(account);
     },
@@ -69,7 +80,7 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
     >
       <h1>Choose Address</h1>
 
-      <select onChange={(e) => setDerivationPath(e.target.value)}>
+      <select onChange={handleDerivationPathChange}>
         {selectAccountOptions.basePaths.map((path) => (
           <option value={path.value} key={path.value}>
             {path.label} ({path.value})
@@ -78,7 +89,7 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
         <option value="custom">Custom</option>
       </select>
 
-      {derivationPath === "custom" && (
+      {derivationPathSelect === "custom" && (
         <input
           value={customPath}
           onChange={(e) => setCustomPath(e.target.value)}
@@ -110,7 +121,7 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
           <li key={account.address}>
             #{index}: {account.address} (
             {utils.formatEther(account.balance.value)} {account.balance.asset})
-            <button onClick={handleSelect(account)}>choose</button>
+            <button onClick={handleAccountSelect(account)}>choose</button>
           </li>
         ))}
       </ul>

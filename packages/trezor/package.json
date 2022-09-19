@@ -15,21 +15,17 @@
   "devDependencies": {
     "@sovryn/onboard-eslint-config": "*",
     "@sovryn/onboard-tsconfig": "*",
-    "eslint": "^7.32.0",
-    "typescript": "^4.5.2"
+    "eslint": "7.32.0",
+    "typescript": "4.5.2"
   },
   "dependencies": {
-    "@ethereumjs/tx": "^3.5.2",
-    "@metamask/eth-sig-util": "^4.0.1",
+    "@ethereumjs/tx": "3.5.2",
+    "@metamask/eth-sig-util": "4.0.1",
     "@sovryn/onboard-common": "*",
     "@sovryn/onboard-hw-common": "*",
-    "eth-crypto": "^2.3.0",
-    "ethers": "^5.7.0",
-    "eventemitter3": "^4.0.7",
-    "hdkey": "^2.0.1",
-    "joi": "^17.6.0",
-    "lodash.partition": "^4.6.0",
-    "rxjs": "^7.5.6",
-    "trezor-connect": "^8.2.11"
+    "eth-crypto": "2.3.0",
+    "ethers": "5.7.0",
+    "hdkey": "2.0.1",
+    "trezor-connect": "8.2.11"
   }
 }
