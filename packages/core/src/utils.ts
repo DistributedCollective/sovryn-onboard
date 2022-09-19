@@ -7,7 +7,7 @@ import type {
   DeviceType,
 } from "@sovryn/onboard-common";
 import bowser from "bowser";
-import type { DeviceNotBrowser } from "./types.js";
+import type { DeviceNotBrowser } from "./types";
 
 export const toHexString = (val: number | string): string =>
   typeof val === "number" ? `0x${val.toString(16)}` : val;

@@ -119,6 +119,10 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
     [wallet.label]
   );
 
+  const disconnect = useCallback(async () => {
+    await onboard.disconnectWallet(wallet.label);
+  }, [wallet.label]);
+
   useEffect(() => {
     wallet.provider.on("chainChanged", (value) => {
       console.log("chainged chainId to ", value, Number(value));
@@ -160,6 +164,10 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
             Switch to {chain.label} {chainId === chain.id && " [current]"}
           </button>
         ))}
+        <hr />
+        <button onClick={disconnect} className={styles.button}>
+          Disconnect
+        </button>
       </div>
     </div>
   );

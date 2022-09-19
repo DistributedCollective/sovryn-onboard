@@ -1,5 +1,6 @@
 // these cannot be dynamically imported
 import { TypedDataUtils } from "@metamask/eth-sig-util";
+import { helpers } from "@sovryn/onboard-core";
 import type Transport from "@ledgerhq/hw-transport";
 import type { StaticJsonRpcProvider } from "@ethersproject/providers";
 import type Eth from "@ledgerhq/hw-app-eth";
@@ -15,27 +16,8 @@ import type {
   ScanAccountsOptions,
   Account,
   Asset,
+  HwConfig,
 } from "@sovryn/onboard-hw-common";
-
-const LEDGER_LIVE_PATH = `m/44'/60'`;
-const LEDGER_DEFAULT_PATH = `m/44'/60'/0'`;
-
-const DEFAULT_BASE_PATHS = [
-  {
-    label: "Ledger Live",
-    value: LEDGER_LIVE_PATH,
-  },
-  {
-    label: "Ledger Legacy",
-    value: LEDGER_DEFAULT_PATH,
-  },
-];
-
-const assets = [
-  {
-    label: "ETH",
-  },
-];
 
 type CustomNavigator = Navigator & { usb: { getDevices(): void } };
 
@@ -63,11 +45,9 @@ const getAccount = async (
   provider: StaticJsonRpcProvider,
   eth: Eth
 ): Promise<Account> => {
-  const dPath =
-    derivationPath === LEDGER_LIVE_PATH
-      ? `${derivationPath}/${index}'/0/0`
-      : `${derivationPath}/${index}`;
-  const { address } = await eth.getAddress(dPath);
+  const dPath = `${derivationPath}/${index}`;
+  let { address } = await eth.getAddress(dPath);
+  address = address.toLowerCase();
   return {
     derivationPath: dPath,
     address,
@@ -109,9 +89,11 @@ const getAddresses = async (
 
 function ledger({
   customNetwork,
+  basePaths,
+  assets,
 }: {
   customNetwork?: CustomNetwork;
-} = {}): WalletInit {
+} & HwConfig): WalletInit {
   const getIcon = async () => (await import("./icon")).default;
   return () => {
     let accounts: Account[] | undefined;
@@ -163,11 +145,9 @@ function ledger({
 
             // Checks to see if this is a custom derivation path
             // If it is then just return the single account
-            if (
-              derivationPath !== LEDGER_LIVE_PATH &&
-              derivationPath !== LEDGER_DEFAULT_PATH
-            ) {
-              const { address } = await eth.getAddress(derivationPath);
+            if (!basePaths.find((item) => item.value === derivationPath)) {
+              let { address } = await eth.getAddress(derivationPath);
+              address = address.toLowerCase();
               return [
                 {
                   derivationPath,
@@ -189,6 +169,7 @@ function ledger({
 
             return accounts;
           } catch (error) {
+            console.error("hw", error);
             const { statusText } = error as { statusText: string };
 
             throw new Error(
@@ -201,7 +182,7 @@ function ledger({
 
         const getAccounts = async () => {
           accounts = await accountSelect({
-            basePaths: DEFAULT_BASE_PATHS,
+            basePaths,
             assets,
             chains,
             scanAccounts,
