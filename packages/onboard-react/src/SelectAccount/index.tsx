@@ -67,6 +67,27 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
     []
   );
 
+  const handleCustomPathChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setCustomPath(event.target.value);
+    },
+    []
+  );
+
+  const handleChainChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      setChainId(event.target.value);
+    },
+    []
+  );
+
+  const handleAssetChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      setAsset({ label: event.target.value });
+    },
+    []
+  );
+
   const handleAccountSelect = useCallback(
     (account: Account) => () => {
       selectAccount(account);
@@ -90,13 +111,10 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
       </select>
 
       {derivationPathSelect === "custom" && (
-        <input
-          value={customPath}
-          onChange={(e) => setCustomPath(e.target.value)}
-        />
+        <input value={customPath} onChange={handleCustomPathChange} />
       )}
 
-      <select onChange={(e) => setChainId(e.target.value)}>
+      <select onChange={handleChainChange}>
         {selectAccountOptions.chains.map((chain) => (
           <option value={chain.id} key={chain.id}>
             {chain.label}
@@ -104,7 +122,7 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
         ))}
       </select>
 
-      <select onChange={(e) => setAsset({ label: e.target.value })}>
+      <select onChange={handleAssetChange}>
         {selectAccountOptions.assets.map((asset) => (
           <option value={asset.label} key={asset.label}>
             {asset.label}
@@ -112,9 +130,13 @@ export const SelectAccount: FC<SelectAccountProps> = () => {
         ))}
       </select>
 
-      <button onClick={handleScan}>Scan Accounts</button>
+      <button onClick={handleScan} disabled={scanning}>
+        Scan Accounts
+      </button>
       <button onClick={handleClose}>Close</button>
-      {scanning && <div>Scanning...</div>}
+      {scanning && (
+        <div>Scanning, checking balances too, so it may take a while...</div>
+      )}
       {error && <div>Error: {error}</div>}
       <ul>
         {accounts.map((account, index) => (
