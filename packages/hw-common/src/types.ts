@@ -1,6 +1,11 @@
 import type { Chain, AccountAddress } from "@sovryn/onboard-common";
 import type { BigNumber } from "ethers";
 
+export interface HwConfig {
+  basePaths: BasePath[];
+  assets: Asset[];
+}
+
 export interface CustomNetwork {
   networkId: number;
   genesis: GenesisBlock;
