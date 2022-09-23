@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default `<svg xmlns="http://www.w3.org/2000/svg" id="dcent-_171_4" width="100%" height="100%" viewBox="0 0 48 48">
 <svg version="1.1" id="dcent-Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 62.27 71.11" style="enable-background:new 0 0 62.27 71.11;" xml:space="preserve">

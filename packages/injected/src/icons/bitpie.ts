@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default `
 <svg width="100%" height="100%" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M8.72147 0.714294H30.3108C35.1186 0.714294 39.0161 4.61182 39.0161 9.41965V31.0089C39.0161 35.8168 35.1186 39.7143 30.3108 39.7143H8.72147C3.91363 39.7143 0.0161133 35.8168 0.0161133 31.0089V9.41965C0.0161133 4.61182 3.91363 0.714294 8.72147 0.714294Z" fill="url(#paint0_linear)"/>

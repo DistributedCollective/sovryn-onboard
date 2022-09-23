@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default `<?xml version="1.0" encoding="utf-8"?>
 <svg width="100%" height="100%" version="1.1" id="Layer_1" xmlns:ev="http://www.w3.org/2001/xml-events"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 318.6 318.6"
