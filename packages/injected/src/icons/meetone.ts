@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default `<svg width="100%" height="100%" viewBox="0 0 151 102" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect x="0.997046" width="150" height="102" fill="url(#pattern0)"/>
 <defs>

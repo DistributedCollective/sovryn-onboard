@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default `<svg width="100%" height="100%" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0)">
 <path d="M12.8862 509.82H83.3388C86.3489 509.82 89.1018 508.123 90.454 505.434L298.671 91.3397C299.832 89.0308 299.8 86.3022 298.586 84.0208L260.211 11.9014C257.779 7.33195 251.202 7.41537 248.887 12.045L5.76289 498.294C3.11521 503.589 6.96582 509.82 12.8862 509.82Z" fill="url(#paint0_linear)"/>

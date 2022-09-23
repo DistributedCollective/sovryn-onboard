@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "lint": "eslint *.ts*"
+    "lint": "eslint ./src/**/*.ts*"
   },
   "dependencies": {
     "@sovryn/onboard-core": "*",

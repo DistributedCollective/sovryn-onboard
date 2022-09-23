@@ -21,3 +21,5 @@ export const remove =
       (label === ProviderLabel.Detected && detected) ||
       (label === ProviderLabel.MetaMask && metamask)
     );
+
+export const hello: string = 19;
