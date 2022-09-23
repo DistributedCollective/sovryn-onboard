@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default `
 <svg height="100%" viewBox="0 0 218 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>brave-browser</title>

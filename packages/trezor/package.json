@@ -1,0 +1,31 @@
+{
+  "name": "@sovryn/onboard-trezor",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "lint": "eslint ./src/**/*"
+  },
+  "devDependencies": {
+    "@sovryn/onboard-eslint-config": "*",
+    "@sovryn/onboard-tsconfig": "*",
+    "eslint": "7.32.0",
+    "typescript": "4.5.2"
+  },
+  "dependencies": {
+    "@ethereumjs/tx": "3.5.2",
+    "@metamask/eth-sig-util": "4.0.1",
+    "@sovryn/onboard-common": "*",
+    "@sovryn/onboard-hw-common": "*",
+    "eth-crypto": "2.3.0",
+    "ethers": "5.7.0",
+    "hdkey": "2.0.1",
+    "trezor-connect": "8.2.11"
+  }
+}

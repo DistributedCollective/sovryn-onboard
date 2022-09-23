@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default `
 <svg  width="100%" height="100%"  viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>

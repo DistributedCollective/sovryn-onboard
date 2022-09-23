@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default `
 <svg viewBox="0 0 396 318" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_5_131)">
