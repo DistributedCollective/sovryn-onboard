@@ -3,6 +3,7 @@ import { Asset, BasePath } from "@sovryn/onboard-hw-common";
 import injectedModule from "@sovryn/onboard-injected";
 import ledgerModule from "@sovryn/onboard-ledger";
 import trezorModule from "@sovryn/onboard-trezor";
+import walletConnectModule from "@sovryn/onboard-walletconnect";
 
 const basePaths: BasePath[] = [
   { label: "RSK Mainnet", value: "m/44'/137'/0'/0" },
@@ -21,9 +22,9 @@ const trezor = trezorModule({
   basePaths,
   assets,
 });
-
+const walletConnect = walletConnectModule();
 export const onboard = Onboard({
-  wallets: [injected, ledger, trezor],
+  wallets: [injected, ledger, trezor, walletConnect],
   chains: [
     {
       id: "0x1e",
