@@ -1,77 +1,59 @@
-# Turborepo starter
+# Sovryn Onboard
 
-This is an official Yarn v1 starter turborepo.
+Library which allows dapp users to connect with their wallets to sign messages and transactions.
 
-## What's inside?
+Modules compatible with web3-onboard as it's mostly clones with additional features required by Sovryn.
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package manager. It includes the following packages/apps:
+## Installation
 
-### Apps and Packages
+`yarn install @sovryn/onboard-core @sovryn/onboard-injected @sovryn/onboard-walletconnect @sovryn/onboard-react`
 
-- `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+## Usage
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+```tsx
+import Onboard from '@sovryn/onboard-core';
+import { OnboardProvider } from "@sovryn/onboard-react";
+import injectedModule from '@sovryn/onboard-injected';
+import walletConnectModule from '@sovryn/onboard-walletconnect';
 
-### Utilities
+const injected = injectedModule();
+const walletConnect = walletConenctModule();
 
-This turborepo has some additional tools already setup for you:
+const chains = [{}];
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+const onboard = Onboard({
+    wallets: [injected, walletConnnct],
+    chains: [{
+      id: "0x1e",
+      rpcUrl: "https://public-node.rsk.co",
+      label: "RSK",
+      token: "RBTC",
+      blockExplorerUrl: "https://explorer.rsk.co",
+    }],
+});
 
-## Setup
-
-This repository is used in the `npx create-turbo` command, and selected when choosing which package manager you wish to use with your monorepo (Yarn).
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-yarn run build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-yarn run dev
+const App = () => {
+    return (
+        <>
+            <button onClick={onboard.connectWallet}>Connect</button>
+            <OnboardProvider onboard={onboard} />
+        </>
+    )
+};
 ```
 
-### Remote Caching
+## API
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+`onboard.connectWallet(wallet?: string)` - if wallet arg is given user will be connected to the wallet module without UI interaction, if wallet arg not provided - UI flow will be triggered for user to select wallet.
+User can connect as many wallets as supported as long as each wallet type are different.
+Returns Promise with list of connected wallets.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+`onboard.disconnectWallet(wallet?: string)` - if wallet arg is given user will be disconnected from that wallet, if not - from all wallets.
 
-```
-cd my-turborepo
-npx turbo login
-```
+`onboard.setChain(chainId: string, chainNamespace?: string, wallet?: string)` - trigger network change if wallet supports it. If wallet name given - change it to that wallet, if not - to the first wallet user connected.
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+`onboard.state.get()` - get state of onboard storage
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
+`onboard.state.get().wallets` - get list of connected wallets, access provider of default wallet like this `onboard.state.get().wallets[0].provider`
 
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Pipelines](https://turborepo.org/docs/core-concepts/pipelines)
-- [Caching](https://turborepo.org/docs/core-concepts/caching)
-- [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching)
-- [Scoped Tasks](https://turborepo.org/docs/core-concepts/scopes)
-- [Configuration Options](https://turborepo.org/docs/reference/configuration)
-- [CLI Usage](https://turborepo.org/docs/reference/command-line-reference)
+`onboard.state.select('wallets').subscribe(changes => console.log(changes))` - watch for connected wallet changes
