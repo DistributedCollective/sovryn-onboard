@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 export default `
   <svg
     viewBox="0 0 40 25" 
