@@ -1,5 +1,11 @@
 # @sovryn/onboard-core
 
+## 0.0.2
+
+### Patch Changes
+
+- allow to disconnect from all connected wallets
+
 ## 0.0.1
 
 ### Patch Changes
