@@ -1,0 +1,7 @@
+.text {
+    @apply flex flex-col w-full gap-3;
+}
+
+.link {
+    @apply pt-10;
+}

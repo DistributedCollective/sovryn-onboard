@@ -1,0 +1,11 @@
+.container {
+    @apply rounded-lg;
+}
+
+.tabs {
+    @apply rounded-l-lg;
+}
+
+.content {
+    @apply flex flex-col justify-center w-full h-auto self-stretch;
+}
