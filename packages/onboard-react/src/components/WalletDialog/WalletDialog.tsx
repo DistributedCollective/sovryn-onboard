@@ -12,6 +12,7 @@ import { FilterType, WalletList } from "../WalletList/WalletList";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
 import styles from "./WalletDialog.module.css";
+import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
 
 type WalletDialogProps = {
   isOpen: boolean;
@@ -25,7 +26,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       {
         label: "Hardware Wallet",
         infoText: "Select the hardware wallet you want to connect",
-        content: <WalletList filter={FilterType.hardware} />,
+        content: <HardwareWallets />,
         dataLayoutId: "hardware",
       },
       {

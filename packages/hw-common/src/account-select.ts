@@ -11,6 +11,7 @@ export let selectAccountOptions: SelectAccountOptions;
 const accountSelect = async (
   options: SelectAccountOptions
 ): Promise<Account[]> => {
+  console.log("selecting account", options);
   if (options) {
     const error = validateSelectAccountOptions(options);
 
