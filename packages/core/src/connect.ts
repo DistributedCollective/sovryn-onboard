@@ -56,8 +56,6 @@ export const loadWalletModule = async (
       .get()
       .wallets.find((wallet) => wallet.label === walletModule.label);
 
-    console.log("load module", walletModule);
-
     if (existingWallet) {
       // set as first wallet
       addWallet(existingWallet);
@@ -89,8 +87,6 @@ export const loadWalletModule = async (
       EventEmitter,
       appMetadata: null,
     });
-
-    console.log("provider", provider, instance);
 
     const loadedIcon = await walletModule.getIcon();
 
