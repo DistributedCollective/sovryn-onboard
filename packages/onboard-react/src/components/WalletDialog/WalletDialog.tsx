@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import {
   Dialog,
   VerticalTabs,
