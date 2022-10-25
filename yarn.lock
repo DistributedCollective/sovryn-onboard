@@ -3137,7 +3137,7 @@
     postcss-preset-env "^7.7.1"
     tailwindcss "^3.1.3"
 
-"@sovryn/ui@^0.0.4":
+"@sovryn/ui@0.0.4", "@sovryn/ui@^0.0.4":
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.4.tgz#0dce39abb63213952606a24ea019658f41a438ce"
   integrity sha512-rPSl0EzpPppab4m9FXTLiBKHO3+35UoqrsS8XvmZmZ1IB4AUYNwRYaV19VIycpcj9xu/guCDcGyUYZvqERgySQ==
@@ -3461,10 +3461,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@17.0.48":
-  version "17.0.48"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.48.tgz#a4532a8b91d7b27b8768b6fc0c3bccb760d15a6c"
-  integrity sha512-zJ6IYlJ8cYYxiJfUaZOQee4lh99mFihBoqkOSEGV+dFi9leROW6+PgstzQ+w3gWTnUfskALtQPGHK6dYmPj+2A==
+"@types/react@18.0.22":
+  version "18.0.22"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.22.tgz#97782d995d999617de116cf61f437f1351036fc7"
+  integrity sha512-4yWc5PyCkZN8ke8K9rQHkTXxHIWHxLzzW6RI1kXVoepkD3vULpKzC2sDtAMKn78h92BRYuzf+7b/ms7ajE6hFw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
