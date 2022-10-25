@@ -1,3 +1,5 @@
+/// <reference path="./custom.d.ts" />
+
 import { FC } from "react";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
 

@@ -8,6 +8,7 @@ import styles from "./Wallet.module.css";
 import { getSigner } from "../lib/signer";
 import { ExplorerLink } from "./ExplorerLink";
 import { _TypedDataEncoder } from "ethers/lib/utils";
+import { WalletIdentity } from "@sovryn/ui";
 
 const MESSAGE_TO_SIGN = "hello world";
 
@@ -137,11 +138,13 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
 
   return (
     <div key={wallet.label} className={styles.container}>
+      <div>
+        <WalletIdentity address={address} onDisconnect={disconnect} />
+      </div>
       <h3 className={styles.label}>
         {wallet.label}{" "}
         <em className={styles.sublabel}>[chainId: {Number(chainId)}]</em>
       </h3>
-      <h4 className={styles.address}>{address}</h4>
       <div>
         <button onClick={handlePersonalSign} className={styles.button}>
           Sign Personal Message
@@ -164,10 +167,6 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
             Switch to {chain.label} {chainId === chain.id && " [current]"}
           </button>
         ))}
-        <hr />
-        <button onClick={disconnect} className={styles.button}>
-          Disconnect
-        </button>
       </div>
     </div>
   );

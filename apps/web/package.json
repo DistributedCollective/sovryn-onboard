@@ -14,11 +14,11 @@
     "@sovryn/onboard-injected": "*",
     "@sovryn/onboard-ledger": "*",
     "@sovryn/onboard-react": "*",
-    "@sovryn/ui": "^0.0.2",
+    "@sovryn/ui": "^0.0.4",
     "ethers": "5.7.0",
     "next": "12.2.3",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

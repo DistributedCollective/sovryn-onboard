@@ -13,6 +13,7 @@ import { getChainId, requestAccounts, trackWallet } from "./provider";
 
 export default async function connect(wallet?: string): Promise<WalletState[]> {
   const { chains } = state.get();
+  console.log("connect called", wallet);
 
   if (!chains.length) {
     throw new Error(
@@ -42,6 +43,8 @@ export default async function connect(wallet?: string): Promise<WalletState[]> {
     map((x) => x?.[1])
   );
 
+  console.log({ result$ });
+
   return firstValueFrom(result$);
 }
 
@@ -52,6 +55,8 @@ export const loadWalletModule = async (
     const existingWallet = state
       .get()
       .wallets.find((wallet) => wallet.label === walletModule.label);
+
+    console.log("load module", walletModule);
 
     if (existingWallet) {
       // set as first wallet
@@ -84,6 +89,8 @@ export const loadWalletModule = async (
       EventEmitter,
       appMetadata: null,
     });
+
+    console.log("provider", provider, instance);
 
     const loadedIcon = await walletModule.getIcon();
 

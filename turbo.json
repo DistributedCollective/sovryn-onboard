@@ -10,6 +10,13 @@
     },
     "dev": {
       "cache": false
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "test:staged": {
+      "cache": false
     }
   }
 }

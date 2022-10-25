@@ -1,10 +1,11 @@
-import { FC, lazy, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 
 import { state, helpers } from "@sovryn/onboard-core";
 import { WalletModule } from "@sovryn/onboard-common";
 import { WalletContainer } from "@sovryn/ui";
 import { shareReplay, startWith } from "rxjs/operators";
 import { useObservable } from "../../hooks/useObservable";
+import { isHardwareWallet } from "./helpers";
 import styles from "./WalletList.module.css";
 
 export enum FilterType {
@@ -52,8 +53,8 @@ export const WalletList: FC<WalletListProps> = ({ filter }) => {
     return walletModules
       .filter(
         filter === FilterType.hardware
-          ? (item) => ["ledger", "trezor"].includes(item.label.toLowerCase())
-          : (item) => !["ledger", "trezor"].includes(item.label.toLowerCase())
+          ? (item) => isHardwareWallet(item.label)
+          : (item) => !isHardwareWallet(item.label)
       )
       .map((module) => {
         return {

@@ -3,7 +3,7 @@ import { WalletState } from "@sovryn/onboard-core";
 import { onboard } from "../lib/connector";
 import { Wallet } from "../components/Wallet";
 import dynamic from "next/dynamic";
-import { Button } from "@sovryn/ui";
+import { Button, ButtonStyle, WalletIdentity } from "@sovryn/ui";
 
 const OnboardProvider = dynamic(
   () => import("@sovryn/onboard-react").then((mod) => mod.OnboardProvider),
