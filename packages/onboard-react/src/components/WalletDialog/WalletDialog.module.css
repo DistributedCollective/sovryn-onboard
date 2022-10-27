@@ -1,9 +1,9 @@
 .container {
-    @apply rounded-lg;
+    @apply rounded;
 }
 
 .tabs {
-    @apply rounded-l-lg;
+    @apply rounded-l;
 }
 
 .content {
