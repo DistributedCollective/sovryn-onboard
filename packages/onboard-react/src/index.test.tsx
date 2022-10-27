@@ -15,8 +15,8 @@ const Component = () => {
 
 describe("WalletDialog", () => {
   it("should start with hidden modal", () => {
-    const { getByText } = render(<WalletDialog isOpen={false} />);
-    expect(() => getByText("test")).toThrowError();
+    const { getByText } = render(<Component />);
+    expect(() => getByText("Connect Wallet")).toThrowError();
   });
 
   it("should be able to open wallet connection flow modal", async () => {

@@ -17,12 +17,12 @@ import injectedModule from "@sovryn/onboard-injected";
 import walletConnectModule from "@sovryn/onboard-walletconnect";
 
 const injected = injectedModule();
-const walletConnect = walletConenctModule();
+const walletConnect = walletConnectModule();
 
 const chains = [{}];
 
 const onboard = Onboard({
-  wallets: [injected, walletConnnct],
+  wallets: [injected, walletConnect],
   chains: [
     {
       id: "0x1e",
