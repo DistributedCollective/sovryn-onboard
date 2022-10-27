@@ -1,5 +1,4 @@
-import { ChangeEvent, FC, useCallback, useMemo, useState } from "react";
-import { Icon, IconNames } from "@sovryn/ui";
+import { FC, useCallback, useState } from "react";
 import {
   Account,
   selectAccount,
@@ -66,14 +65,13 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
 
   return (
     <>
-      {scanning && "Scanning..."}
-      {error && "Error: " + error.toString()}
-
       {step === HardwareWalletStep.derivationPathForm && (
         <DerivationPathForm
           value={dPath}
           onChange={handleDPathChange}
           basePaths={selectAccountOptions.basePaths}
+          error={error}
+          loading={scanning}
         />
       )}
 

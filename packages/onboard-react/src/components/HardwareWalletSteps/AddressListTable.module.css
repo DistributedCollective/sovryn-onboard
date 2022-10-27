@@ -1,0 +1,11 @@
+.centering {
+  @apply flex flex-col items-center justify-center;
+}
+
+.pagination {
+  @apply mt-4;
+}
+
+.button {
+  @apply mt-8 w-[13.5rem];
+}

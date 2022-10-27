@@ -24,8 +24,6 @@ export const HardwareWallets: FC = () => {
     }
   }, [step]);
 
-  console.log({ step });
-
   return (
     <>
       {!inProgress ? (

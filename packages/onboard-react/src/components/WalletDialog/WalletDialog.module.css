@@ -1,11 +1,19 @@
 .container {
-    @apply rounded;
+  @apply rounded transition-colors transition-opacity duration-500;
+}
+
+.containerInProgress {
+  @apply bg-gray-80 bg-opacity-65;
 }
 
 .tabs {
-    @apply rounded-l;
+  @apply rounded-l transition-opacity transition-colors duration-500;
+}
+
+.tabsInProgress {
+  @apply bg-gray-70 opacity-65;
 }
 
 .content {
-    @apply flex flex-col justify-center w-full h-auto self-stretch;
+  @apply flex flex-col justify-center w-full h-auto self-stretch;
 }
