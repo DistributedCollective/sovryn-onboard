@@ -11,11 +11,16 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "turbo run test",
+    "test:staged": "turbo run test:staged",
     "prepare": "husky install",
     "release-packages": "yarn turbo run build lint --filter=./packages/* && yarn changeset publish"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": "prettier --write"
+    "*.{js,ts,tsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@commitlint/config-conventional": "17.0.3",

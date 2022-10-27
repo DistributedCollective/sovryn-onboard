@@ -1,0 +1,11 @@
+.container {
+    @apply flex flex-col gap-y-3;
+}
+
+.icon {
+    @apply flex justify-center items-center w-full h-full text-current;
+}
+
+.item:hover .icon {
+    @apply text-primary;
+}

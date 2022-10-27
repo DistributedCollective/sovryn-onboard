@@ -1,8 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, FC } from "react";
 import { WalletState } from "@sovryn/onboard-core";
-import { OnboardProvider } from "@sovryn/onboard-react";
+import dynamic from "next/dynamic";
+import { Button } from "@sovryn/ui";
 import { onboard } from "../lib/connector";
 import { Wallet } from "../components/Wallet";
+
+const OnboardProvider = dynamic(
+  () => import("@sovryn/onboard-react").then((mod) => mod.OnboardProvider),
+  { ssr: false }
+) as FC;
 
 export default function Web() {
   const handleConnectClick = useCallback(() => {
@@ -17,13 +23,14 @@ export default function Web() {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col gap-4 w-full min-h-screen self-stretch items-center justify-center">
       <h1>Connection Example</h1>
 
       <div>
-        <button onClick={handleConnectClick}>
-          {wallets.length > 0 ? "Connect another wallet" : "Connect"}
-        </button>
+        <Button
+          onClick={handleConnectClick}
+          text={wallets.length > 0 ? "Connect another wallet" : "Connect"}
+        />
       </div>
 
       {wallets.length > 0 && (
@@ -35,7 +42,7 @@ export default function Web() {
         </div>
       )}
 
-      <OnboardProvider onboard={onboard} />
+      <OnboardProvider />
     </div>
   );
 }
