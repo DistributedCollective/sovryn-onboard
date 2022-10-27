@@ -1,9 +1,9 @@
 .container {
-  @apply rounded transition-colors transition-opacity duration-500;
+  @apply rounded transition-colors duration-500;
 }
 
 .containerInProgress {
-  @apply bg-gray-80 bg-opacity-65;
+  @apply bg-gray-50;
 }
 
 .tabs {
