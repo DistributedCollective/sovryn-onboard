@@ -7,22 +7,18 @@
   @apply mb-10;
 }
 
-.selectPath {
-  @apply mb-3 text-gray-10 bg-gray-70;
-}
-
 .customPathInput {
-  @apply mb-3;
+  @apply mt-3;
 }
 
 .button {
-  @apply w-full;
-}
-
-.error {
-  @apply text-error mt-2 mb-3 font-semibold;
+  @apply w-full mt-3;
 }
 
 .infoLink {
   @apply block w-full text-center mt-5;
+}
+
+.dropdown {
+  @apply w-full mt-3;
 }

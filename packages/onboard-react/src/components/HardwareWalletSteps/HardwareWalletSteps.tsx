@@ -21,8 +21,8 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
   step,
   onStepChanged,
 }) => {
-  const [chainId, setChainId] = useState(selectAccountOptions.chains[0].id);
-  const [asset, setAsset] = useState(selectAccountOptions.assets[0]);
+  const [chainId] = useState(selectAccountOptions.chains[0].id);
+  const [asset] = useState(selectAccountOptions.assets[0]);
 
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [scanning, setScanning] = useState(false);

@@ -1,13 +1,13 @@
+import { ChangeEvent, FC, useCallback, useMemo, useState } from "react";
 import {
-  ChangeEvent,
-  ChangeEventHandler,
-  EventHandler,
-  FC,
-  useCallback,
-  useMemo,
-  useState,
-} from "react";
-import { Button, ButtonType, Input, Link, Paragraph } from "@sovryn/ui";
+  Button,
+  ButtonType,
+  Input,
+  Link,
+  Paragraph,
+  Select,
+  FormGroup,
+} from "@sovryn/ui";
 import { BasePath } from "@sovryn/onboard-hw-common";
 import styles from "./DerivationPathForm.module.css";
 
@@ -36,16 +36,13 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
     return selectedPath;
   }, [selectedPath, customPath]);
 
-  const handleSelectedPathChange = useCallback(
-    (event: ChangeEvent<HTMLSelectElement>) => {
-      if (event.target.value !== "custom") {
-        // update custom path to the last used path from dropdown
-        setCustomPath(event.target.value);
-      }
-      setSelectedPath(event.target.value);
-    },
-    []
-  );
+  const handleSelectedPathChange = useCallback((value: string) => {
+    if (value !== "custom") {
+      // update custom path to the last used path from dropdown
+      setCustomPath(value);
+    }
+    setSelectedPath(value);
+  }, []);
 
   const handleCustomChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setCustomPath(event.target.value),
@@ -75,30 +72,26 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
           derivation path.
         </Paragraph>
 
-        <Paragraph>Derivation path:</Paragraph>
-        <select
-          value={selectedPath}
-          onChange={handleSelectedPathChange}
-          className={styles.selectPath}
+        <FormGroup
+          label="Derivation path:"
+          dataLayoutId="derivation-path"
+          errorLabel={error ? error.toString() : undefined}
         >
-          {options.map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.label}
-            </option>
-          ))}
-        </select>
-
-        {selectedPath === "custom" && (
-          <Input
-            value={customPath}
-            onChange={handleCustomChange}
-            className={styles.customPathInput}
+          <Select
+            value={selectedPath}
+            onChange={handleSelectedPathChange}
+            options={options}
+            dropdownProps={{ usePortal: false, className: styles.dropdown }}
           />
-        )}
 
-        {error && (
-          <Paragraph className={styles.error}>{error.toString()}</Paragraph>
-        )}
+          {selectedPath === "custom" && (
+            <Input
+              value={customPath}
+              onChange={handleCustomChange}
+              className={styles.customPathInput}
+            />
+          )}
+        </FormGroup>
       </div>
 
       <div>

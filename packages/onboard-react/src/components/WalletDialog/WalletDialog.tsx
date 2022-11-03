@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import {
   Dialog,
@@ -10,7 +10,7 @@ import {
   DialogSize,
 } from "@sovryn/ui";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
-import { selectAccounts$ } from "@sovryn/onboard-hw-common";
+import { closeAccountSelect, selectAccounts$ } from "@sovryn/onboard-hw-common";
 import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
 import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
@@ -54,6 +54,12 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       inProgress: false,
     });
   }, []);
+
+  useEffect(() => {
+    if (index !== 0) {
+      closeAccountSelect();
+    }
+  }, [index]);
 
   return (
     <Dialog

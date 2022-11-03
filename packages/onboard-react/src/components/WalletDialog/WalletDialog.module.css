@@ -1,5 +1,5 @@
 .container {
-  @apply rounded transition-colors duration-500;
+  @apply rounded transition-colors duration-300;
 }
 
 .containerInProgress {
@@ -7,7 +7,7 @@
 }
 
 .tabs {
-  @apply rounded-l transition-opacity transition-colors duration-500;
+  @apply rounded-l transition-opacity transition-colors duration-300;
 }
 
 .tabsInProgress {
