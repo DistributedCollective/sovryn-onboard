@@ -2,16 +2,8 @@
   @apply rounded transition-colors duration-300;
 }
 
-.containerInProgress {
-  @apply bg-gray-50;
-}
-
 .tabs {
   @apply rounded-l transition-opacity transition-colors duration-300;
-}
-
-.tabsInProgress {
-  @apply bg-gray-70 opacity-65;
 }
 
 .content {

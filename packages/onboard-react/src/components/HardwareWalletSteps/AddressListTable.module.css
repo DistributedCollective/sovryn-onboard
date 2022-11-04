@@ -1,3 +1,7 @@
+.container {
+  @apply w-full;
+}
+
 .centering {
   @apply flex flex-col items-center justify-center;
 }

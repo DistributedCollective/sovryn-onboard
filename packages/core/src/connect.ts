@@ -13,7 +13,6 @@ import { getChainId, requestAccounts, trackWallet } from "./provider";
 
 export default async function connect(wallet?: string): Promise<WalletState[]> {
   const { chains } = state.get();
-  console.log("connect called", wallet);
 
   if (!chains.length) {
     throw new Error(
@@ -42,8 +41,6 @@ export default async function connect(wallet?: string): Promise<WalletState[]> {
     withLatestFrom(wallets$),
     map((x) => x?.[1])
   );
-
-  console.log({ result$ });
 
   return firstValueFrom(result$);
 }

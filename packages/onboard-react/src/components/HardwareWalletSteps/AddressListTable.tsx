@@ -1,5 +1,12 @@
-import { FC, useCallback, useMemo, useState } from "react";
-import { Button, AddressTablePagination } from "@sovryn/ui";
+import { FC, ReactNode, useCallback, useMemo, useState } from "react";
+import {
+  Button,
+  AddressTablePagination,
+  TableBase,
+  ColumnOptions,
+  TransactionId,
+  Align,
+} from "@sovryn/ui";
 import { Account } from "@sovryn/onboard-hw-common";
 import { utils } from "ethers";
 import styles from "./AddressListTable.module.css";
@@ -11,6 +18,14 @@ type AddressListTableProps = {
   onAccountSelected: (account: Account) => void;
 };
 
+type Item = {
+  index: string;
+  address: ReactNode;
+  balance: string;
+  asset: string;
+  account: Account;
+};
+
 export const AddressListTable: FC<AddressListTableProps> = ({
   items,
   onAccountSelected,
@@ -19,7 +34,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   const [offset, setOffset] = useState(0);
 
   const handleSelect = useCallback(
-    (account: Account) => () => setSelected(account),
+    (item: Item) => setSelected(item.account),
     [setSelected]
   );
 
@@ -28,44 +43,60 @@ export const AddressListTable: FC<AddressListTableProps> = ({
     [selected, onAccountSelected]
   );
 
-  const paginatedItems = useMemo(
-    () => items.slice(offset, offset + PER_PAGE),
+  const paginatedItems: Item[] = useMemo(
+    () =>
+      items.slice(offset, offset + PER_PAGE).map((item, index) => ({
+        index: String(offset + index).padStart(2, "0"),
+        address: (
+          <TransactionId
+            value={item.address}
+            href={`https://explorer.rsk.co/address/${item.address}`}
+          />
+        ),
+        balance: utils.formatEther(item.balance.value),
+        asset: item.balance.asset,
+        account: item,
+      })),
     [items, offset]
   );
 
+  const columns: ColumnOptions<Item>[] = useMemo(
+    () => [
+      {
+        id: "index",
+        align: Align.left,
+        title: "Index",
+        cellRenderer: (row: Item) => `${row.index}.`,
+      },
+      {
+        id: "address",
+        align: Align.center,
+        title: "Address",
+      },
+      {
+        id: "balance",
+        align: Align.right,
+        title: "Balance",
+        cellRenderer: (row: Item) =>
+          `${Number(row.balance).toLocaleString(undefined, {
+            minimumFractionDigits: 4,
+            maximumFractionDigits: 4,
+          })} ${row.asset}`,
+      },
+    ],
+    []
+  );
+
   return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            <th>Index</th>
-            <th>Address</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedItems.map((account, index) => (
-            <tr key={account.address} onClick={handleSelect(account)}>
-              <td>{String(index).padStart(2, "0")}.</td>
-              <td>{account.address.substring(0, 12)}</td>
-              <td>
-                {Number(
-                  utils.formatEther(account.balance.value)
-                ).toLocaleString(undefined, {
-                  minimumFractionDigits: 4,
-                  maximumFractionDigits: 4,
-                })}{" "}
-                {account.balance.asset}
-              </td>
-            </tr>
-          ))}
-          {paginatedItems.length === 0 && (
-            <tr>
-              <td colSpan={3}>There is no more active accounts.</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    <div className={styles.container}>
+      <TableBase
+        columns={columns}
+        rows={paginatedItems}
+        rowKey={(item) => item.account.address}
+        dataAttribute="addressTable"
+        onRowClick={handleSelect}
+        isClickable
+      />
 
       <div className={styles.centering}>
         <AddressTablePagination
@@ -81,6 +112,6 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           className={styles.button}
         />
       </div>
-    </>
+    </div>
   );
 };

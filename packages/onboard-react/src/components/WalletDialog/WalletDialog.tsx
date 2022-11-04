@@ -1,5 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
-import classNames from "classnames";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import {
   Dialog,
   VerticalTabs,
@@ -10,11 +9,10 @@ import {
   DialogSize,
 } from "@sovryn/ui";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
-import { closeAccountSelect, selectAccounts$ } from "@sovryn/onboard-hw-common";
+import { selectAccounts$ } from "@sovryn/onboard-hw-common";
 import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
 import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
-import { useSubscription } from "../../hooks/useSubscription";
 import styles from "./WalletDialog.module.css";
 
 type WalletDialogProps = {
@@ -22,7 +20,6 @@ type WalletDialogProps = {
 };
 
 const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
-  const { inProgress } = useSubscription(selectAccounts$);
   const [index, setIndex] = useState(0);
 
   const items: VerticalTabsItem[] = useMemo(
@@ -55,12 +52,6 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
     });
   }, []);
 
-  useEffect(() => {
-    if (index !== 0) {
-      closeAccountSelect();
-    }
-  }, [index]);
-
   return (
     <Dialog
       isOpen={isOpen}
@@ -72,12 +63,8 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         selectedIndex={index}
         onChange={setIndex}
         items={items}
-        className={classNames(styles.container, {
-          [styles.containerInProgress]: inProgress,
-        })}
-        tabsClassName={classNames(styles.tabs, {
-          [styles.tabsInProgress]: inProgress,
-        })}
+        className={styles.container}
+        tabsClassName={styles.tabs}
         contentClassName={styles.content}
         header={() => <Heading>Connect Wallet</Heading>}
         footer={() => (

@@ -561,7 +561,6 @@ function trezor(options: TrezorOptions): WalletInit {
               domain_separator_hash: domainHash,
               message_hash: messageHash,
             }).then((result: any) => {
-              console.log(result);
               if (result.success) {
                 return result.payload.signature;
               }

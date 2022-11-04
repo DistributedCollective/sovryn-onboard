@@ -46,7 +46,6 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
         setAccounts(list);
         onStepChanged(HardwareWalletStep.addressList);
       } catch (error) {
-        console.log("failed to scan", error);
         if (error instanceof Error) {
           console.error(error);
           setError(error.message);
