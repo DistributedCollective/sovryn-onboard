@@ -29,11 +29,11 @@ export const HardwareWallets: FC = () => {
       {!inProgress ? (
         <WalletList filter={FilterType.hardware} />
       ) : (
-        <div className={styles.container}>
+        <div>
           <button onClick={handleGoBack} className={styles.closeButton}>
             <Icon icon={IconNames.ARROW_BACK} />
           </button>
-          <div className={styles.content}>
+          <div>
             <HardwareWalletSteps step={step} onStepChanged={setStep} />
           </div>
         </div>
