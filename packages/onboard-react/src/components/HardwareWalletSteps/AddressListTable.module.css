@@ -13,3 +13,16 @@
 .button {
   @apply mt-8 w-[13.5rem];
 }
+
+.table {
+  @apply w-full;
+  td {
+    @apply px-0 whitespace-nowrap;
+    &:first-child {
+      @apply pl-3;
+    }
+    &:last-child {
+      @apply pr-3;
+    }
+  }
+}

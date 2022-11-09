@@ -21,6 +21,13 @@ import type {
 
 type CustomNavigator = Navigator & { usb: { getDevices(): void } };
 
+const errorMap: Record<string, string> = {
+  UNKNOWN_ERROR: "Ledger device is locked, please unlock to continue",
+  INCORRECT_DATA: "Please enter a valid derivation path",
+};
+
+const makeError = (statusText: string) => errorMap[statusText] || statusText;
+
 const supportsWebUSB = (): Promise<boolean> =>
   Promise.resolve(
     !!navigator &&
@@ -172,11 +179,7 @@ function ledger({
             console.error("hw", error);
             const { statusText } = error as { statusText: string };
 
-            throw new Error(
-              statusText === "UNKNOWN_ERROR"
-                ? "Ledger device is locked, please unlock to continue"
-                : statusText
-            );
+            throw new Error(makeError(statusText));
           }
         };
 

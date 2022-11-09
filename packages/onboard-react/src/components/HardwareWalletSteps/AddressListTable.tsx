@@ -96,6 +96,8 @@ export const AddressListTable: FC<AddressListTableProps> = ({
         dataAttribute="addressTable"
         onRowClick={handleSelect}
         isClickable
+        className={styles.table}
+        noData="No more accounts found."
       />
 
       <div className={styles.centering}>

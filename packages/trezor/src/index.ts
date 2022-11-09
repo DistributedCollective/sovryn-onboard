@@ -271,9 +271,7 @@ function trezor(options: TrezorOptions): WalletInit {
 
             return account;
           } catch (error) {
-            throw new Error(
-              `There was an error accessing your Trezor accounts - Error: ${error}`
-            );
+            throw error;
           }
         }
 

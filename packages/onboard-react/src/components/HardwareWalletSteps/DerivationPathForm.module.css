@@ -12,7 +12,7 @@
 }
 
 .button {
-  @apply w-full mt-3;
+  @apply w-full mt-8;
 }
 
 .infoLink {

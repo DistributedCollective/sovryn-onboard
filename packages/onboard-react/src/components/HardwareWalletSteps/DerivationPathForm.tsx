@@ -7,6 +7,9 @@ import {
   Paragraph,
   Select,
   FormGroup,
+  ButtonStyle,
+  InputSize,
+  HelperButton,
 } from "@sovryn/ui";
 import { BasePath } from "@sovryn/onboard-hw-common";
 import styles from "./DerivationPathForm.module.css";
@@ -76,6 +79,19 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
           label="Derivation path:"
           dataLayoutId="derivation-path"
           errorLabel={error ? error.toString() : undefined}
+          helper={
+            <HelperButton
+              content={
+                <>
+                  <p>New to this term? See the wiki.</p>
+                  <Link
+                    href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
+                    text="Wiki"
+                  />
+                </>
+              }
+            />
+          }
         >
           <Select
             value={selectedPath}
@@ -87,8 +103,10 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
           {selectedPath === "custom" && (
             <Input
               value={customPath}
+              placeholder="m/0'/0'/0'/0"
               onChange={handleCustomChange}
               className={styles.customPathInput}
+              size={InputSize.large}
             />
           )}
         </FormGroup>
@@ -100,6 +118,7 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
           loading={loading}
           disabled={loading}
           type={ButtonType.submit}
+          style={ButtonStyle.secondary}
           onClick={handleSubmit}
           className={styles.button}
         />

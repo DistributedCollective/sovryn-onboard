@@ -9,7 +9,6 @@ import {
   DialogSize,
 } from "@sovryn/ui";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
-import { selectAccounts$ } from "@sovryn/onboard-hw-common";
 import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
 import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
@@ -58,6 +57,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       onClose={handleCloseClick}
       closeOnEscape
       width={DialogSize.xl2}
+      disableFocusTrap
     >
       <VerticalTabs
         selectedIndex={index}
