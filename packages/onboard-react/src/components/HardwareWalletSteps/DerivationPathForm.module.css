@@ -22,3 +22,7 @@
 .dropdown {
   @apply w-full mt-3;
 }
+
+.loadingText {
+  @apply text-warning mt-1 mb-2;
+}

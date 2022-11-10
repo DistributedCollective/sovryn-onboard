@@ -122,6 +122,11 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
           onClick={handleSubmit}
           className={styles.button}
         />
+        {loading && (
+          <Paragraph className={styles.loadingText}>
+            Scanning wallet addresses, please wait.
+          </Paragraph>
+        )}
 
         <Link
           href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
