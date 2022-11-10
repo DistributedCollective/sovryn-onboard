@@ -1,5 +1,5 @@
 .container {
-  @apply flex flex-col justify-between;
+  @apply flex flex-col justify-between px-6;
   min-height: 250px;
 }
 

@@ -7,7 +7,7 @@ import {
   TransactionId,
   Align,
 } from "@sovryn/ui";
-import { Account } from "@sovryn/onboard-hw-common";
+import { Account, selectAccountOptions } from "@sovryn/onboard-hw-common";
 import { utils } from "ethers";
 import styles from "./AddressListTable.module.css";
 
@@ -20,8 +20,8 @@ type AddressListTableProps = {
 };
 
 type Item = {
-  index: string;
-  address: ReactNode;
+  index: number;
+  address: string;
   balance: string;
   asset: string;
   account: Account;
@@ -32,6 +32,9 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   onAccountSelected,
   perPage = DEFAULT_PER_PAGE,
 }) => {
+  // todo: detect to which chain user is supposed to connect
+  const chain = selectAccountOptions.chains[0];
+
   const [selected, setSelected] = useState<Account>();
   const [offset, setOffset] = useState(0);
 
@@ -48,13 +51,8 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   const paginatedItems: Item[] = useMemo(
     () =>
       items.slice(offset, offset + perPage).map((item, index) => ({
-        index: String(offset + index).padStart(2, "0"),
-        address: (
-          <TransactionId
-            value={item.address}
-            href={`https://explorer.rsk.co/address/${item.address}`}
-          />
-        ),
+        index: offset + index,
+        address: item.address,
         balance: utils.formatEther(item.balance.value),
         asset: item.balance.asset,
         account: item,
@@ -68,12 +66,19 @@ export const AddressListTable: FC<AddressListTableProps> = ({
         id: "index",
         align: Align.left,
         title: "Index",
-        cellRenderer: (row: Item) => `${row.index}.`,
+        cellRenderer: (row: Item) =>
+          `${String(row.index + 1).padStart(2, "0")}.`,
       },
       {
         id: "address",
         align: Align.center,
         title: "Address",
+        cellRenderer: (row: Item) => (
+          <TransactionId
+            value={row.address}
+            href={`${chain.blockExplorerUrl}/address/${row.address}`}
+          />
+        ),
       },
       {
         id: "balance",
@@ -86,7 +91,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           })} ${row.asset}`,
       },
     ],
-    []
+    [chain.blockExplorerUrl]
   );
 
   return (

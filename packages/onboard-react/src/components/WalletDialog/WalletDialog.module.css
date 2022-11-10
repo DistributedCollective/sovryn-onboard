@@ -3,7 +3,12 @@
 }
 
 .tabs {
-  @apply rounded-l transition-opacity transition-colors duration-300;
+  @apply rounded-l transition-opacity transition-colors duration-300 justify-start;
+  min-height: 589px;
+  & > div:last-child {
+    @apply absolute;
+    bottom: 1rem;
+  }
 }
 
 .content {

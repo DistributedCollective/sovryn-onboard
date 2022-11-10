@@ -176,7 +176,6 @@ function ledger({
 
             return accounts;
           } catch (error) {
-            console.error("hw", error);
             const { statusText } = error as { statusText: string };
 
             throw new Error(makeError(statusText));
