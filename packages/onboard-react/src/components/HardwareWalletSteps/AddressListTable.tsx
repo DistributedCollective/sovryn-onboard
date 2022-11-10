@@ -11,11 +11,12 @@ import { Account } from "@sovryn/onboard-hw-common";
 import { utils } from "ethers";
 import styles from "./AddressListTable.module.css";
 
-const PER_PAGE = 5;
+const DEFAULT_PER_PAGE = 5;
 
 type AddressListTableProps = {
   items: Account[];
   onAccountSelected: (account: Account) => void;
+  perPage?: number;
 };
 
 type Item = {
@@ -29,6 +30,7 @@ type Item = {
 export const AddressListTable: FC<AddressListTableProps> = ({
   items,
   onAccountSelected,
+  perPage = DEFAULT_PER_PAGE,
 }) => {
   const [selected, setSelected] = useState<Account>();
   const [offset, setOffset] = useState(0);
@@ -45,7 +47,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
 
   const paginatedItems: Item[] = useMemo(
     () =>
-      items.slice(offset, offset + PER_PAGE).map((item, index) => ({
+      items.slice(offset, offset + perPage).map((item, index) => ({
         index: String(offset + index).padStart(2, "0"),
         address: (
           <TransactionId
@@ -57,7 +59,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
         asset: item.balance.asset,
         account: item,
       })),
-    [items, offset]
+    [items, offset, perPage]
   );
 
   const columns: ColumnOptions<Item>[] = useMemo(
@@ -103,7 +105,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
       <div className={styles.centering}>
         <AddressTablePagination
           onPageChange={setOffset}
-          itemsPerPage={PER_PAGE}
+          itemsPerPage={perPage}
           className={styles.pagination}
         />
 

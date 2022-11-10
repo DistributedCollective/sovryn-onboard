@@ -21,20 +21,20 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
   step,
   onStepChanged,
 }) => {
-  const [chainId] = useState(selectAccountOptions.chains[0].id);
-  const [asset] = useState(selectAccountOptions.assets[0]);
+  const chainId = selectAccountOptions.chains[0].id;
+  const asset = selectAccountOptions.assets[0];
 
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [scanning, setScanning] = useState(false);
   const [error, setError] = useState<string>();
 
-  const [dPath, setDPath] = useState<string>(
+  const [derivationPath, setDerivationPath] = useState(
     selectAccountOptions.basePaths[0].value
   );
 
-  const handleDPathChange = useCallback(
+  const handleDerivationPathChange = useCallback(
     async (path: string) => {
-      setDPath(path);
+      setDerivationPath(path);
 
       setScanning(true);
       try {
@@ -66,8 +66,8 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
     <>
       {step === HardwareWalletStep.derivationPathForm && (
         <DerivationPathForm
-          value={dPath}
-          onChange={handleDPathChange}
+          value={derivationPath}
+          onChange={handleDerivationPathChange}
           basePaths={selectAccountOptions.basePaths}
           error={error}
           loading={scanning}

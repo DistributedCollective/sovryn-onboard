@@ -29,8 +29,8 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
   loading,
   error,
 }) => {
-  const [selectedPath, setSelectedPath] = useState<string>(value);
-  const [customPath, setCustomPath] = useState<string>(value);
+  const [selectedPath, setSelectedPath] = useState(value);
+  const [customPath, setCustomPath] = useState(value);
 
   const derivationPath = useMemo(() => {
     if (selectedPath === "custom") {

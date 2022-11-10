@@ -16,7 +16,7 @@ export const HardwareWallets: FC = () => {
     HardwareWalletStep.derivationPathForm
   );
 
-  const handleGoBack = useCallback(() => {
+  const handleStepBack = useCallback(() => {
     if (step === HardwareWalletStep.derivationPathForm) {
       closeAccountSelect();
     } else if (step === HardwareWalletStep.addressList) {
@@ -30,7 +30,7 @@ export const HardwareWallets: FC = () => {
         <WalletList filter={FilterType.hardware} />
       ) : (
         <div>
-          <button onClick={handleGoBack} className={styles.closeButton}>
+          <button onClick={handleStepBack} className={styles.closeButton}>
             <Icon icon={IconNames.ARROW_BACK} />
           </button>
           <div>
