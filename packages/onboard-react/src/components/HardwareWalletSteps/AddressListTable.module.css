@@ -7,7 +7,7 @@
 }
 
 .pagination {
-  @apply mt-4;
+  @apply mt-2;
 }
 
 .button {

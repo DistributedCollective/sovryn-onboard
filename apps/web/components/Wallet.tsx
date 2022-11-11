@@ -146,27 +146,48 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
         <em className={styles.sublabel}>[chainId: {Number(chainId)}]</em>
       </h3>
       <div>
-        <button onClick={handlePersonalSign} className={styles.button}>
-          Sign Personal Message
-        </button>
-        <button onClick={handleDataSign} className={styles.button}>
-          Sign Typed Data
-        </button>
+        <ol className="list-disc list-inside">
+          <li>
+            <button onClick={handlePersonalSign} className={styles.button}>
+              Sign Personal Message
+            </button>
+          </li>
+
+          <li>
+            <button onClick={handleDataSign} className={styles.button}>
+              Sign Typed Data
+            </button>
+          </li>
+        </ol>
+
         <hr />
-        <button onClick={sendTransaction} className={styles.button}>
-          Send Transaction
-        </button>
-        {tx && <ExplorerLink tx={tx} />}
+
+        <ol className="list-disc list-inside">
+          <li>
+            <button onClick={sendTransaction} className={styles.button}>
+              Send Transaction
+            </button>
+          </li>
+          {tx && (
+            <li>
+              <ExplorerLink tx={tx} />
+            </li>
+          )}
+        </ol>
         <hr />
-        {onboard.state.get().chains.map((chain) => (
-          <button
-            onClick={switchNetwork(chain)}
-            className={styles.button}
-            key={chain.id}
-          >
-            Switch to {chain.label} {chainId === chain.id && " [current]"}
-          </button>
-        ))}
+        <ol className="list-disc list-inside">
+          {onboard.state.get().chains.map((chain) => (
+            <li>
+              <button
+                onClick={switchNetwork(chain)}
+                className={styles.button}
+                key={chain.id}
+              >
+                Switch to {chain.label} {chainId === chain.id && " [current]"}
+              </button>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );
