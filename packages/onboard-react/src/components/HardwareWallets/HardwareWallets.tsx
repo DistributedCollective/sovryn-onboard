@@ -12,9 +12,7 @@ import {
 
 export const HardwareWallets: FC = () => {
   const { inProgress } = useSubscription(selectAccounts$);
-  const [step, setStep] = useState<HardwareWalletStep>(
-    HardwareWalletStep.derivationPathForm
-  );
+  const [step, setStep] = useState(HardwareWalletStep.derivationPathForm);
 
   const handleStepBack = useCallback(() => {
     if (step === HardwareWalletStep.derivationPathForm) {
