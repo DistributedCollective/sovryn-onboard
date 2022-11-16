@@ -9,3 +9,7 @@
 .item:hover .icon {
     @apply text-primary;
 }
+
+.error {
+  @apply mt-16 text-center text-error-light text-sm font-bold;
+}

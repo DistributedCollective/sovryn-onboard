@@ -1,12 +1,6 @@
 import type { Chain } from "@sovryn/onboard-common";
 import { Observable, Subject, defer, BehaviorSubject } from "rxjs";
-import {
-  take,
-  takeUntil,
-  withLatestFrom,
-  pluck,
-  shareReplay,
-} from "rxjs/operators";
+import { withLatestFrom, pluck, shareReplay } from "rxjs/operators";
 
 import { resetStore } from "./store/actions";
 import { state } from "./store/index";
@@ -17,9 +11,10 @@ export const reset$ = new Subject<void>();
 export const disconnectWallet$ = new Subject<WalletState["label"]>();
 
 export const connectWallet$ = new BehaviorSubject<{
+  inProgress: boolean;
   module?: string;
   actionRequired?: string;
-  inProgress: boolean;
+  error?: string;
 }>({ inProgress: false, actionRequired: "" });
 
 export const switchChainModal$ = new BehaviorSubject<null | {

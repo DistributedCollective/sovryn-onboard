@@ -14,7 +14,7 @@
     "test": "turbo run test",
     "test:staged": "turbo run test:staged",
     "prepare": "husky install",
-    "release-packages": "yarn turbo run build lint --filter=./packages/* && yarn changeset publish"
+    "release-packages": "turbo run build lint --filter=./packages/* && changeset publish"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [

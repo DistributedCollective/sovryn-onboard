@@ -1,0 +1,28 @@
+.container {
+  @apply -mx-6 w-auto;
+}
+
+.centering {
+  @apply flex flex-col items-center justify-center;
+}
+
+.pagination {
+  @apply mt-2;
+}
+
+.button {
+  @apply mt-8 w-[13.5rem];
+}
+
+.table {
+  @apply w-full;
+  td {
+    @apply px-0 whitespace-nowrap;
+    &:first-child {
+      @apply pl-3;
+    }
+    &:last-child {
+      @apply pr-3;
+    }
+  }
+}

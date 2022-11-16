@@ -271,9 +271,7 @@ function trezor(options: TrezorOptions): WalletInit {
 
             return account;
           } catch (error) {
-            throw new Error(
-              `There was an error accessing your Trezor accounts - Error: ${error}`
-            );
+            throw error;
           }
         }
 
@@ -561,7 +559,6 @@ function trezor(options: TrezorOptions): WalletInit {
               domain_separator_hash: domainHash,
               message_hash: messageHash,
             }).then((result: any) => {
-              console.log(result);
               if (result.success) {
                 return result.payload.signature;
               }

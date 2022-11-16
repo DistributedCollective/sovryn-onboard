@@ -21,6 +21,13 @@ import type {
 
 type CustomNavigator = Navigator & { usb: { getDevices(): void } };
 
+const errorMap: Record<string, string> = {
+  UNKNOWN_ERROR: "Ledger device is locked, please unlock to continue",
+  INCORRECT_DATA: "Please enter a valid derivation path",
+};
+
+const makeError = (statusText: string) => errorMap[statusText] || statusText;
+
 const supportsWebUSB = (): Promise<boolean> =>
   Promise.resolve(
     !!navigator &&
@@ -126,9 +133,9 @@ function ledger({
         );
 
         const transport: Transport = await getTransport();
+
         const eth = new Eth(transport);
         const eventEmitter = new EventEmitter();
-
         let ethersProvider: StaticJsonRpcProvider;
 
         let currentChain: Chain = chains[0];
@@ -169,14 +176,9 @@ function ledger({
 
             return accounts;
           } catch (error) {
-            console.error("hw", error);
             const { statusText } = error as { statusText: string };
 
-            throw new Error(
-              statusText === "UNKNOWN_ERROR"
-                ? "Ledger device is locked, please unlock to continue"
-                : statusText
-            );
+            throw new Error(makeError(statusText));
           }
         };
 

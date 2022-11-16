@@ -1,11 +1,16 @@
 .container {
-    @apply rounded;
+  @apply rounded transition-colors duration-300;
 }
 
 .tabs {
-    @apply rounded-l;
+  @apply rounded-l transition-opacity transition-colors duration-300 justify-start pt-[0.625rem] px-5;
+  min-height: 589px;
+  & > div:last-child {
+    @apply absolute;
+    bottom: 1.25rem;
+  }
 }
 
 .content {
-    @apply flex flex-col justify-center w-full h-auto self-stretch;
+  @apply flex flex-col justify-start w-full h-auto self-stretch pt-[9.125rem];
 }

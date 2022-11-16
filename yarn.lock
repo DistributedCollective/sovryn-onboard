@@ -3137,10 +3137,10 @@
     postcss-preset-env "^7.7.1"
     tailwindcss "^3.1.3"
 
-"@sovryn/ui@0.0.4", "@sovryn/ui@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.4.tgz#0dce39abb63213952606a24ea019658f41a438ce"
-  integrity sha512-rPSl0EzpPppab4m9FXTLiBKHO3+35UoqrsS8XvmZmZ1IB4AUYNwRYaV19VIycpcj9xu/guCDcGyUYZvqERgySQ==
+"@sovryn/ui@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.10.tgz#022cafca7a80c302e1ecceb8b96534e36fc8f72f"
+  integrity sha512-P+BmAVsQYJTkUc+A1oqbMrIIyFs6zB+l/hh5oDt6LilfM7W9EwXi5NgJ+75NaXwJfn4/c0BMs9Sh3ddyigzQMA==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "6.2.0"
     "@fortawesome/free-solid-svg-icons" "6.2.0"
@@ -4452,6 +4452,11 @@ classnames@2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
+
+classnames@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
 
 clean-stack@^2.0.0:
   version "2.2.0"
@@ -6379,7 +6384,7 @@ icss-utils@^5.0.0:
   resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-5.1.0.tgz#c6be6858abd013d768e98366ae47e25d5887b1ae"
   integrity sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==
 
-identity-obj-proxy@3.0.0, identity-obj-proxy@^3.0.0:
+identity-obj-proxy@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz#94d2bda96084453ef36fbc5aaec37e0f79f1fc14"
   integrity sha512-00n6YnVHKrinT9t0d9+5yZC6UBNJANpYEQvL2LlX6Ab9lnmxzIRcEmTPuyGScvl1+jKuCICX1Z0Ab1pPKKdikA==

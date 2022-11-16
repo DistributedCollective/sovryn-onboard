@@ -1,0 +1,28 @@
+.container {
+  @apply flex flex-col justify-between px-6;
+  min-height: 250px;
+}
+
+.infoText {
+  @apply mb-10;
+}
+
+.customPathInput {
+  @apply mt-3;
+}
+
+.button {
+  @apply w-full mt-8;
+}
+
+.infoLink {
+  @apply block w-full text-center mt-5;
+}
+
+.dropdown {
+  @apply w-full mt-3;
+}
+
+.loadingText {
+  @apply text-gray-20 mt-1 mb-2;
+}

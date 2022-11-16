@@ -8,9 +8,10 @@ import {
   Heading,
   DialogSize,
 } from "@sovryn/ui";
-import { FilterType, WalletList } from "../WalletList/WalletList";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
+import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
+import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
 import styles from "./WalletDialog.module.css";
 
 type WalletDialogProps = {
@@ -25,7 +26,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       {
         label: "Hardware Wallet",
         infoText: "Select the hardware wallet you want to connect",
-        content: <WalletList filter={FilterType.hardware} />,
+        content: <HardwareWallets />,
         dataLayoutId: "hardware",
       },
       {
@@ -56,6 +57,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       onClose={handleCloseClick}
       closeOnEscape
       width={DialogSize.xl2}
+      disableFocusTrap
     >
       <VerticalTabs
         selectedIndex={index}

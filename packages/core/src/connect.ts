@@ -13,7 +13,6 @@ import { getChainId, requestAccounts, trackWallet } from "./provider";
 
 export default async function connect(wallet?: string): Promise<WalletState[]> {
   const { chains } = state.get();
-  console.log("connect called", wallet);
 
   if (!chains.length) {
     throw new Error(
@@ -42,8 +41,6 @@ export default async function connect(wallet?: string): Promise<WalletState[]> {
     withLatestFrom(wallets$),
     map((x) => x?.[1])
   );
-
-  console.log({ result$ });
 
   return firstValueFrom(result$);
 }
@@ -104,11 +101,15 @@ export const loadWalletModule = async (
 };
 
 export const connectWallet = async (walletModule: WalletModule) => {
-  const selectedWallet = await loadWalletModule(walletModule);
-
-  const { provider, label } = selectedWallet;
-
   try {
+    connectWallet$.next({
+      error: undefined,
+      inProgress: true,
+    });
+    const selectedWallet = await loadWalletModule(walletModule);
+
+    const { provider, label } = selectedWallet;
+
     const [address] = await requestAccounts(provider);
 
     // canceled previous request
@@ -130,7 +131,12 @@ export const connectWallet = async (walletModule: WalletModule) => {
       inProgress: false,
     });
   } catch (error) {
-    const { code } = error as { code: number; message: string };
+    const { code, message } = error as { code: number; message: string };
+
+    connectWallet$.next({
+      error: message,
+      inProgress: true,
+    });
 
     // user rejected account access
     if (code === ProviderRpcErrorCode.ACCOUNT_ACCESS_REJECTED) {
