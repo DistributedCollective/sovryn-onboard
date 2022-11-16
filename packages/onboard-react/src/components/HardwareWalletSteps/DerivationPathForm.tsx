@@ -83,11 +83,13 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
             <HelperButton
               content={
                 <>
-                  <p>New to this term? See the wiki.</p>
-                  <Link
-                    href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
-                    text="Wiki"
-                  />
+                  <p>
+                    New to this term?{" "}
+                    <Link
+                      href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
+                      text="Wiki"
+                    />
+                  </p>
                 </>
               }
             />
@@ -107,6 +109,7 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
               onChange={handleCustomChange}
               className={styles.customPathInput}
               size={InputSize.large}
+              invalid={!!error}
             />
           )}
         </FormGroup>
@@ -116,7 +119,7 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
         <Button
           text="Continue"
           loading={loading}
-          disabled={loading}
+          disabled={loading || !derivationPath}
           type={ButtonType.submit}
           style={ButtonStyle.secondary}
           onClick={handleSubmit}
@@ -129,9 +132,9 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
         )}
 
         <Link
-          href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
+          href="https://wiki.sovryn.app/en/getting-started/direct-hardware-wallet-integrations"
           className={styles.infoLink}
-          text="Learn more about derivation paths"
+          text="Learn how to setup your hardware wallet"
         />
       </div>
     </div>
