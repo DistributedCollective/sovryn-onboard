@@ -82,15 +82,13 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
           helper={
             <HelperButton
               content={
-                <>
-                  <p>
-                    New to this term?{" "}
-                    <Link
-                      href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
-                      text="Wiki"
-                    />
-                  </p>
-                </>
+                <Paragraph>
+                  New to this term?{" "}
+                  <Link
+                    href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
+                    text="See the wiki"
+                  />
+                </Paragraph>
               }
             />
           }

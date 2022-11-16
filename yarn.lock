@@ -3137,10 +3137,10 @@
     postcss-preset-env "^7.7.1"
     tailwindcss "^3.1.3"
 
-"@sovryn/ui@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.9.tgz#d1895d7f2f2e1493a30f5fcbc438b07518b30f4e"
-  integrity sha512-sHJycPWu0JIIOHVQ0mY7GI96r50hMcdkuXsvrAfmypoPaQlx6V/ULJpdCpNui+FXdLWwOjAzK3h2SL83sV+Zww==
+"@sovryn/ui@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.10.tgz#022cafca7a80c302e1ecceb8b96534e36fc8f72f"
+  integrity sha512-P+BmAVsQYJTkUc+A1oqbMrIIyFs6zB+l/hh5oDt6LilfM7W9EwXi5NgJ+75NaXwJfn4/c0BMs9Sh3ddyigzQMA==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "6.2.0"
     "@fortawesome/free-solid-svg-icons" "6.2.0"
