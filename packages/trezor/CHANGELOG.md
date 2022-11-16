@@ -1,5 +1,14 @@
 # @sovryn/onboard-trezor
 
+## 0.0.2
+
+### Patch Changes
+
+- 115daf0: chore: change icon image
+- 64b3746: SOV-631: hw connection fixes
+- Updated dependencies [64b3746]
+  - @sovryn/onboard-hw-common@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes
