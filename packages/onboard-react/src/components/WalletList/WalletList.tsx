@@ -7,6 +7,8 @@ import { shareReplay, startWith } from "rxjs/operators";
 import { useObservable } from "../../hooks/useObservable";
 import { isHardwareWallet } from "./helpers";
 import styles from "./WalletList.module.css";
+import { useSubscription } from "../../hooks/useSubscription";
+import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
 
 export enum FilterType {
   hardware,
@@ -18,6 +20,8 @@ export type WalletListProps = {
 };
 
 export const WalletList: FC<WalletListProps> = ({ filter }) => {
+  const { error } = useSubscription(connectWallet$);
+
   const connectedWallets = useObservable(
     state
       .select("wallets")
@@ -98,6 +102,8 @@ export const WalletList: FC<WalletListProps> = ({ filter }) => {
           }
         />
       ))}
+
+      {error && <div className={styles.error}>{error}</div>}
     </div>
   );
 };

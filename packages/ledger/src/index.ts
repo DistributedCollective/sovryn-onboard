@@ -133,9 +133,9 @@ function ledger({
         );
 
         const transport: Transport = await getTransport();
+
         const eth = new Eth(transport);
         const eventEmitter = new EventEmitter();
-
         let ethersProvider: StaticJsonRpcProvider;
 
         let currentChain: Chain = chains[0];
