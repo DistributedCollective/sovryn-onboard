@@ -1,5 +1,13 @@
 # @sovryn/onboard-hw-common
 
+## 0.0.2
+
+### Patch Changes
+
+- 64b3746: SOV-631: hardware wallet connection flow
+- Updated dependencies [64b3746]
+  - @sovryn/onboard-core@0.0.3
+
 ## 0.0.1
 
 ### Patch Changes

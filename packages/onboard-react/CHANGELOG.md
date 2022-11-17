@@ -1,5 +1,16 @@
 # @sovryn/onboard-react
 
+## 0.0.3
+
+### Patch Changes
+
+- 64b3746: SOV-631: hardware wallet connection flow
+- 115daf0: SOV-633: add dialog for wallet connection flow
+- Updated dependencies [64b3746]
+- Updated dependencies [64b3746]
+  - @sovryn/onboard-hw-common@0.0.2
+  - @sovryn/onboard-core@0.0.3
+
 ## 0.0.2
 
 ### Patch Changes
