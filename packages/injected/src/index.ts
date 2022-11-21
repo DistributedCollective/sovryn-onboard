@@ -85,6 +85,7 @@ function injected(options?: InjectedWalletOptions): WalletInit {
 
     if (validWallets.length) {
       const moreThanOneWallet = validWallets.length > 1;
+      console.log("validWallets", validWallets);
       // if more than one wallet, then remove detected wallet
       return validWallets
         .filter(
@@ -100,6 +101,10 @@ function injected(options?: InjectedWalletOptions): WalletInit {
         }));
     }
 
+    const metamask = deduped.find(item => item.label === ProviderLabel.MetaMask);
+    if (metamask) {
+      return [{...metamask, label: 'Install MetaMask'}];
+    }
     return [];
   };
 }

@@ -6,6 +6,7 @@ import type {
 } from "@sovryn/onboard-common";
 
 import { createEIP1193Provider } from "@sovryn/onboard-common";
+
 import type {
   InjectedWalletModule,
   CustomWindow,
@@ -25,12 +26,26 @@ const UNSUPPORTED_METHOD = null;
 function getInjectedInterface(
   identity: string
 ): () => Promise<{ provider: EIP1193Provider }> {
-  return async () => ({
-    provider: (window.ethereum.providers &&
-    Array.isArray(window.ethereum.providers)
-      ? window.ethereum.providers.find((provider) => !!provider[identity])
-      : window.ethereum) as EIP1193Provider,
-  });
+
+  return async () => {
+
+    if (identity === 'isMetaMask') {
+      const MetaMaskOnboarding = await import('@metamask/onboarding').then(m => m.default);
+      const onboarding = new MetaMaskOnboarding();
+
+      if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
+        onboarding.startOnboarding();
+        throw new Error('Installing MetaMask. Follow instructions in the tab that opened.');
+      }
+    }
+
+    return {
+      provider: (window.ethereum.providers &&
+      Array.isArray(window.ethereum.providers)
+        ? window.ethereum.providers.find((provider) => !!provider[identity])
+        : window.ethereum) as EIP1193Provider,
+    };
+  }
 }
 
 const metamask: InjectedWalletModule = {
