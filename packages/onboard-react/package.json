@@ -20,7 +20,8 @@
   "dependencies": {
     "@sovryn/onboard-common": "0.0.1",
     "@sovryn/onboard-core": "0.0.3",
-    "@sovryn/onboard-hw-common": "0.0.2"
+    "@sovryn/onboard-hw-common": "0.0.2",
+    "bowser": "2.11.0"
   },
   "peerDependencies": {
     "@sovryn/ui": "0.0.10",

@@ -1,0 +1,7 @@
+.ButtonBack {
+  @apply flex items-center text-sm mb-11;
+}
+
+.Icon {
+  @apply bg-gray-70 w-6 h-6 p-1 mr-2 rounded flex items-center justify-center;
+}
