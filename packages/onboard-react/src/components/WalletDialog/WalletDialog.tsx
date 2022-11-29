@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
-import Bowser from "bowser";
+
 import {
   Dialog,
   VerticalTabs,
@@ -11,12 +11,16 @@ import {
   DialogSize,
 } from "@sovryn/ui";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "@sovryn/tailwindcss-config";
+
 import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
 import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
 import styles from "./WalletDialog.module.css";
 import { ButtonBack } from "./ButtonBack";
-import { DeviceType } from "@sovryn/onboard-common";
+
+const config = resolveConfig(tailwindConfig);
 
 type WalletDialogProps = {
   isOpen: boolean;
@@ -33,10 +37,12 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
   }, []);
 
   const getPlatformType = useCallback(() => {
-    const platformType = Bowser.getParser(
-      window.navigator.userAgent
-    ).getPlatformType() as DeviceType;
-    return platformType === "mobile" ? setIsMobile(true) : setIsMobile(false);
+    // @ts-ignore - avoid typechecking actual screensize definition keynames
+    const widthToCheck: string = config?.theme?.screens.md; // value will be in format "768px"
+    const screenWidth = window?.visualViewport?.width || 0;
+    return screenWidth < parseInt(widthToCheck || "0")
+      ? setIsMobile(true)
+      : setIsMobile(false);
   }, []);
 
   const buttonBack = useMemo(
