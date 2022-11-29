@@ -15,31 +15,38 @@ import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
 import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
 import styles from "./WalletDialog.module.css";
-import { PlatformTypeProps, WalletDialogProps } from "./WalletDialog.types";
 import { ButtonBack } from "./ButtonBack";
+import { DeviceType } from "@sovryn/onboard-common";
+
+type WalletDialogProps = {
+  isOpen: boolean;
+};
 
 const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [index, setIndex] = useState(0);
   const [indexMobile, setIndexMobile] = useState<null | number>(null);
 
+  const onChangeIndex = useCallback((index: number | null) => {
+    index !== null ? setIndex(index) : setIndex(0);
+    setIndexMobile(index);
+  }, []);
+
   const getPlatformType = useCallback(() => {
     const platformType = Bowser.getParser(
       window.navigator.userAgent
-    ).getPlatformType() as PlatformTypeProps;
-    return platformType === PlatformTypeProps.mobile
-      ? setIsMobile(true)
-      : setIsMobile(false);
+    ).getPlatformType() as DeviceType;
+    return platformType === "mobile" ? setIsMobile(true) : setIsMobile(false);
   }, []);
 
   const buttonBack = useMemo(
     () => (
       <ButtonBack
         label="Back to wallet menu"
-        onClick={() => setIndexMobile(null)}
+        onClick={() => onChangeIndex(null)}
       />
     ),
-    []
+    [onChangeIndex]
   );
 
   useEffect(() => {
@@ -109,13 +116,13 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
           selectedIndex={indexMobile}
           header={() => <Heading>Connect Wallet</Heading>}
           items={items}
-          onChange={setIndexMobile}
+          onChange={onChangeIndex}
           tabsClassName={styles.tabsMobile}
         />
       ) : (
         <VerticalTabs
           selectedIndex={index}
-          onChange={setIndex}
+          onChange={onChangeIndex}
           items={items}
           className={styles.container}
           tabsClassName={styles.tabs}
