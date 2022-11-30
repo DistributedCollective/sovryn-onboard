@@ -13,11 +13,9 @@ export const ButtonBack: FC<ButtonBackProps> = ({
   onClick,
   label,
   className,
-}) => {
-  return (
-    <button className={classNames(styles.button, className)} onClick={onClick}>
-      <Icon icon={IconNames.ARROW_BACK} className={styles.icon} size={14} />
-      {label}
-    </button>
-  );
-};
+}) => (
+  <button className={classNames(styles.button, className)} onClick={onClick}>
+    <Icon icon={IconNames.ARROW_BACK} className={styles.icon} size={14} />
+    {label}
+  </button>
+);
