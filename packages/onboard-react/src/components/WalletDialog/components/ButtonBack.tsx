@@ -9,8 +9,8 @@ type ButtonBackProps = {
 
 export const ButtonBack: FC<ButtonBackProps> = ({ onClick, label }) => {
   return (
-    <button className={styles.ButtonBack} onClick={onClick}>
-      <Icon icon="arrow-back" className={styles.Icon} size={14} />
+    <button className={styles.button} onClick={onClick}>
+      <Icon icon="arrow-back" className={styles.icon} size={14} />
       {label}
     </button>
   );

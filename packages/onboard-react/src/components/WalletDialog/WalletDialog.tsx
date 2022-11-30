@@ -18,7 +18,7 @@ import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
 import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
 import styles from "./WalletDialog.module.css";
-import { ButtonBack } from "./ButtonBack";
+import { ButtonBack } from "./components/ButtonBack";
 
 const config = resolveConfig(tailwindConfig);
 
