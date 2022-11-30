@@ -18,7 +18,9 @@ import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
 import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
 import styles from "./WalletDialog.module.css";
-import { ButtonBack } from "./components/ButtonBack";
+import { ButtonBack } from "../ButtonBack/ButtonBack";
+import { useSubscription } from "../../hooks/useSubscription";
+import { selectAccounts$ } from "@sovryn/onboard-hw-common";
 
 const config = resolveConfig(tailwindConfig);
 
@@ -27,6 +29,7 @@ type WalletDialogProps = {
 };
 
 const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
+  const { inProgress } = useSubscription(selectAccounts$);
   const [isMobile, setIsMobile] = useState(false);
   const [index, setIndex] = useState(0);
   const [indexMobile, setIndexMobile] = useState<null | number>(null);
@@ -71,7 +74,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         infoText: "Select the hardware wallet you want to connect",
         content: (
           <>
-            {isMobile && buttonBack}
+            {isMobile && !inProgress && buttonBack}
             <HardwareWallets />
           </>
         ),
@@ -100,7 +103,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         dataLayoutId: "instructions",
       },
     ],
-    [isMobile, buttonBack]
+    [isMobile, buttonBack, inProgress]
   );
 
   const handleCloseClick = useCallback(() => {

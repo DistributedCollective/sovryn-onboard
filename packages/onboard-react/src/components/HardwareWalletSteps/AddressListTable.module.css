@@ -1,5 +1,8 @@
 .container {
-  @apply -mx-6 w-auto;
+  @apply w-auto;
+  @screen md {
+    @apply -mx-6;
+  }
 }
 
 .centering {

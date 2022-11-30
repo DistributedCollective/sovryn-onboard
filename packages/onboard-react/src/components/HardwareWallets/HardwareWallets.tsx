@@ -1,14 +1,13 @@
 import { FC, useCallback, useState } from "react";
-import { Icon, IconNames } from "@sovryn/ui";
 import { closeAccountSelect, selectAccounts$ } from "@sovryn/onboard-hw-common";
 import { useSubscription } from "../../hooks/useSubscription";
 import { FilterType, WalletList } from "../WalletList/WalletList";
 
-import styles from "./HardwareWallets.module.css";
 import {
   HardwareWalletStep,
   HardwareWalletSteps,
 } from "../HardwareWalletSteps/HardwareWalletSteps";
+import { ButtonBack } from "../ButtonBack/ButtonBack";
 
 export const HardwareWallets: FC = () => {
   const { inProgress } = useSubscription(selectAccounts$);
@@ -27,14 +26,12 @@ export const HardwareWallets: FC = () => {
       {!inProgress ? (
         <WalletList filter={FilterType.hardware} />
       ) : (
-        <div>
-          <button onClick={handleStepBack} className={styles.closeButton}>
-            <Icon icon={IconNames.ARROW_LEFT} size={12} />
-          </button>
+        <>
+          <ButtonBack label="Back to wallet menu" onClick={handleStepBack} />
           <div>
             <HardwareWalletSteps step={step} onStepChanged={setStep} />
           </div>
-        </div>
+        </>
       )}
     </>
   );

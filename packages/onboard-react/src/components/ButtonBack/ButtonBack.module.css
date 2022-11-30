@@ -4,4 +4,8 @@
 
 .icon {
   @apply bg-gray-70 w-6 h-6 p-1 mr-2 rounded flex items-center justify-center;
+
+  @screen md {
+    @apply bg-transparent;
+  }
 }
