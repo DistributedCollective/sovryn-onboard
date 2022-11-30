@@ -2,4 +2,4 @@
 "@sovryn/onboard-react": patch
 ---
 
-Wallet connection flow integrate mobile component
+SOV-1027: Wallet connection flow integrate mobile component
