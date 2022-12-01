@@ -1,0 +1,3 @@
+.closeButton {
+  @apply absolute top-16 left-6;
+}

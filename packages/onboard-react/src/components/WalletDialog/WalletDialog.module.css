@@ -2,6 +2,18 @@
   @apply rounded transition-colors duration-300;
 }
 
+.dialog {
+  @apply p-4 flex flex-col justify-center;
+
+  @screen sm {
+    @apply p-0;
+  }
+
+  @screen md {
+    @apply block;
+  }
+}
+
 .tabs {
   @apply rounded-l transition-colors duration-300 justify-start pt-[0.625rem] px-5;
   min-height: 589px;
@@ -12,7 +24,11 @@
 }
 
 .tabsMobile {
-  @apply p-7;
+  @apply p-7 rounded;
+}
+
+.tabsContainer {
+  @apply rounded overflow-hidden;
 }
 
 .content {

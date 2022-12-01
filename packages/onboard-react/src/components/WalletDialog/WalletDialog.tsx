@@ -9,7 +9,9 @@ import {
   ButtonStyle,
   Heading,
   DialogSize,
+  HeadingType,
 } from "@sovryn/ui";
+import { selectAccounts$ } from "@sovryn/onboard-hw-common";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "@sovryn/tailwindcss-config";
@@ -20,7 +22,7 @@ import { HardwareWallets } from "../HardwareWallets/HardwareWallets";
 import styles from "./WalletDialog.module.css";
 import { ButtonBack } from "../ButtonBack/ButtonBack";
 import { useSubscription } from "../../hooks/useSubscription";
-import { selectAccounts$ } from "@sovryn/onboard-hw-common";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 const config = resolveConfig(tailwindConfig);
 
@@ -30,22 +32,13 @@ type WalletDialogProps = {
 
 const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
   const { inProgress } = useSubscription(selectAccounts$);
-  const [isMobile, setIsMobile] = useState(false);
+  const { isMobile } = useIsMobile();
   const [index, setIndex] = useState(0);
   const [indexMobile, setIndexMobile] = useState<null | number>(null);
 
   const onChangeIndex = useCallback((index: number | null) => {
     index !== null ? setIndex(index) : setIndex(0);
     setIndexMobile(index);
-  }, []);
-
-  const getPlatformType = useCallback(() => {
-    // @ts-ignore - avoid typechecking actual screensize definition keynames
-    const widthToCheck: string = config?.theme?.screens.md; // value will be in format "768px"
-    const screenWidth = window?.visualViewport?.width || 0;
-    return screenWidth < parseInt(widthToCheck || "0")
-      ? setIsMobile(true)
-      : setIsMobile(false);
   }, []);
 
   const buttonBack = useMemo(
@@ -57,15 +50,6 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
     ),
     [onChangeIndex]
   );
-
-  useEffect(() => {
-    getPlatformType();
-    window.addEventListener("resize", getPlatformType);
-
-    return () => {
-      window.removeEventListener("resize", getPlatformType);
-    };
-  }, [getPlatformType]);
 
   const items: VerticalTabsItem[] = useMemo(
     () => [
@@ -119,14 +103,20 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       closeOnEscape
       width={DialogSize.xl2}
       disableFocusTrap
+      className={styles.dialog}
     >
       {isMobile ? (
         <VerticalTabsMobile
           selectedIndex={indexMobile}
-          header={() => <Heading>Connect Wallet</Heading>}
+          header={() => (
+            <Heading type={HeadingType.h2}>
+              Select the type of wallet you have
+            </Heading>
+          )}
           items={items}
           onChange={onChangeIndex}
           tabsClassName={styles.tabsMobile}
+          className={styles.tabsContainer}
         />
       ) : (
         <VerticalTabs
