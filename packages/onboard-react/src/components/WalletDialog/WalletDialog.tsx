@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 
 import {
   Dialog,
@@ -13,8 +13,6 @@ import {
 } from "@sovryn/ui";
 import { selectAccounts$ } from "@sovryn/onboard-hw-common";
 import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "@sovryn/tailwindcss-config";
 
 import { FilterType, WalletList } from "../WalletList/WalletList";
 import { InstructionsTab } from "../InstructionsTab/InstructionsTab";
@@ -23,8 +21,6 @@ import styles from "./WalletDialog.module.css";
 import { ButtonBack } from "../ButtonBack/ButtonBack";
 import { useSubscription } from "../../hooks/useSubscription";
 import { useIsMobile } from "../../hooks/useIsMobile";
-
-const config = resolveConfig(tailwindConfig);
 
 type WalletDialogProps = {
   isOpen: boolean;

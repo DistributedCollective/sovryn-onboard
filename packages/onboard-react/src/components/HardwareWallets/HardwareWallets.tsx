@@ -24,7 +24,7 @@ export const HardwareWallets: FC = () => {
     }
   }, [step]);
 
-  const renderButtonBack = useMemo(() => {
+  const buttonBack = useMemo(() => {
     const buttonText =
       step === HardwareWalletStep.addressList
         ? "Back to derivation path"
@@ -45,7 +45,7 @@ export const HardwareWallets: FC = () => {
         <WalletList filter={FilterType.hardware} />
       ) : (
         <>
-          {renderButtonBack}
+          {buttonBack}
           <div>
             <HardwareWalletSteps step={step} onStepChanged={setStep} />
           </div>
