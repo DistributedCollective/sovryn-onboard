@@ -4,3 +4,5 @@ declare module "*.css" {
 }
 
 declare module "*.css";
+
+declare module "@sovryn/tailwindcss-config";
