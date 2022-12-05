@@ -1,5 +1,12 @@
 # @sovryn/onboard-react
 
+## 0.0.4
+
+### Patch Changes
+
+- a6ad553: SOV-1027: Wallet connection flow integrate mobile component
+- 1dfc9ca: use new pagination component
+
 ## 0.0.3
 
 ### Patch Changes
