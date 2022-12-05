@@ -1,7 +1,7 @@
 import { FC, useCallback, useMemo, useState } from "react";
 import {
   Button,
-  AddressTablePagination,
+  Pagination,
   TableBase,
   ColumnOptions,
   TransactionId,
@@ -36,7 +36,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   const chain = selectAccountOptions.chains[0];
 
   const [selected, setSelected] = useState<Account>();
-  const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(1);
 
   const handleSelect = useCallback(
     (item: Item) => setSelected(item.account),
@@ -50,14 +50,16 @@ export const AddressListTable: FC<AddressListTableProps> = ({
 
   const paginatedItems: Item[] = useMemo(
     () =>
-      items.slice(offset, offset + perPage).map((item, index) => ({
-        index: offset + index,
-        address: item.address,
-        balance: utils.formatEther(item.balance.value),
-        asset: item.balance.asset,
-        account: item,
-      })),
-    [items, offset, perPage]
+      items
+        .slice(page * perPage - perPage, page * perPage)
+        .map((item, index) => ({
+          index: page * perPage - perPage + index,
+          address: item.address,
+          balance: utils.formatEther(item.balance.value),
+          asset: item.balance.asset,
+          account: item,
+        })),
+    [items, page, perPage]
   );
 
   const columns: ColumnOptions<Item>[] = useMemo(
@@ -108,10 +110,12 @@ export const AddressListTable: FC<AddressListTableProps> = ({
       />
 
       <div className={styles.centering}>
-        <AddressTablePagination
-          onPageChange={setOffset}
+        <Pagination
+          onChange={setPage}
+          page={page}
           itemsPerPage={perPage}
           className={styles.pagination}
+          totalItems={items.length}
         />
 
         <Button
