@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 0.0.5
+
+### Patch Changes
+
+- 40edf7e: fix: remove non-browser imports
+
 ## 0.0.4
 
 ### Patch Changes
