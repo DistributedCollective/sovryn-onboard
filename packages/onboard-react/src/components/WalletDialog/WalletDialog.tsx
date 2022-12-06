@@ -83,7 +83,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         dataLayoutId: "instructions",
       },
     ],
-    [isMobile, buttonBack, inProgress]
+    [isMobile, inProgress, buttonBack]
   );
 
   const handleCloseClick = useCallback(() => {
