@@ -6,6 +6,7 @@ import {
   ColumnOptions,
   TransactionId,
   Align,
+  ButtonSize,
 } from "@sovryn/ui";
 import { Account, selectAccountOptions } from "@sovryn/onboard-hw-common";
 import { utils } from "ethers";
@@ -36,7 +37,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   const chain = selectAccountOptions.chains[0];
 
   const [selected, setSelected] = useState<Account>();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   const handleSelect = useCallback(
     (item: Item) => setSelected(item.account),
@@ -50,15 +51,13 @@ export const AddressListTable: FC<AddressListTableProps> = ({
 
   const paginatedItems: Item[] = useMemo(
     () =>
-      items
-        .slice(page * perPage - perPage, page * perPage)
-        .map((item, index) => ({
-          index: page * perPage - perPage + index,
-          address: item.address,
-          balance: utils.formatEther(item.balance.value),
-          asset: item.balance.asset,
-          account: item,
-        })),
+      items.slice(page * perPage, (page + 1) * perPage).map((item, index) => ({
+        index: page * perPage + index,
+        address: item.address,
+        balance: utils.formatEther(item.balance.value),
+        asset: item.balance.asset,
+        account: item,
+      })),
     [items, page, perPage]
   );
 
@@ -116,9 +115,12 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           itemsPerPage={perPage}
           className={styles.pagination}
           totalItems={items.length}
+          hideFirstPageButton
+          hideLastPageButton
         />
 
         <Button
+          size={ButtonSize.large}
           onClick={handleConfirm}
           disabled={!selected}
           text="Confirm"

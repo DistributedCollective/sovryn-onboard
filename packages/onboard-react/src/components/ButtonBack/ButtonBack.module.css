@@ -3,7 +3,7 @@
 }
 
 .icon {
-  @apply bg-gray-70 w-6 h-6 p-1 mr-2 rounded flex items-center justify-center;
+  @apply bg-gray-70 w-6 h-6 p-1.5 mr-2 rounded flex items-center justify-center rotate-180;
 
   @screen md {
     @apply bg-transparent;
