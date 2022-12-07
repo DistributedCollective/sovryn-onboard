@@ -139,7 +139,14 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
   return (
     <div key={wallet.label} className={styles.container}>
       <div>
-        <WalletIdentity address={address} onDisconnect={disconnect} />
+        <WalletIdentity
+          address={address}
+          onDisconnect={disconnect}
+          submenuLabels={{
+            copyAddress: "Copy Address",
+            disconnect: "Disconnect",
+          }}
+        />
       </div>
       <h3 className={styles.label}>
         {wallet.label}{" "}

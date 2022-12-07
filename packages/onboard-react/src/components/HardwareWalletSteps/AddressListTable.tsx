@@ -36,7 +36,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   const chain = selectAccountOptions.chains[0];
 
   const [selected, setSelected] = useState<Account>();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   const handleSelect = useCallback(
     (item: Item) => setSelected(item.account),
@@ -50,15 +50,13 @@ export const AddressListTable: FC<AddressListTableProps> = ({
 
   const paginatedItems: Item[] = useMemo(
     () =>
-      items
-        .slice(page * perPage - perPage, page * perPage)
-        .map((item, index) => ({
-          index: page * perPage - perPage + index,
-          address: item.address,
-          balance: utils.formatEther(item.balance.value),
-          asset: item.balance.asset,
-          account: item,
-        })),
+      items.slice(page * perPage, (page + 1) * perPage).map((item, index) => ({
+        index: page * perPage + index,
+        address: item.address,
+        balance: utils.formatEther(item.balance.value),
+        asset: item.balance.asset,
+        account: item,
+      })),
     [items, page, perPage]
   );
 
