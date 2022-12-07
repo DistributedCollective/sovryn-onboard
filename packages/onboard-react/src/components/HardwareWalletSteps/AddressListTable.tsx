@@ -6,6 +6,7 @@ import {
   ColumnOptions,
   TransactionId,
   Align,
+  ButtonSize,
 } from "@sovryn/ui";
 import { Account, selectAccountOptions } from "@sovryn/onboard-hw-common";
 import { utils } from "ethers";
@@ -114,9 +115,12 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           itemsPerPage={perPage}
           className={styles.pagination}
           totalItems={items.length}
+          hideFirstPageButton
+          hideLastPageButton
         />
 
         <Button
+          size={ButtonSize.large}
           onClick={handleConfirm}
           disabled={!selected}
           text="Confirm"
