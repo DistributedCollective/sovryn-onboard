@@ -1,10 +1,14 @@
 module.exports = {
   root: true,
   // This tells ESLint to load the config from the package `eslint-config-custom`
-  extends: ["custom"],
+  extends: ['@sovryn/eslint-config-custom'],
+  ignorePatterns: ['build/', 'dist/'],
   settings: {
     next: {
-      rootDir: ["apps/*/"],
+      rootDir: ['apps/*/'],
     },
+  },
+  rules: {
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };

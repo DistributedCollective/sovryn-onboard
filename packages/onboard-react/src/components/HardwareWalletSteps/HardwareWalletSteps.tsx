@@ -1,11 +1,13 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useState } from 'react';
+
 import {
   Account,
   selectAccount,
   selectAccountOptions,
-} from "@sovryn/onboard-hw-common";
-import { DerivationPathForm } from "./DerivationPathForm";
-import { AddressListTable } from "./AddressListTable";
+} from '@sovryn/onboard-hw-common';
+
+import { AddressListTable } from './AddressListTable';
+import { DerivationPathForm } from './DerivationPathForm';
 
 export enum HardwareWalletStep {
   derivationPathForm,
@@ -29,7 +31,7 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
   const [error, setError] = useState<string>();
 
   const [derivationPath, setDerivationPath] = useState(
-    selectAccountOptions.basePaths[0].value
+    selectAccountOptions.basePaths[0].value,
   );
 
   const handleDerivationPathChange = useCallback(
@@ -54,12 +56,12 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
         setScanning(false);
       }
     },
-    [asset, chainId, onStepChanged]
+    [asset, chainId, onStepChanged],
   );
 
   const handleSelectedAccount = useCallback(
     (account: Account) => selectAccount(account),
-    []
+    [],
   );
 
   return (

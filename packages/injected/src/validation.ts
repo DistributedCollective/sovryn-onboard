@@ -1,6 +1,8 @@
-import Joi from "joi";
-import { InjectedWalletOptions } from "./types";
-import { validate, type ValidateReturn } from "@sovryn/onboard-common";
+import Joi from 'joi';
+
+import { validate, type ValidateReturn } from '@sovryn/onboard-common';
+
+import { InjectedWalletOptions } from './types';
 
 const walletModule = Joi.object({
   label: Joi.string().required(),
@@ -14,7 +16,7 @@ const walletModule = Joi.object({
 const wallets = Joi.array().items(walletModule);
 const filter = Joi.object().pattern(
   /\w+/,
-  Joi.any().allow(Joi.boolean(), Joi.array().items(Joi.string()))
+  Joi.any().allow(Joi.boolean(), Joi.array().items(Joi.string())),
 );
 const walletOptions = Joi.object({
   custom: wallets,
@@ -22,5 +24,5 @@ const walletOptions = Joi.object({
 });
 
 export const validateWalletOptions = (
-  data: InjectedWalletOptions | Partial<InjectedWalletOptions>
+  data: InjectedWalletOptions | Partial<InjectedWalletOptions>,
 ): ValidateReturn => validate(walletOptions, data);

@@ -1,15 +1,16 @@
-import { FC, useCallback, useMemo, useState } from "react";
-import { closeAccountSelect, selectAccounts$ } from "@sovryn/onboard-hw-common";
-import { useSubscription } from "../../hooks/useSubscription";
-import { FilterType, WalletList } from "../WalletList/WalletList";
+import { FC, useCallback, useMemo, useState } from 'react';
 
+import { closeAccountSelect, selectAccounts$ } from '@sovryn/onboard-hw-common';
+
+import { useIsMobile } from '../../hooks/useIsMobile';
+import { useSubscription } from '../../hooks/useSubscription';
+import { ButtonBack } from '../ButtonBack/ButtonBack';
 import {
   HardwareWalletStep,
   HardwareWalletSteps,
-} from "../HardwareWalletSteps/HardwareWalletSteps";
-import { ButtonBack } from "../ButtonBack/ButtonBack";
-import styles from "./HardwareWallets.module.css";
-import { useIsMobile } from "../../hooks/useIsMobile";
+} from '../HardwareWalletSteps/HardwareWalletSteps';
+import { FilterType, WalletList } from '../WalletList/WalletList';
+import styles from './HardwareWallets.module.css';
 
 export const HardwareWallets: FC = () => {
   const { inProgress } = useSubscription(selectAccounts$);
@@ -27,12 +28,12 @@ export const HardwareWallets: FC = () => {
   const buttonBack = useMemo(() => {
     const buttonText =
       step === HardwareWalletStep.addressList
-        ? "Back to derivation path"
-        : "Back to wallet menu";
+        ? 'Back to derivation path'
+        : 'Back to wallet menu';
 
     return (
       <ButtonBack
-        label={isMobile ? buttonText : ""}
+        label={isMobile ? buttonText : ''}
         className={!isMobile && styles.closeButton}
         onClick={handleStepBack}
       />

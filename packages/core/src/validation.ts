@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 import {
   type ChainId,
@@ -10,9 +10,9 @@ import {
   chainIdValidation,
   chainValidation,
   validate,
-} from "@sovryn/onboard-common";
+} from '@sovryn/onboard-common';
 
-import type { InitOptions, WalletState } from "./types.js";
+import type { InitOptions, WalletState } from './types.js';
 
 const unknownObject = Joi.object().unknown();
 
@@ -28,14 +28,14 @@ const ens = Joi.any().allow(
     contentHash: Joi.any().allow(Joi.string(), null),
     getText: Joi.function().arity(1).required(),
   }),
-  null
+  null,
 );
 
 const balance = Joi.any().allow(
   Joi.object({
     eth: Joi.number(),
   }).unknown(),
-  null
+  null,
 );
 
 const account = Joi.object({
@@ -55,8 +55,6 @@ const wallet = Joi.object({
   accounts,
   chains: Joi.array().items(connectedChain),
 }).required();
-
-const wallets = Joi.array().items(wallet);
 
 const walletModule = Joi.object({
   label: Joi.string().required(),
@@ -78,7 +76,7 @@ const setChainOptions = Joi.object({
 });
 
 export function validateWallet(
-  data: WalletState | Partial<WalletState>
+  data: WalletState | Partial<WalletState>,
 ): ValidateReturn {
   return validate(wallet, data);
 }
@@ -95,15 +93,15 @@ export function validateString(str: string, label?: string): ValidateReturn {
   return validate(
     Joi.string()
       .required()
-      .label(label || "value"),
-    str
+      .label(label || 'value'),
+    str,
   );
 }
 
 export function validateSetChainOptions(data: {
   chainId: ChainId | DecimalChainId;
   chainNamespace?: string;
-  wallet?: WalletState["label"];
+  wallet?: WalletState['label'];
 }): ValidateReturn {
   return validate(setChainOptions, data);
 }

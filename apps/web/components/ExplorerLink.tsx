@@ -1,7 +1,10 @@
-import { FC, useMemo } from "react";
-import { TransactionResponse } from "@ethersproject/providers";
-import { Chain } from "@sovryn/onboard-common";
-import { onboard } from "../lib/connector";
+import { TransactionResponse } from '@ethersproject/providers';
+
+import { FC, useMemo } from 'react';
+
+import { Chain } from '@sovryn/onboard-common';
+
+import { onboard } from '../lib/connector';
 
 type ExplorerLinkProps = {
   tx: TransactionResponse;

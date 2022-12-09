@@ -5,7 +5,7 @@ import type {
   EIP1193Provider,
   WalletInit,
   WalletModule,
-} from "@sovryn/onboard-common";
+} from '@sovryn/onboard-common';
 
 export interface InitOptions {
   wallets: WalletInit[];
@@ -26,8 +26,8 @@ export interface AppState {
 export type Address = string;
 
 export type ConnectedChain = {
-  id: Chain["id"];
-  namespace: Chain["namespace"];
+  id: Chain['id'];
+  namespace: Chain['namespace'];
 };
 
 export interface WalletState {
@@ -53,29 +53,29 @@ export type Action =
   | UpdateAccountAction
   | SetWalletModulesAction;
 
-export type AddChainsAction = { type: "add_chains"; payload: Chain[] };
-export type AddWalletAction = { type: "add_wallet"; payload: WalletState };
+export type AddChainsAction = { type: 'add_chains'; payload: Chain[] };
+export type AddWalletAction = { type: 'add_wallet'; payload: WalletState };
 export type UpdateWalletAction = {
-  type: "update_wallet";
+  type: 'update_wallet';
   payload: { id: string } & Partial<WalletState>;
 };
 export type RemoveWalletAction = {
-  type: "remove_wallet";
+  type: 'remove_wallet';
   payload: { id: string };
 };
 
 export type ResetStoreAction = {
-  type: "reset_store";
+  type: 'reset_store';
   payload: unknown;
 };
 
 export type UpdateAccountAction = {
-  type: "update_account";
+  type: 'update_account';
   payload: { id: string; address: string } & Partial<Account>;
 };
 
 export type SetWalletModulesAction = {
-  type: "set_wallet_modules";
+  type: 'set_wallet_modules';
   payload: WalletModule[];
 };
 

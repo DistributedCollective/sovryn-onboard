@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 export type ValidateReturn = Joi.ValidationResult | null;
 
@@ -9,10 +9,10 @@ export function validate(validator: Joi.Schema, data: unknown): ValidateReturn {
 
 export const chainIdValidation = Joi.alternatives().try(
   Joi.string().pattern(/^0x[0-9a-fA-F]+$/),
-  Joi.number().positive()
+  Joi.number().positive(),
 );
 
-export const chainNamespaceValidation = Joi.string().valid("evm");
+export const chainNamespaceValidation = Joi.string().valid('evm');
 
 /** Related to ConnectionInfo from 'ethers/lib/utils' */
 export const providerConnectionInfoValidation = Joi.object({

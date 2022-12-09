@@ -1,14 +1,16 @@
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { state, helpers } from "@sovryn/onboard-core";
-import { WalletModule } from "@sovryn/onboard-common";
-import { WalletContainer } from "@sovryn/ui";
-import { shareReplay, startWith } from "rxjs/operators";
-import { useObservable } from "../../hooks/useObservable";
-import { isHardwareWallet } from "./helpers";
-import styles from "./WalletList.module.css";
-import { useSubscription } from "../../hooks/useSubscription";
-import { connectWallet$ } from "@sovryn/onboard-core/dist/streams";
+import { shareReplay, startWith } from 'rxjs/operators';
+
+import { WalletModule } from '@sovryn/onboard-common';
+import { state, helpers } from '@sovryn/onboard-core';
+import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
+import { WalletContainer } from '@sovryn/ui';
+
+import { useObservable } from '../../hooks/useObservable';
+import { useSubscription } from '../../hooks/useSubscription';
+import styles from './WalletList.module.css';
+import { isHardwareWallet } from './helpers';
 
 export enum FilterType {
   hardware,
@@ -24,26 +26,26 @@ export const WalletList: FC<WalletListProps> = ({ filter }) => {
 
   const connectedWallets = useObservable(
     state
-      .select("wallets")
+      .select('wallets')
       .pipe(startWith(state.get().wallets), shareReplay(1)),
-    state.get().wallets
+    state.get().wallets,
   );
 
   const [walletModules, setWalletModules] = useState<WalletModule[]>([]);
 
   useEffect(() => {
     const sub = state
-      .select("walletModules")
+      .select('walletModules')
       .pipe(startWith(state.get().walletModules), shareReplay(1))
-      .subscribe(async (modules) => {
+      .subscribe(async modules => {
         const wallets = await Promise.all(
-          modules.map(async (module) => {
+          modules.map(async module => {
             const loadedIcon = await module.getIcon();
             return {
               ...module,
               loadedIcon,
             };
-          })
+          }),
         );
         setWalletModules(wallets);
       });
@@ -57,16 +59,16 @@ export const WalletList: FC<WalletListProps> = ({ filter }) => {
     return walletModules
       .filter(
         filter === FilterType.hardware
-          ? (item) => isHardwareWallet(item.label)
-          : (item) => !isHardwareWallet(item.label)
+          ? item => isHardwareWallet(item.label)
+          : item => !isHardwareWallet(item.label),
       )
-      .map((module) => {
+      .map(module => {
         return {
           module,
           // @ts-ignore
           icon: module.loadedIcon,
           isSelected:
-            connectedWallets.find((wallet) => wallet.label === module.label) !==
+            connectedWallets.find(wallet => wallet.label === module.label) !==
             undefined,
         };
       });
@@ -74,15 +76,13 @@ export const WalletList: FC<WalletListProps> = ({ filter }) => {
 
   const handleOnClick = useCallback(
     (label: string) => async () => {
-      const wallet = walletModules.find(
-        (m) => m.label === label
-      ) as WalletModule;
+      const wallet = walletModules.find(m => m.label === label) as WalletModule;
 
       if (wallet) {
         helpers.connectWallet(wallet);
       }
     },
-    [walletModules]
+    [walletModules],
   );
 
   return (
@@ -90,7 +90,7 @@ export const WalletList: FC<WalletListProps> = ({ filter }) => {
       {items.map(({ module, icon, isSelected }) => (
         <WalletContainer
           key={module.label}
-          name={`${module.label}${isSelected ? " (Connected)" : ""}`}
+          name={`${module.label}${isSelected ? ' (Connected)' : ''}`}
           className={styles.item}
           disabled={isSelected}
           onClick={handleOnClick(module.label)}

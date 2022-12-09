@@ -1,10 +1,12 @@
-import Joi from "joi";
+import Joi from 'joi';
+
 import {
   validate,
   chainValidation,
   type ValidateReturn,
-} from "@sovryn/onboard-common";
-import type { SelectAccountOptions } from "./types";
+} from '@sovryn/onboard-common';
+
+import type { SelectAccountOptions } from './types';
 
 const basePath = Joi.object({
   label: Joi.string().required(),
@@ -31,7 +33,7 @@ const selectAccountOptions = Joi.object({
 });
 
 export const validateSelectAccountOptions = (
-  data: SelectAccountOptions
+  data: SelectAccountOptions,
 ): ValidateReturn => {
   return validate(selectAccountOptions, data);
 };

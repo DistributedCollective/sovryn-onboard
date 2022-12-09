@@ -1,7 +1,7 @@
-import { fromEventPattern, Observable } from "rxjs";
-import { filter, takeUntil, take, share, switchMap } from "rxjs/operators";
-import partition from "lodash.partition";
-import { providers } from "ethers";
+import { providers } from 'ethers';
+import partition from 'lodash.partition';
+import { fromEventPattern, Observable } from 'rxjs';
+import { filter, takeUntil, take, share, switchMap } from 'rxjs/operators';
 
 import type {
   ChainId,
@@ -12,27 +12,27 @@ import type {
   AccountsListener,
   ChainListener,
   SelectAccountsRequest,
-} from "@sovryn/onboard-common";
+} from '@sovryn/onboard-common';
 
-import { disconnectWallet$ } from "./streams";
-import type { Account, WalletState } from "./types";
-import { updateAccount, updateWallet } from "./store/actions";
-import disconnect from "./disconnect";
-import { state } from "./store/index";
+import disconnect from './disconnect';
+import { updateAccount, updateWallet } from './store/actions';
+import { state } from './store/index';
+import { disconnectWallet$ } from './streams';
+import type { Account, WalletState } from './types';
 
 export const ethersProviders: {
   [key: string]: providers.StaticJsonRpcProvider;
 } = {};
 
 export function getProvider(chain: Chain): providers.StaticJsonRpcProvider {
-  // @ts-ignore
+  // @ts-ignore - This is a hack to get around the fact that the `chain` object
   if (!chain) return null;
 
   if (!ethersProviders[chain.rpcUrl]) {
     ethersProviders[chain.rpcUrl] = new providers.StaticJsonRpcProvider(
       chain.providerConnectionInfo && chain.providerConnectionInfo.url
         ? chain.providerConnectionInfo
-        : chain.rpcUrl
+        : chain.rpcUrl,
     );
   }
 
@@ -40,21 +40,21 @@ export function getProvider(chain: Chain): providers.StaticJsonRpcProvider {
 }
 
 export function requestAccounts(
-  provider: EIP1193Provider
+  provider: EIP1193Provider,
 ): Promise<ProviderAccounts> {
-  const args = { method: "eth_requestAccounts" } as EIP1102Request;
+  const args = { method: 'eth_requestAccounts' } as EIP1102Request;
   return provider.request(args);
 }
 
 export function selectAccounts(
-  provider: EIP1193Provider
+  provider: EIP1193Provider,
 ): Promise<ProviderAccounts> {
-  const args = { method: "eth_selectAccounts" } as SelectAccountsRequest;
+  const args = { method: 'eth_selectAccounts' } as SelectAccountsRequest;
   return provider.request(args);
 }
 
 export function getChainId(provider: EIP1193Provider): Promise<string> {
-  return provider.request({ method: "eth_chainId" }) as Promise<string>;
+  return provider.request({ method: 'eth_chainId' }) as Promise<string>;
 }
 
 export function listenAccountsChanged(args: {
@@ -64,15 +64,15 @@ export function listenAccountsChanged(args: {
   const { provider, disconnected$ } = args;
 
   const addHandler = (handler: AccountsListener) => {
-    provider.on("accountsChanged", handler);
+    provider.on('accountsChanged', handler);
   };
 
   const removeHandler = (handler: AccountsListener) => {
-    provider.removeListener("accountsChanged", handler);
+    provider.removeListener('accountsChanged', handler);
   };
 
   return fromEventPattern<ProviderAccounts>(addHandler, removeHandler).pipe(
-    takeUntil(disconnected$)
+    takeUntil(disconnected$),
   );
 }
 
@@ -82,25 +82,25 @@ export function listenChainChanged(args: {
 }): Observable<ChainId> {
   const { provider, disconnected$ } = args;
   const addHandler = (handler: ChainListener) => {
-    provider.on("chainChanged", handler);
+    provider.on('chainChanged', handler);
   };
 
   const removeHandler = (handler: ChainListener) => {
-    provider.removeListener("chainChanged", handler);
+    provider.removeListener('chainChanged', handler);
   };
 
   return fromEventPattern<ChainId>(addHandler, removeHandler).pipe(
-    takeUntil(disconnected$)
+    takeUntil(disconnected$),
   );
 }
 
 export function trackWallet(
   provider: EIP1193Provider,
-  label: WalletState["label"]
+  label: WalletState['label'],
 ): void {
   const disconnected$ = disconnectWallet$.pipe(
-    filter((wallet) => wallet === label),
-    take(1)
+    filter(wallet => wallet === label),
+    take(1),
   );
 
   const accountsChanged$ = listenAccountsChanged({
@@ -120,12 +120,12 @@ export function trackWallet(
 
     const { wallets } = state.get();
     const { accounts } = wallets.find(
-      (wallet) => wallet.label === label
+      wallet => wallet.label === label,
     ) as WalletState;
 
     const [[existingAccount], restAccounts] = partition(
       accounts,
-      (account) => account.address === address
+      account => account.address === address,
     );
 
     // update accounts without ens and balance first
@@ -143,13 +143,13 @@ export function trackWallet(
       switchMap(async ([address]) => {
         if (!address) return;
 
-        const { wallets, chains } = state.get();
+        // const { wallets } = state.get();
 
-        const { chains: walletChains, accounts } = wallets.find(
-          (wallet) => wallet.label === label
-        ) as WalletState;
+        // const { chains: walletChains } = wallets.find(
+        //   wallet => wallet.label === label,
+        // ) as WalletState;
 
-        const [connectedWalletChain] = walletChains;
+        // const [connectedWalletChain] = walletChains;
 
         // const chain = chains.find(
         //   ({ namespace, id }) =>
@@ -166,23 +166,23 @@ export function trackWallet(
         //   : Promise.resolve(null)
 
         return Promise.all([Promise.resolve(address) /*, balanceProm */]);
-      })
+      }),
     )
-    .subscribe((res) => {
+    .subscribe(res => {
       if (!res) return;
       const [address] = res;
       updateAccount(label, address, {});
     });
 
   const chainChanged$ = listenChainChanged({ provider, disconnected$ }).pipe(
-    share()
+    share(),
   );
 
   // Update chain on wallet when chainId changed
-  chainChanged$.subscribe(async (chainId) => {
+  chainChanged$.subscribe(async chainId => {
     const { wallets } = state.get();
     const { chains, accounts } = wallets.find(
-      (wallet) => wallet.label === label
+      wallet => wallet.label === label,
     ) as WalletState;
     const [connectedWalletChain] = chains;
 
@@ -194,11 +194,11 @@ export function trackWallet(
           address,
           ens: null,
           balance: null,
-        } as Account)
+        } as Account),
     );
 
     updateWallet(label, {
-      chains: [{ namespace: "evm", id: chainId }],
+      chains: [{ namespace: 'evm', id: chainId }],
       accounts: resetAccounts,
     });
   });
@@ -206,15 +206,15 @@ export function trackWallet(
   // when chain changes get ens and balance for each account for wallet
   chainChanged$
     .pipe(
-      switchMap(async (chainId) => {
-        const { wallets, chains } = state.get();
+      switchMap(async () => {
+        const { wallets } = state.get();
         const { accounts } = wallets.find(
-          (wallet) => wallet.label === label
+          wallet => wallet.label === label,
         ) as WalletState;
 
-        const chain = chains.find(
-          ({ namespace, id }) => namespace === "evm" && id === chainId
-        );
+        // const chain = chains.find(
+        //   ({ namespace, id }) => namespace === 'evm' && id === chainId,
+        // );
 
         return Promise.all(
           accounts.map(async ({ address }) => {
@@ -230,11 +230,11 @@ export function trackWallet(
               balance: null,
               ens: null,
             };
-          })
+          }),
         );
-      })
+      }),
     )
-    .subscribe((updatedAccounts) => {
+    .subscribe(updatedAccounts => {
       updatedAccounts && updateWallet(label, { accounts: updatedAccounts });
     });
 
@@ -245,20 +245,20 @@ export function trackWallet(
 
 export function switchChain(
   provider: EIP1193Provider,
-  chainId: ChainId
+  chainId: ChainId,
 ): Promise<unknown> {
   return provider.request({
-    method: "wallet_switchEthereumChain",
+    method: 'wallet_switchEthereumChain',
     params: [{ chainId }],
   });
 }
 
 export function addNewChain(
   provider: EIP1193Provider,
-  chain: Chain
+  chain: Chain,
 ): Promise<unknown> {
   return provider.request({
-    method: "wallet_addEthereumChain",
+    method: 'wallet_addEthereumChain',
     params: [
       {
         chainId: chain.id,

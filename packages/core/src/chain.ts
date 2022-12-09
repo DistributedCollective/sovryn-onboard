@@ -1,17 +1,19 @@
-import { firstValueFrom } from "rxjs";
-import { filter, map } from "rxjs/operators";
-import { ProviderRpcErrorCode } from "@sovryn/onboard-common";
-import { addNewChain, switchChain } from "./provider";
-import { state } from "./store/index";
-import { switchChainModal$ } from "./streams";
-import { validateSetChainOptions } from "./validation";
-import type { WalletState } from "./types";
-import { toHexString } from "./utils";
+import { firstValueFrom } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
+import { ProviderRpcErrorCode } from '@sovryn/onboard-common';
+
+import { addNewChain, switchChain } from './provider';
+import { state } from './store/index';
+import { switchChainModal$ } from './streams';
+import type { WalletState } from './types';
+import { toHexString } from './utils';
+import { validateSetChainOptions } from './validation';
 
 async function setChain(options: {
   chainId: string | number;
   chainNamespace?: string;
-  wallet?: WalletState["label"];
+  wallet?: WalletState['label'];
 }): Promise<boolean> {
   const error = validateSetChainOptions(options);
 
@@ -20,17 +22,17 @@ async function setChain(options: {
   }
 
   const { wallets, chains } = state.get();
-  const { chainId, chainNamespace = "evm", wallet: walletToSet } = options;
+  const { chainId, chainNamespace = 'evm', wallet: walletToSet } = options;
   const chainIdHex = toHexString(chainId);
 
   // validate that chainId has been added to chains
   const chain = chains.find(
-    ({ namespace, id }) => namespace === chainNamespace && id === chainIdHex
+    ({ namespace, id }) => namespace === chainNamespace && id === chainIdHex,
   );
 
   if (!chain) {
     throw new Error(
-      `Chain with chainId: ${chainId} and chainNamespace: ${chainNamespace} has not been set and must be added when Onboard is initialized.`
+      `Chain with chainId: ${chainId} and chainNamespace: ${chainNamespace} has not been set and must be added when Onboard is initialized.`,
     );
   }
 
@@ -43,7 +45,7 @@ async function setChain(options: {
     throw new Error(
       walletToSet
         ? `Wallet with label ${walletToSet} is not connected`
-        : "A wallet must be connected before a chain can be set"
+        : 'A wallet must be connected before a chain can be set',
     );
   }
 
@@ -63,8 +65,8 @@ async function setChain(options: {
   } catch (error) {
     const { code } = error as { code: number };
     const switchChainModalClosed$ = switchChainModal$.pipe(
-      filter((x) => x === null),
-      map(() => false)
+      filter(x => x === null),
+      map(() => false),
     );
 
     if (code === ProviderRpcErrorCode.CHAIN_NOT_ADDED) {

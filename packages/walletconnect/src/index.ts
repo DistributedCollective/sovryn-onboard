@@ -1,11 +1,11 @@
-import type { StaticJsonRpcProvider as StaticJsonRpcProviderType } from "@ethersproject/providers";
+import type { StaticJsonRpcProvider as StaticJsonRpcProviderType } from '@ethersproject/providers';
 
 import type {
   Chain,
   ProviderAccounts,
   WalletInit,
   EIP1193Provider,
-} from "@sovryn/onboard-common";
+} from '@sovryn/onboard-common';
 
 interface WalletConnectOptions {
   bridge?: string;
@@ -17,40 +17,40 @@ interface WalletConnectOptions {
 
 function walletConnect(options?: WalletConnectOptions): WalletInit {
   const {
-    bridge = "https://bridge.walletconnect.org",
+    bridge = 'https://bridge.walletconnect.org',
     qrcodeModalOptions,
     connectFirstChainId,
   } = options || {};
 
   return () => {
     return {
-      label: "WalletConnect",
-      getIcon: async () => (await import("./icon.js")).default,
+      label: 'WalletConnect',
+      getIcon: async () => (await import('./icon.js')).default,
       getInterface: async ({ chains, EventEmitter }) => {
         const { StaticJsonRpcProvider } = await import(
-          "@ethersproject/providers"
+          '@ethersproject/providers'
         );
 
         const { ProviderRpcError, ProviderRpcErrorCode } = await import(
-          "@sovryn/onboard-common"
+          '@sovryn/onboard-common'
         );
 
         const { default: WalletConnect } = await import(
-          "@walletconnect/client"
+          '@walletconnect/client'
         );
 
         // This is a cjs module and therefore depending on build tooling
         // sometimes it will be nested in the { default } object and
         // other times it will be the actual import
         // @ts-ignore - It thinks it is missing properties since it expect it to be nested under default
-        let QRCodeModal: typeof import("@walletconnect/qrcode-modal").default =
-          await import("@walletconnect/qrcode-modal");
+        let QRCodeModal: typeof import('@walletconnect/qrcode-modal').default =
+          await import('@walletconnect/qrcode-modal');
 
         // @ts-ignore - TS thinks that there is no default property on the `QRCodeModal` but sometimes there is
         QRCodeModal = QRCodeModal.default || QRCodeModal;
 
-        const { Subject, fromEvent } = await import("rxjs");
-        const { takeUntil, take } = await import("rxjs/operators");
+        const { Subject, fromEvent } = await import('rxjs');
+        const { takeUntil, take } = await import('rxjs/operators');
 
         const connector = new WalletConnect({
           bridge,
@@ -59,16 +59,16 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
         const emitter = new EventEmitter();
 
         class EthProvider {
-          public request: EIP1193Provider["request"];
+          public request: EIP1193Provider['request'];
           public connector: InstanceType<typeof WalletConnect>;
           public chains: Chain[];
-          public disconnect: EIP1193Provider["disconnect"];
+          public disconnect: EIP1193Provider['disconnect'];
           // @ts-ignore - TS thinks that there is no default property on the `QRCodeModal` but sometimes there is
-          public emit: typeof EventEmitter["emit"];
+          public emit: typeof EventEmitter['emit'];
           // @ts-ignore - TS thinks that there is no default property on the `QRCodeModal` but sometimes there is
-          public on: typeof EventEmitter["on"];
+          public on: typeof EventEmitter['on'];
           // @ts-ignore - TS thinks that there is no default property on the `QRCodeModal` but sometimes there is
-          public removeListener: typeof EventEmitter["removeListener"];
+          public removeListener: typeof EventEmitter['removeListener'];
 
           private disconnected$: InstanceType<typeof Subject>;
           private providers: Record<string, StaticJsonRpcProviderType>;
@@ -90,7 +90,7 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
             this.providers = {};
 
             // listen for session updates
-            fromEvent(this.connector, "session_update", (error, payload) => {
+            fromEvent(this.connector, 'session_update', (error, payload) => {
               if (error) {
                 throw error;
               }
@@ -101,14 +101,14 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
               .subscribe({
                 next: ({ params }) => {
                   const [{ accounts, chainId }] = params;
-                  this.emit("accountsChanged", accounts);
-                  this.emit("chainChanged", `0x${chainId.toString(16)}`);
+                  this.emit('accountsChanged', accounts);
+                  this.emit('chainChanged', `0x${chainId.toString(16)}`);
                 },
                 error: console.warn,
               });
 
             // listen for disconnect event
-            fromEvent(this.connector, "disconnect", (error, payload) => {
+            fromEvent(this.connector, 'disconnect', (error, payload) => {
               if (error) {
                 throw error;
               }
@@ -118,10 +118,10 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
               .pipe(takeUntil(this.disconnected$))
               .subscribe({
                 next: () => {
-                  this.emit("accountsChanged", []);
+                  this.emit('accountsChanged', []);
                   this.disconnected$.next(true);
-                  typeof localStorage !== "undefined" &&
-                    localStorage.removeItem("walletconnect");
+                  typeof localStorage !== 'undefined' &&
+                    localStorage.removeItem('walletconnect');
                 },
                 error: console.warn,
               });
@@ -129,11 +129,11 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
             this.disconnect = () => this.connector.killSession();
 
             this.request = async ({ method, params }) => {
-              if (method === "eth_chainId") {
+              if (method === 'eth_chainId') {
                 return `0x${this.connector.chainId.toString(16)}`;
               }
 
-              if (method === "eth_requestAccounts") {
+              if (method === 'eth_requestAccounts') {
                 return new Promise<ProviderAccounts>((resolve, reject) => {
                   // Check if connection is already established
                   if (!this.connector.connected) {
@@ -142,7 +142,7 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
                       .createSession(
                         connectFirstChainId
                           ? { chainId: parseInt(chains[0].id, 16) }
-                          : undefined
+                          : undefined,
                       )
                       .then(() => {
                         QRCodeModal.open(
@@ -151,20 +151,20 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
                             reject(
                               new ProviderRpcError({
                                 code: 4001,
-                                message: "User rejected the request.",
-                              })
+                                message: 'User rejected the request.',
+                              }),
                             ),
-                          qrcodeModalOptions
+                          qrcodeModalOptions,
                         );
                       });
                   } else {
                     const { accounts, chainId } = this.connector.session;
-                    this.emit("chainChanged", `0x${chainId.toString(16)}`);
+                    this.emit('chainChanged', `0x${chainId.toString(16)}`);
                     return resolve(accounts);
                   }
 
                   // Subscribe to connection events
-                  fromEvent(this.connector, "connect", (error, payload) => {
+                  fromEvent(this.connector, 'connect', (error, payload) => {
                     if (error) {
                       throw error;
                     }
@@ -175,8 +175,8 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
                     .subscribe({
                       next: ({ params }) => {
                         const [{ accounts, chainId }] = params;
-                        this.emit("accountsChanged", accounts);
-                        this.emit("chainChanged", `0x${chainId.toString(16)}`);
+                        this.emit('accountsChanged', accounts);
+                        this.emit('chainChanged', `0x${chainId.toString(16)}`);
                         QRCodeModal.close();
                         resolve(accounts);
                       },
@@ -186,8 +186,8 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
               }
 
               if (
-                method === "wallet_switchEthereumChain" ||
-                method === "eth_selectAccounts"
+                method === 'wallet_switchEthereumChain' ||
+                method === 'eth_selectAccounts'
               ) {
                 throw new ProviderRpcError({
                   code: ProviderRpcErrorCode.UNSUPPORTED_METHOD,
@@ -196,50 +196,50 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
               }
 
               // @ts-ignore
-              if (method === "eth_sendTransaction") {
+              if (method === 'eth_sendTransaction') {
                 // @ts-ignore
                 return this.connector.sendTransaction(params[0]);
               }
 
               // @ts-ignore
-              if (method === "eth_signTransaction") {
+              if (method === 'eth_signTransaction') {
                 // @ts-ignore
                 return this.connector.signTransaction(params[0]);
               }
 
               // @ts-ignore
-              if (method === "personal_sign") {
+              if (method === 'personal_sign') {
                 // @ts-ignore
                 return this.connector.signPersonalMessage(params);
               }
 
               // @ts-ignore
-              if (method === "eth_sign") {
+              if (method === 'eth_sign') {
                 // @ts-ignore
                 return this.connector.signMessage(params);
               }
 
               // @ts-ignore
-              if (method === "eth_signTypedData") {
+              if (method === 'eth_signTypedData') {
                 // @ts-ignore
                 return this.connector.signTypedData(params);
               }
 
-              if (method === "eth_signTypedData_v4") {
+              if (method === 'eth_signTypedData_v4') {
                 // @ts-ignore
                 return this.connector.signTypedData(params);
               }
 
-              if (method === "eth_accounts") {
+              if (method === 'eth_accounts') {
                 return this.connector.sendCustomRequest({
                   id: 1337,
-                  jsonrpc: "2.0",
+                  jsonrpc: '2.0',
                   method,
                   params,
                 });
               }
 
-              const chainId = await this.request({ method: "eth_chainId" });
+              const chainId = await this.request({ method: 'eth_chainId' });
 
               if (!this.providers[chainId]) {
                 const currentChain = chains.find(({ id }) => id === chainId);
@@ -252,14 +252,14 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
                 }
 
                 this.providers[chainId] = new StaticJsonRpcProvider(
-                  currentChain.rpcUrl
+                  currentChain.rpcUrl,
                 );
               }
 
               return this.providers[chainId].send(
                 method,
                 // @ts-ignore
-                params
+                params,
               );
             };
           }

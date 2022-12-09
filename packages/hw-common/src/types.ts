@@ -1,5 +1,6 @@
-import type { Chain, AccountAddress } from "@sovryn/onboard-common";
-import type { BigNumber } from "ethers";
+import type { BigNumber } from 'ethers';
+
+import type { Chain, AccountAddress } from '@sovryn/onboard-common';
 
 export interface HwConfig {
   basePaths: BasePath[];
@@ -39,7 +40,7 @@ export interface BootstrapNode {
 }
 
 export type AccountSelectAPI = (
-  options: SelectAccountOptions
+  options: SelectAccountOptions,
 ) => Promise<Account>;
 
 export type SelectAccountOptions = {
@@ -66,7 +67,7 @@ export type ScanAccounts = (options: ScanAccountsOptions) => Promise<Account[]>;
 
 export type ScanAccountsOptions = {
   derivationPath: DerivationPath;
-  chainId: Chain["id"];
+  chainId: Chain['id'];
   asset: Asset;
 };
 
@@ -74,7 +75,7 @@ export type Account = {
   address: AccountAddress;
   derivationPath: DerivationPath;
   balance: {
-    asset: Asset["label"];
+    asset: Asset['label'];
     value: BigNumber;
   };
 };

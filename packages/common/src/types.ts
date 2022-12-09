@@ -1,8 +1,9 @@
-import type { ConnectionInfo } from "ethers/lib/utils";
-import type EventEmitter from "eventemitter3";
-import type { TypedData as EIP712TypedData } from "eip-712";
-import type { ethers } from "ethers";
-export type { TypedData as EIP712TypedData } from "eip-712";
+import type { TypedData as EIP712TypedData } from 'eip-712';
+import type { ethers } from 'ethers';
+import type { ConnectionInfo } from 'ethers/lib/utils';
+import type EventEmitter from 'eventemitter3';
+
+export type { TypedData as EIP712TypedData } from 'eip-712';
 
 /**
  * Types for request patching methods. Ethereum RPC request is mapped to
@@ -13,71 +14,71 @@ export type { TypedData as EIP712TypedData } from "eip-712";
 export type RequestPatch = {
   eth_accounts?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
+        baseRequest: EIP1193Provider['request'];
       }) => Promise<ProviderAccounts>)
     | null;
   eth_getBalance?:
-    | ((args: { baseRequest: EIP1193Provider["request"] }) => Promise<Balance>)
+    | ((args: { baseRequest: EIP1193Provider['request'] }) => Promise<Balance>)
     | null;
   eth_requestAccounts?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
+        baseRequest: EIP1193Provider['request'];
       }) => Promise<ProviderAccounts>)
     | null;
   eth_selectAccounts?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
+        baseRequest: EIP1193Provider['request'];
       }) => Promise<ProviderAccounts>)
     | null;
   eth_chainId?:
-    | ((args: { baseRequest: EIP1193Provider["request"] }) => Promise<string>)
+    | ((args: { baseRequest: EIP1193Provider['request'] }) => Promise<string>)
     | null;
   eth_signTransaction?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
-        params: EthSignTransactionRequest["params"];
+        baseRequest: EIP1193Provider['request'];
+        params: EthSignTransactionRequest['params'];
       }) => Promise<string>)
     | null;
   eth_sendTransaction?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
-        params: EthSignTransactionRequest["params"];
+        baseRequest: EIP1193Provider['request'];
+        params: EthSignTransactionRequest['params'];
       }) => Promise<string>)
     | null;
   eth_sign?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
-        params: EthSignMessageRequest["params"];
+        baseRequest: EIP1193Provider['request'];
+        params: EthSignMessageRequest['params'];
       }) => Promise<string>)
     | null;
   personal_sign?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
-        params: PersonalSignMessageRequest["params"];
+        baseRequest: EIP1193Provider['request'];
+        params: PersonalSignMessageRequest['params'];
       }) => Promise<string>)
     | null;
   eth_signTypedData?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
-        params: EIP712Request["params"];
+        baseRequest: EIP1193Provider['request'];
+        params: EIP712Request['params'];
       }) => Promise<string>)
     | null;
   eth_signTypedData_v4?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
-        params: EIP712Request["params"];
+        baseRequest: EIP1193Provider['request'];
+        params: EIP712Request['params'];
       }) => Promise<string>)
     | null;
   wallet_switchEthereumChain?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
-        params: EIP3326Request["params"];
+        baseRequest: EIP1193Provider['request'];
+        params: EIP3326Request['params'];
       }) => Promise<null>)
     | null;
   wallet_addEthereumChain?:
     | ((args: {
-        baseRequest: EIP1193Provider["request"];
-        params: EIP3085Request["params"];
+        baseRequest: EIP1193Provider['request'];
+        params: EIP3085Request['params'];
       }) => Promise<null>)
     | null;
 };
@@ -123,7 +124,7 @@ export type RecommendedInjectedWallets = {
  * returns an initialised `WalletModule` or array of `WalletModule`s.
  */
 export type WalletInit = (
-  helpers: WalletHelpers
+  helpers: WalletHelpers,
 ) => WalletModule | WalletModule[] | null;
 
 export type WalletHelpers = {
@@ -140,7 +141,7 @@ export type Device = {
   browser: DeviceBrowser;
 };
 
-export type Platform = DeviceOSName | DeviceBrowserName | DeviceType | "all";
+export type Platform = DeviceOSName | DeviceBrowserName | DeviceType | 'all';
 
 export type DeviceOS = {
   name: DeviceOSName;
@@ -153,24 +154,24 @@ export type DeviceBrowser = {
 };
 
 export type DeviceOSName =
-  | "Windows Phone"
-  | "Windows"
-  | "macOS"
-  | "iOS"
-  | "Android"
-  | "Linux"
-  | "Chrome OS";
+  | 'Windows Phone'
+  | 'Windows'
+  | 'macOS'
+  | 'iOS'
+  | 'Android'
+  | 'Linux'
+  | 'Chrome OS';
 
 export type DeviceBrowserName =
-  | "Android Browser"
-  | "Chrome"
-  | "Chromium"
-  | "Firefox"
-  | "Microsoft Edge"
-  | "Opera"
-  | "Safari";
+  | 'Android Browser'
+  | 'Chrome'
+  | 'Chromium'
+  | 'Firefox'
+  | 'Microsoft Edge'
+  | 'Opera'
+  | 'Safari';
 
-export type DeviceType = "desktop" | "mobile" | "tablet";
+export type DeviceType = 'desktop' | 'mobile' | 'tablet';
 
 export interface WalletModule {
   // The label of the wallet
@@ -227,11 +228,11 @@ export type AccountAddress = string;
 export type ProviderAccounts = AccountAddress[];
 
 export type ProviderEvent =
-  | "connect"
-  | "disconnect"
-  | "message"
-  | "chainChanged"
-  | "accountsChanged";
+  | 'connect'
+  | 'disconnect'
+  | 'message'
+  | 'chainChanged'
+  | 'accountsChanged';
 
 export interface SimpleEventEmitter {
   on(
@@ -241,7 +242,7 @@ export interface SimpleEventEmitter {
       | DisconnectListener
       | MessageListener
       | ChainListener
-      | AccountsListener
+      | AccountsListener,
   ): void;
   removeListener(
     event: ProviderEvent,
@@ -250,7 +251,7 @@ export interface SimpleEventEmitter {
       | DisconnectListener
       | MessageListener
       | ChainListener
-      | AccountsListener
+      | AccountsListener,
   ): void;
 }
 
@@ -284,57 +285,57 @@ interface BaseRequest {
 }
 
 export interface EthAccountsRequest extends BaseRequest {
-  method: "eth_accounts";
+  method: 'eth_accounts';
 }
 
 export interface EthChainIdRequest extends BaseRequest {
-  method: "eth_chainId";
+  method: 'eth_chainId';
 }
 
 export interface EthSignTransactionRequest {
-  method: "eth_signTransaction";
+  method: 'eth_signTransaction';
   params: [TransactionObject];
 }
 
 type Address = string;
 type Message = string;
 export interface EthSignMessageRequest {
-  method: "eth_sign";
+  method: 'eth_sign';
   params: [Address, Message];
 }
 
 //https://geth.ethereum.org/docs/rpc/ns-personal#personal_sign
 export interface PersonalSignMessageRequest {
-  method: "personal_sign";
+  method: 'personal_sign';
   params: [Message, Address];
 }
 
 // request -> signTypedData_v3`
 export interface EIP712Request {
-  method: "eth_signTypedData" | "eth_signTypedData_v4";
+  method: 'eth_signTypedData' | 'eth_signTypedData_v4';
   params: [Address, EIP712TypedData];
 }
 
 export interface EthBalanceRequest {
-  method: "eth_getBalance";
-  params: [string, (number | "latest" | "earliest" | "pending")?];
+  method: 'eth_getBalance';
+  params: [string, (number | 'latest' | 'earliest' | 'pending')?];
 }
 
 export interface EIP1102Request extends BaseRequest {
-  method: "eth_requestAccounts";
+  method: 'eth_requestAccounts';
 }
 
 export interface SelectAccountsRequest extends BaseRequest {
-  method: "eth_selectAccounts";
+  method: 'eth_selectAccounts';
 }
 
 export interface EIP3085Request {
-  method: "wallet_addEthereumChain";
+  method: 'wallet_addEthereumChain';
   params: AddChainParams[];
 }
 
 export interface EIP3326Request {
-  method: "wallet_switchEthereumChain";
+  method: 'wallet_switchEthereumChain';
   params: [{ chainId: ChainId }];
 }
 
@@ -350,11 +351,11 @@ export type AddChainParams = {
 };
 
 export interface EIP1193Provider extends SimpleEventEmitter {
-  on(event: "connect", listener: ConnectListener): void;
-  on(event: "disconnect", listener: DisconnectListener): void;
-  on(event: "message", listener: MessageListener): void;
-  on(event: "chainChanged", listener: ChainListener): void;
-  on(event: "accountsChanged", listener: AccountsListener): void;
+  on(event: 'connect', listener: ConnectListener): void;
+  on(event: 'disconnect', listener: DisconnectListener): void;
+  on(event: 'message', listener: MessageListener): void;
+  on(event: 'chainChanged', listener: ChainListener): void;
+  on(event: 'accountsChanged', listener: AccountsListener): void;
   request(args: EthAccountsRequest): Promise<ProviderAccounts>;
   request(args: EthBalanceRequest): Promise<Balance>;
   request(args: EIP1102Request): Promise<ProviderAccounts>;
@@ -383,7 +384,7 @@ export enum ProviderRpcErrorCode {
 }
 
 export interface Chain {
-  namespace?: "evm";
+  namespace?: 'evm';
   id: ChainId;
   rpcUrl: string;
   label: string;
@@ -395,7 +396,7 @@ export interface Chain {
   blockExplorerUrl?: string;
 }
 
-export type ChainWithDecimalId = Omit<Chain, "id"> & { id: DecimalChainId };
+export type ChainWithDecimalId = Omit<Chain, 'id'> & { id: DecimalChainId };
 
 export type TokenSymbol = string; // eg ETH
 
