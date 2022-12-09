@@ -1,5 +1,16 @@
 # @sovryn/onboard-react
 
+## 0.0.6
+
+### Patch Changes
+
+- d4d66c7: SOV-930: prettified files
+- 7d80fed: SOV-1135-verify-wallet-connection-integration-works-on-mobile-screen-sizes
+- Updated dependencies [d4d66c7]
+  - @sovryn/onboard-common@0.0.2
+  - @sovryn/onboard-core@0.0.4
+  - @sovryn/onboard-hw-common@0.0.3
+
 ## 0.0.5
 
 ### Patch Changes

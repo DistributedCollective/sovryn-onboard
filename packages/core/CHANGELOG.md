@@ -1,5 +1,13 @@
 # @sovryn/onboard-core
 
+## 0.0.4
+
+### Patch Changes
+
+- d4d66c7: SOV-930: prettified files
+- Updated dependencies [d4d66c7]
+  - @sovryn/onboard-common@0.0.2
+
 ## 0.0.3
 
 ### Patch Changes

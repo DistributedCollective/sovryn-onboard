@@ -1,5 +1,20 @@
 # web
 
+## 0.0.3
+
+### Patch Changes
+
+- d4d66c7: SOV-930: prettified files
+- 7d80fed: SOV-1135-verify-wallet-connection-integration-works-on-mobile-screen-sizes
+- Updated dependencies [d4d66c7]
+- Updated dependencies [7d80fed]
+  - @sovryn/onboard-common@0.0.2
+  - @sovryn/onboard-core@0.0.4
+  - @sovryn/onboard-injected@0.0.2
+  - @sovryn/onboard-ledger@0.0.3
+  - @sovryn/onboard-react@0.0.6
+  - @sovryn/onboard-walletconnect@0.0.2
+
 ## 0.0.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @sovryn/onboard-common
 
+## 0.0.2
+
+### Patch Changes
+
+- d4d66c7: SOV-930: prettified files
+
 ## 0.0.1
 
 ### Patch Changes
