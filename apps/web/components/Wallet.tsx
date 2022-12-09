@@ -1,27 +1,30 @@
-import { Chain } from "@sovryn/onboard-common";
-import type { WalletState } from "@sovryn/onboard-core/dist/types";
-import { FC, useCallback, useEffect, useState } from "react";
-import { utils } from "ethers";
-import { TransactionResponse } from "@ethersproject/providers";
-import { onboard } from "../lib/connector";
-import styles from "./Wallet.module.css";
-import { getSigner } from "../lib/signer";
-import { ExplorerLink } from "./ExplorerLink";
-import { _TypedDataEncoder } from "ethers/lib/utils";
-import { WalletIdentity } from "@sovryn/ui";
+import { TransactionResponse } from '@ethersproject/providers';
 
-const MESSAGE_TO_SIGN = "hello world";
+import { FC, useCallback, useEffect, useState } from 'react';
+
+import { utils } from 'ethers';
+
+import { Chain } from '@sovryn/onboard-common';
+import type { WalletState } from '@sovryn/onboard-core/dist/types';
+import { WalletIdentity } from '@sovryn/ui';
+
+import { onboard } from '../lib/connector';
+import { getSigner } from '../lib/signer';
+import { ExplorerLink } from './ExplorerLink';
+import styles from './Wallet.module.css';
+
+const MESSAGE_TO_SIGN = 'hello world';
 
 const DATA_TO_SIGN = (chainId: number) => ({
   domain: {
     chainId,
-    name: "Ether Mail",
-    verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC",
-    version: "1",
+    name: 'Ether Mail',
+    verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+    version: '1',
   },
 
   message: {
-    content: "a signed message",
+    content: 'a signed message',
   },
 
   types: {
@@ -31,7 +34,7 @@ const DATA_TO_SIGN = (chainId: number) => ({
     //     { name: 'chainId', type: 'uint256' },
     //     { name: 'verifyingContract', type: 'address' },
     // ],
-    Message: [{ name: "content", type: "string" }],
+    Message: [{ name: 'content', type: 'string' }],
   },
 });
 
@@ -47,7 +50,7 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
 
   const handlePersonalSign = useCallback(async () => {
     const signature = await getSigner(wallet.provider).signMessage(
-      MESSAGE_TO_SIGN
+      MESSAGE_TO_SIGN,
     );
 
     const signer = utils.verifyMessage(MESSAGE_TO_SIGN, signature);
@@ -56,8 +59,8 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
 
     alert(
       address.toLowerCase() === signer.toLowerCase()
-        ? "Signature verified"
-        : "Signature verification failed"
+        ? 'Signature verified'
+        : 'Signature verification failed',
     );
   }, [address, wallet.provider]);
 
@@ -67,22 +70,22 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
     const signature = await getSigner(wallet.provider)._signTypedData(
       data.domain,
       data.types,
-      data.message
+      data.message,
     );
 
     const signer = utils.verifyTypedData(
       data.domain,
       data.types,
       data.message,
-      signature
+      signature,
     );
 
     console.log({ address, signer, signature });
 
     alert(
       address.toLowerCase() === signer.toLowerCase()
-        ? "Signature verified"
-        : "Signature verification failed"
+        ? 'Signature verified'
+        : 'Signature verification failed',
     );
   }, [address, chainId, wallet.provider]);
 
@@ -97,7 +100,7 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
 
       const wait = await tx.wait();
 
-      setTx((value) => ({
+      setTx(value => ({
         ...(value as TransactionResponse),
         confirmations: wait.confirmations,
       }));
@@ -117,7 +120,7 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
       });
       console.log(result);
     },
-    [wallet.label]
+    [wallet.label],
   );
 
   const disconnect = useCallback(async () => {
@@ -125,13 +128,13 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
   }, [wallet.label]);
 
   useEffect(() => {
-    wallet.provider.on("chainChanged", (value) => {
-      console.log("chainged chainId to ", value, Number(value));
+    wallet.provider.on('chainChanged', value => {
+      console.log('chainged chainId to ', value, Number(value));
       setChainId(value);
     });
 
-    wallet.provider.on("accountsChanged", (value) => {
-      console.log("account changed to ", value);
+    wallet.provider.on('accountsChanged', value => {
+      console.log('account changed to ', value);
       setAddress(value[0]);
     });
   }, [wallet.provider]);
@@ -143,13 +146,13 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
           address={address}
           onDisconnect={disconnect}
           submenuLabels={{
-            copyAddress: "Copy Address",
-            disconnect: "Disconnect",
+            copyAddress: 'Copy Address',
+            disconnect: 'Disconnect',
           }}
         />
       </div>
       <h3 className={styles.label}>
-        {wallet.label}{" "}
+        {wallet.label}{' '}
         <em className={styles.sublabel}>[chainId: {Number(chainId)}]</em>
       </h3>
       <div>
@@ -183,14 +186,14 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
         </ol>
         <hr />
         <ol className="list-disc list-inside">
-          {onboard.state.get().chains.map((chain) => (
+          {onboard.state.get().chains.map(chain => (
             <li>
               <button
                 onClick={switchNetwork(chain)}
                 className={styles.button}
                 key={chain.id}
               >
-                Switch to {chain.label} {chainId === chain.id && " [current]"}
+                Switch to {chain.label} {chainId === chain.id && ' [current]'}
               </button>
             </li>
           ))}

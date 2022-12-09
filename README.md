@@ -11,10 +11,10 @@ Modules compatible with web3-onboard as it's mostly clones with additional featu
 ## Usage
 
 ```tsx
-import Onboard from "@sovryn/onboard-core";
-import { OnboardProvider } from "@sovryn/onboard-react";
-import injectedModule from "@sovryn/onboard-injected";
-import walletConnectModule from "@sovryn/onboard-walletconnect";
+import Onboard from '@sovryn/onboard-core';
+import injectedModule from '@sovryn/onboard-injected';
+import { OnboardProvider } from '@sovryn/onboard-react';
+import walletConnectModule from '@sovryn/onboard-walletconnect';
 
 const injected = injectedModule();
 const walletConnect = walletConnectModule();
@@ -25,11 +25,11 @@ const onboard = Onboard({
   wallets: [injected, walletConnect],
   chains: [
     {
-      id: "0x1e",
-      rpcUrl: "https://public-node.rsk.co",
-      label: "RSK",
-      token: "RBTC",
-      blockExplorerUrl: "https://explorer.rsk.co",
+      id: '0x1e',
+      rpcUrl: 'https://public-node.rsk.co',
+      label: 'RSK',
+      token: 'RBTC',
+      blockExplorerUrl: 'https://explorer.rsk.co',
     },
   ],
 });

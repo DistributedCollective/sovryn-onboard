@@ -1,6 +1,8 @@
-import { Link, Paragraph } from "@sovryn/ui";
-import { FC } from "react";
-import styles from "./InstructionsTab.module.css";
+import { FC } from 'react';
+
+import { Link, Paragraph } from '@sovryn/ui';
+
+import styles from './InstructionsTab.module.css';
 
 export const InstructionsTab: FC = () => {
   return (
@@ -16,7 +18,7 @@ export const InstructionsTab: FC = () => {
           password on every website or dapp, you can just connect your wallet.
         </Paragraph>
         <Paragraph>
-          Find out how to get a wallet to use on Sovryn in the wiki.{" "}
+          Find out how to get a wallet to use on Sovryn in the wiki.{' '}
         </Paragraph>
       </div>
 

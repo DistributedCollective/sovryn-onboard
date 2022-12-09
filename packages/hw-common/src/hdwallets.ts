@@ -1,7 +1,10 @@
-import type Common from "@ethereumjs/common";
-import type { EIP1193Provider, RPCResponse } from "@sovryn/onboard-common";
-import type { BigNumber, providers } from "ethers";
-import type { CustomNetwork } from "./types";
+import type Common from '@ethereumjs/common';
+
+import type { BigNumber, providers } from 'ethers';
+
+import type { EIP1193Provider, RPCResponse } from '@sovryn/onboard-common';
+
+import type { CustomNetwork } from './types';
 
 /**
  * Creates the common instance used for signing
@@ -15,7 +18,7 @@ export const getCommon = async ({
   customNetwork?: CustomNetwork;
   chainId: number;
 }): Promise<Common> => {
-  const { default: Common, Hardfork } = await import("@ethereumjs/common");
+  const { default: Common, Hardfork } = await import('@ethereumjs/common');
   // @ts-ignore
   const CommonConstructor: typeof Common = Common.default || Common;
 
@@ -43,12 +46,12 @@ export const getCommon = async ({
 
 type StringifiedTransactionRequest = Omit<
   providers.TransactionRequest,
-  | "nonce"
-  | "gasLimit"
-  | "gasPrice"
-  | "value"
-  | "maxPriorityFeePerGas"
-  | "maxFeePerGas"
+  | 'nonce'
+  | 'gasLimit'
+  | 'gasPrice'
+  | 'value'
+  | 'maxPriorityFeePerGas'
+  | 'maxFeePerGas'
 > & {
   nonce: string;
   gasLimit: string;
@@ -64,7 +67,7 @@ type StringifiedTransactionRequest = Omit<
  * @returns a transaction where all BigNumber properties are now strings
  */
 export const bigNumberFieldsToStrings = (
-  transaction: providers.TransactionRequest
+  transaction: providers.TransactionRequest,
 ): StringifiedTransactionRequest =>
   Object.keys(transaction).reduce(
     (transaction, txnProperty) => ({
@@ -83,7 +86,7 @@ export const bigNumberFieldsToStrings = (
           }
         : {}),
     }),
-    transaction
+    transaction,
   ) as StringifiedTransactionRequest;
 
 /**
@@ -94,23 +97,23 @@ export const bigNumberFieldsToStrings = (
  * to be called when making rpc requests
  */
 export const getHardwareWalletProvider = (
-  getRpcUrl: () => string
-): { request: EIP1193Provider["request"] } => ({
+  getRpcUrl: () => string,
+): { request: EIP1193Provider['request'] } => ({
   request: ({ method, params }) =>
     fetch(getRpcUrl(), {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        jsonrpc: "2.0",
-        id: "42",
+        jsonrpc: '2.0',
+        id: '42',
         method,
         params,
       }),
-    }).then(async (res) => {
+    }).then(async res => {
       const response = (await res.json()) as RPCResponse;
-      if ("error" in response) {
+      if ('error' in response) {
         throw response.error;
       }
       return response.result;

@@ -1,7 +1,10 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import styles from "./ButtonBack.module.css";
-import { Icon, IconNames } from "@sovryn/ui";
+import React, { FC } from 'react';
+
+import classNames from 'classnames';
+
+import { Icon, IconNames } from '@sovryn/ui';
+
+import styles from './ButtonBack.module.css';
 
 type ButtonBackProps = {
   onClick: () => void;

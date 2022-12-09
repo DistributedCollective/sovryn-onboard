@@ -1,14 +1,14 @@
-import { updateConfiguration } from "./configuration";
-import connect, { connectWallet, loadWalletModule } from "./connect";
-import disconnectWallet from "./disconnect";
-import setChain from "./chain";
-import { state } from "./store";
-import { addChains, setPrimaryWallet, setWalletModules } from "./store/actions";
-import { InitOptions } from "./types";
-import { chainIdToHex } from "./utils";
-import { validateInitOptions } from "./validation";
+import setChain from './chain';
+import { updateConfiguration } from './configuration';
+import connect, { connectWallet, loadWalletModule } from './connect';
+import disconnectWallet from './disconnect';
+import { state } from './store';
+import { addChains, setPrimaryWallet, setWalletModules } from './store/actions';
+import { InitOptions } from './types';
+import { chainIdToHex } from './utils';
+import { validateInitOptions } from './validation';
 
-export * from "./types";
+export * from './types';
 
 const API = {
   connectWallet: connect,
@@ -32,7 +32,7 @@ const helpers = {
 export type OnboardAPI = typeof API;
 
 function init(options: InitOptions): OnboardAPI {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     return API;
   }
 

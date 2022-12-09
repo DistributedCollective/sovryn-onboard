@@ -1,4 +1,6 @@
-import { ChangeEvent, FC, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, FC, useCallback, useMemo, useState } from 'react';
+
+import { BasePath } from '@sovryn/onboard-hw-common';
 import {
   Button,
   ButtonType,
@@ -10,11 +12,11 @@ import {
   ButtonStyle,
   InputSize,
   HelperButton,
-} from "@sovryn/ui";
-import { BasePath } from "@sovryn/onboard-hw-common";
-import styles from "./DerivationPathForm.module.css";
+} from '@sovryn/ui';
 
-type DerivationPathForm = {
+import styles from './DerivationPathForm.module.css';
+
+type DerivationPathFormProps = {
   value: string;
   onChange: (value: string) => void;
   basePaths: BasePath[];
@@ -22,7 +24,7 @@ type DerivationPathForm = {
   error?: string;
 };
 
-export const DerivationPathForm: FC<DerivationPathForm> = ({
+export const DerivationPathForm: FC<DerivationPathFormProps> = ({
   value,
   onChange,
   basePaths,
@@ -33,14 +35,14 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
   const [customPath, setCustomPath] = useState(value);
 
   const derivationPath = useMemo(() => {
-    if (selectedPath === "custom") {
+    if (selectedPath === 'custom') {
       return customPath;
     }
     return selectedPath;
   }, [selectedPath, customPath]);
 
   const handleSelectedPathChange = useCallback((value: string) => {
-    if (value !== "custom") {
+    if (value !== 'custom') {
       // update custom path to the last used path from dropdown
       setCustomPath(value);
     }
@@ -49,7 +51,7 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
 
   const handleCustomChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setCustomPath(event.target.value),
-    []
+    [],
   );
 
   const handleSubmit = useCallback(() => {
@@ -58,13 +60,13 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
 
   const options = useMemo(
     () => [
-      ...basePaths.map((item) => ({
+      ...basePaths.map(item => ({
         value: item.value,
         label: `${item.label} - ${item.value}`,
       })),
-      { value: "custom", label: "Custom" },
+      { value: 'custom', label: 'Custom' },
     ],
-    [basePaths]
+    [basePaths],
   );
 
   return (
@@ -83,7 +85,7 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
             <HelperButton
               content={
                 <Paragraph>
-                  New to this term?{" "}
+                  New to this term?{' '}
                   <Link
                     href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
                     text="See the wiki"
@@ -100,7 +102,7 @@ export const DerivationPathForm: FC<DerivationPathForm> = ({
             dropdownProps={{ usePortal: false, className: styles.dropdown }}
           />
 
-          {selectedPath === "custom" && (
+          {selectedPath === 'custom' && (
             <Input
               value={customPath}
               placeholder="m/0'/0'/0'/0"

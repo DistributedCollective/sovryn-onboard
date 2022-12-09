@@ -1,4 +1,8 @@
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, useCallback, useMemo, useState } from 'react';
+
+import { utils } from 'ethers';
+
+import { Account, selectAccountOptions } from '@sovryn/onboard-hw-common';
 import {
   Button,
   Pagination,
@@ -7,10 +11,9 @@ import {
   TransactionId,
   Align,
   ButtonSize,
-} from "@sovryn/ui";
-import { Account, selectAccountOptions } from "@sovryn/onboard-hw-common";
-import { utils } from "ethers";
-import styles from "./AddressListTable.module.css";
+} from '@sovryn/ui';
+
+import styles from './AddressListTable.module.css';
 
 const DEFAULT_PER_PAGE = 5;
 
@@ -41,12 +44,12 @@ export const AddressListTable: FC<AddressListTableProps> = ({
 
   const handleSelect = useCallback(
     (item: Item) => setSelected(item.account),
-    [setSelected]
+    [setSelected],
   );
 
   const handleConfirm = useCallback(
     () => onAccountSelected(selected!),
-    [selected, onAccountSelected]
+    [selected, onAccountSelected],
   );
 
   const paginatedItems: Item[] = useMemo(
@@ -58,22 +61,22 @@ export const AddressListTable: FC<AddressListTableProps> = ({
         asset: item.balance.asset,
         account: item,
       })),
-    [items, page, perPage]
+    [items, page, perPage],
   );
 
   const columns: ColumnOptions<Item>[] = useMemo(
     () => [
       {
-        id: "index",
+        id: 'index',
         align: Align.left,
-        title: "Index",
+        title: 'Index',
         cellRenderer: (row: Item) =>
-          `${String(row.index + 1).padStart(2, "0")}.`,
+          `${String(row.index + 1).padStart(2, '0')}.`,
       },
       {
-        id: "address",
+        id: 'address',
         align: Align.center,
-        title: "Address",
+        title: 'Address',
         cellRenderer: (row: Item) => (
           <TransactionId
             value={row.address}
@@ -82,9 +85,9 @@ export const AddressListTable: FC<AddressListTableProps> = ({
         ),
       },
       {
-        id: "balance",
+        id: 'balance',
         align: Align.right,
-        title: "Balance",
+        title: 'Balance',
         cellRenderer: (row: Item) =>
           `${Number(row.balance).toLocaleString(undefined, {
             minimumFractionDigits: 4,
@@ -92,7 +95,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           })} ${row.asset}`,
       },
     ],
-    [chain.blockExplorerUrl]
+    [chain.blockExplorerUrl],
   );
 
   return (
@@ -100,7 +103,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
       <TableBase
         columns={columns}
         rows={paginatedItems}
-        rowKey={(item) => item.account.address}
+        rowKey={item => item.account.address}
         dataAttribute="addressTable"
         onRowClick={handleSelect}
         isClickable

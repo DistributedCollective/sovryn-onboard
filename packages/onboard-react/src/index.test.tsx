@@ -1,10 +1,12 @@
-import { render, waitFor } from "@testing-library/react";
-import { useReducer } from "react";
-import userEvent from "@testing-library/user-event";
-import WalletDialog from "./components/WalletDialog/WalletDialog";
+import { render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import { useReducer } from 'react';
+
+import WalletDialog from './components/WalletDialog/WalletDialog';
 
 const Component = () => {
-  const [isOpen, toggle] = useReducer((p) => !p, false);
+  const [isOpen, toggle] = useReducer(p => !p, false);
   return (
     <>
       <button onClick={toggle}>Engage</button>
@@ -13,19 +15,19 @@ const Component = () => {
   );
 };
 
-describe("WalletDialog", () => {
-  it("should start with hidden modal", () => {
+describe('WalletDialog', () => {
+  it('should start with hidden modal', () => {
     const { getByText } = render(<Component />);
-    expect(() => getByText("Connect Wallet")).toThrowError();
+    expect(() => getByText('Browser Wallet')).toThrowError();
   });
 
-  it("should be able to open wallet connection flow modal", async () => {
+  it('should be able to open wallet connection flow modal', async () => {
     const { getByText } = render(<Component />);
 
-    userEvent.click(getByText("Engage"));
+    userEvent.click(getByText('Engage'));
 
-    await waitFor(() => getByText("Connect Wallet"));
+    await waitFor(() => getByText('Browser Wallet'));
 
-    expect(getByText("Connect Wallet")).toBeInTheDocument();
+    expect(getByText('Browser Wallet')).toBeInTheDocument();
   });
 });

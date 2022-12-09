@@ -1,20 +1,15 @@
-import {
-  Account,
-  Asset,
-  HwConfig,
-  ScanAccountsOptions,
-} from "@sovryn/onboard-hw-common";
-import type { StaticJsonRpcProvider } from "@ethersproject/providers";
-import type { TransactionRequest } from "@ethersproject/providers";
 import type {
   FeeMarketEIP1559TxData,
   TxData,
   FeeMarketEIP1559Transaction,
   Transaction,
-} from "@ethereumjs/tx";
+} from '@ethereumjs/tx';
+import type { StaticJsonRpcProvider } from '@ethersproject/providers';
+import type { TransactionRequest } from '@ethersproject/providers';
+import { SignTypedDataVersion, TypedDataUtils } from '@metamask/eth-sig-util';
 
 // cannot be dynamically imported
-import { Buffer } from "buffer";
+import { Buffer } from 'buffer';
 
 import type {
   Chain,
@@ -22,8 +17,13 @@ import type {
   Platform,
   TransactionObject,
   WalletInit,
-} from "@sovryn/onboard-common";
-import { SignTypedDataVersion, TypedDataUtils } from "@metamask/eth-sig-util";
+} from '@sovryn/onboard-common';
+import {
+  Account,
+  Asset,
+  HwConfig,
+  ScanAccountsOptions,
+} from '@sovryn/onboard-hw-common';
 
 interface TrezorOptions extends HwConfig {
   email: string;
@@ -42,24 +42,24 @@ const getAccount = async (
   { publicKey, chainCode, path }: AccountData,
   asset: Asset,
   index: number,
-  provider: StaticJsonRpcProvider
+  provider: StaticJsonRpcProvider,
 ): Promise<Account> => {
   //@ts-ignore
-  const { default: HDKey } = await import("hdkey");
-  const ethUtil = await import("ethereumjs-util");
+  const { default: HDKey } = await import('hdkey');
+  const ethUtil = await import('ethereumjs-util');
 
   // @ts-ignore - Commonjs importing weirdness
   const { publicToAddress, toChecksumAddress } = ethUtil.default || ethUtil;
 
   const hdk = new HDKey();
 
-  hdk.publicKey = Buffer.from(publicKey, "hex");
-  hdk.chainCode = Buffer.from(chainCode, "hex");
+  hdk.publicKey = Buffer.from(publicKey, 'hex');
+  hdk.chainCode = Buffer.from(chainCode, 'hex');
 
   const dkey = hdk.deriveChild(index);
 
   const address = toChecksumAddress(
-    `0x${publicToAddress(dkey.publicKey, true).toString("hex")}`
+    `0x${publicToAddress(dkey.publicKey, true).toString('hex')}`,
   );
 
   return {
@@ -75,7 +75,7 @@ const getAccount = async (
 const getAddresses = async (
   account: AccountData,
   asset: Asset,
-  provider: StaticJsonRpcProvider
+  provider: StaticJsonRpcProvider,
 ): Promise<Account[]> => {
   const accounts = [];
   let index = 0;
@@ -87,8 +87,8 @@ const getAddresses = async (
     const acc = await getAccount(account, asset, index, provider);
     if (
       acc &&
-      acc.hasOwnProperty("balance") &&
-      acc.balance.hasOwnProperty("value") &&
+      acc.hasOwnProperty('balance') &&
+      acc.balance.hasOwnProperty('value') &&
       acc.balance.value.isZero()
     ) {
       zeroBalanceAccounts++;
@@ -105,7 +105,7 @@ const getAddresses = async (
 };
 
 function trezor(options: TrezorOptions): WalletInit {
-  const getIcon = async () => (await import("./icon")).default;
+  const getIcon = async () => (await import('./icon')).default;
 
   return ({ device }) => {
     const { email, appUrl, customNetwork, filter, basePaths, assets } =
@@ -113,7 +113,7 @@ function trezor(options: TrezorOptions): WalletInit {
 
     if (!email || !appUrl) {
       throw new Error(
-        "Email and AppUrl required in Trezor options for Trezor Wallet Connection"
+        'Email and AppUrl required in Trezor options for Trezor Wallet Connection',
       );
     }
 
@@ -126,31 +126,31 @@ function trezor(options: TrezorOptions): WalletInit {
     let accounts: Account[] | undefined;
 
     return {
-      label: "Trezor",
+      label: 'Trezor',
       getIcon,
       getInterface: async ({ EventEmitter, chains }) => {
-        const { default: Trezor } = await import("trezor-connect");
+        const { default: Trezor } = await import('trezor-connect');
         const { Transaction, FeeMarketEIP1559Transaction } = await import(
-          "@ethereumjs/tx"
+          '@ethereumjs/tx'
         );
 
         const { createEIP1193Provider, ProviderRpcError } = await import(
-          "@sovryn/onboard-common"
+          '@sovryn/onboard-common'
         );
 
-        const { accountSelect } = await import("@sovryn/onboard-hw-common");
+        const { accountSelect } = await import('@sovryn/onboard-hw-common');
 
         const {
           getCommon,
           bigNumberFieldsToStrings,
           getHardwareWalletProvider,
-        } = await import("@sovryn/onboard-hw-common");
+        } = await import('@sovryn/onboard-hw-common');
 
-        const ethUtil = await import("ethereumjs-util");
-        const { compress } = (await import("eth-crypto")).publicKey;
+        const ethUtil = await import('ethereumjs-util');
+        const { compress } = (await import('eth-crypto')).publicKey;
 
         const { StaticJsonRpcProvider } = await import(
-          "@ethersproject/providers"
+          '@ethersproject/providers'
         );
 
         // @ts-ignore
@@ -179,10 +179,10 @@ function trezor(options: TrezorOptions): WalletInit {
           ethersProvider = new StaticJsonRpcProvider(currentChain.rpcUrl);
 
           const { publicKey, chainCode, path } = await getPublicKey(
-            derivationPath
+            derivationPath,
           );
 
-          if (!basePaths.find((item) => item.value === derivationPath)) {
+          if (!basePaths.find(item => item.value === derivationPath)) {
             const address = await getAddress(path);
             return [
               {
@@ -199,11 +199,11 @@ function trezor(options: TrezorOptions): WalletInit {
           return getAddresses(
             {
               publicKey: compress(publicKey),
-              chainCode: chainCode || "",
+              chainCode: chainCode || '',
               path: derivationPath,
             },
             asset,
-            ethersProvider
+            ethersProvider,
           );
         };
 
@@ -218,9 +218,9 @@ function trezor(options: TrezorOptions): WalletInit {
           if (
             Array.isArray(accounts) &&
             accounts.length &&
-            accounts[0].hasOwnProperty("address")
+            accounts[0].hasOwnProperty('address')
           ) {
-            eventEmitter.emit("accountsChanged", [accounts[0].address]);
+            eventEmitter.emit('accountsChanged', [accounts[0].address]);
           }
 
           return accounts;
@@ -249,14 +249,14 @@ function trezor(options: TrezorOptions): WalletInit {
         async function getPublicKey(dPath: string) {
           if (!dPath) {
             throw new Error(
-              "a derivation path is needed to get the public key"
+              'a derivation path is needed to get the public key',
             );
           }
 
           try {
             const result = await TrezorConnect.getPublicKey({
               path: dPath,
-              coin: "ETH",
+              coin: 'ETH',
             });
 
             if (!result.success) {
@@ -276,15 +276,15 @@ function trezor(options: TrezorOptions): WalletInit {
         }
 
         function createTrezorTransactionObject(
-          transactionData: TransactionObject
+          transactionData: TransactionObject,
         ): Partial<TransactionObject> {
           if (
             !transactionData ||
-            (!transactionData.hasOwnProperty("gasLimit") &&
-              !transactionData.hasOwnProperty("gas"))
+            (!transactionData.hasOwnProperty('gasLimit') &&
+              !transactionData.hasOwnProperty('gas'))
           ) {
             throw new Error(
-              "There was no Transaction Object or both the gasLimit and gas property are missing"
+              'There was no Transaction Object or both the gasLimit and gas property are missing',
             );
           }
           const gasLimit = transactionData.gasLimit || transactionData.gas;
@@ -294,33 +294,33 @@ function trezor(options: TrezorOptions): WalletInit {
           ) {
             return {
               to: transactionData.to!,
-              value: transactionData.value || "",
+              value: transactionData.value || '',
               gasLimit: gasLimit!,
               maxFeePerGas: transactionData.maxFeePerGas!,
               maxPriorityFeePerGas: transactionData.maxPriorityFeePerGas!,
               nonce: transactionData.nonce!,
               chainId: Number(currentChain.id),
-              data: transactionData.hasOwnProperty("data")
+              data: transactionData.hasOwnProperty('data')
                 ? transactionData.data
-                : "",
+                : '',
             };
           }
           return {
             to: transactionData.to!,
-            value: transactionData.value || "",
+            value: transactionData.value || '',
             gasPrice: transactionData.gasPrice!,
             gasLimit: gasLimit!,
             nonce: transactionData.nonce!,
             chainId: Number(currentChain.id),
-            data: transactionData.hasOwnProperty("data")
+            data: transactionData.hasOwnProperty('data')
               ? transactionData.data
-              : "",
+              : '',
           };
         }
 
         function trezorSignTransaction(
           path: string,
-          transactionData: TransactionRequest
+          transactionData: TransactionRequest,
         ) {
           try {
             return TrezorConnect.ethereumSignTransaction({
@@ -329,7 +329,7 @@ function trezor(options: TrezorOptions): WalletInit {
             });
           } catch (error) {
             throw new Error(
-              `There was an error signing transaction - Error: ${error}`
+              `There was an error signing transaction - Error: ${error}`,
             );
           }
         }
@@ -337,13 +337,13 @@ function trezor(options: TrezorOptions): WalletInit {
         async function signTransaction(transactionObject: TransactionObject) {
           if (!Array.isArray(accounts) || !accounts.length)
             throw new Error(
-              "No account selected. Must call eth_requestAccounts first."
+              'No account selected. Must call eth_requestAccounts first.',
             );
 
           let signingAccount;
-          if (transactionObject.hasOwnProperty("from")) {
+          if (transactionObject.hasOwnProperty('from')) {
             signingAccount = accounts.find(
-              (account) => account.address === transactionObject.from
+              account => account.address === transactionObject.from,
             );
           }
           signingAccount = signingAccount ? signingAccount : accounts[0];
@@ -359,23 +359,23 @@ function trezor(options: TrezorOptions): WalletInit {
           const signer = ethersProvider.getSigner(address);
 
           const populatedTransaction = await signer.populateTransaction(
-            transactionObject
+            transactionObject,
           );
 
           if (
-            populatedTransaction.hasOwnProperty("nonce") &&
-            typeof populatedTransaction.nonce === "number"
+            populatedTransaction.hasOwnProperty('nonce') &&
+            typeof populatedTransaction.nonce === 'number'
           ) {
             populatedTransaction.nonce =
               populatedTransaction.nonce.toString(16);
           }
           if (
-            populatedTransaction.hasOwnProperty("nonce") &&
-            typeof populatedTransaction.nonce === "string"
+            populatedTransaction.hasOwnProperty('nonce') &&
+            typeof populatedTransaction.nonce === 'string'
           ) {
             // Adds "0x" to a given `String` if it does not already start with "0x".
             populatedTransaction.nonce = ethUtil.addHexPrefix(
-              populatedTransaction.nonce
+              populatedTransaction.nonce,
             );
           }
 
@@ -383,24 +383,24 @@ function trezor(options: TrezorOptions): WalletInit {
             bigNumberFieldsToStrings(populatedTransaction);
 
           const transactionData = createTrezorTransactionObject(
-            updateBigNumberFields as TransactionObject
+            updateBigNumberFields as TransactionObject,
           );
 
           transactionData.from = address;
-          const chainId = currentChain.hasOwnProperty("id")
+          const chainId = currentChain.hasOwnProperty('id')
             ? Number(currentChain.id)
             : 1;
           const common = await getCommon({ customNetwork, chainId });
 
           const trezorResult = await trezorSignTransaction(
             derivationPath,
-            transactionData
+            transactionData,
           );
 
           if (!trezorResult.success) {
             const message =
-              trezorResult.payload.error === "Unknown message"
-                ? "This type of transactions is not supported on this device"
+              trezorResult.payload.error === 'Unknown message'
+                ? 'This type of transactions is not supported on this device'
                 : trezorResult.payload.error;
 
             throw new Error(message);
@@ -416,7 +416,7 @@ function trezor(options: TrezorOptions): WalletInit {
                 ...(transactionData as FeeMarketEIP1559TxData),
                 ...trezorResult.payload,
               },
-              { common }
+              { common },
             );
           } else {
             signedTx = Transaction.fromTxData(
@@ -424,23 +424,23 @@ function trezor(options: TrezorOptions): WalletInit {
                 ...(transactionData as TxData),
                 ...trezorResult.payload,
               },
-              { common }
+              { common },
             );
           }
-          return signedTx ? `0x${signedTx.serialize().toString("hex")}` : "";
+          return signedTx ? `0x${signedTx.serialize().toString('hex')}` : '';
         }
 
         async function signMessage(
           address: string,
-          message: { data: string }
+          message: { data: string },
         ): Promise<string> {
           if (!Array.isArray(accounts) || !accounts.length)
             throw new Error(
-              "No account selected. Must call eth_requestAccounts first."
+              'No account selected. Must call eth_requestAccounts first.',
             );
 
           const accountToSign =
-            accounts.find((account) => account.address === address) ||
+            accounts.find(account => account.address === address) ||
             accounts[0];
 
           return new Promise((resolve, reject) => {
@@ -454,7 +454,7 @@ function trezor(options: TrezorOptions): WalletInit {
                   response.payload.address !==
                   ethUtil.toChecksumAddress(address)
                 ) {
-                  reject(new Error("signature doesnt match the right address"));
+                  reject(new Error('signature doesnt match the right address'));
                 }
                 const signature = `0x${response.payload.signature}`;
                 resolve(signature);
@@ -462,8 +462,8 @@ function trezor(options: TrezorOptions): WalletInit {
                 reject(
                   new Error(
                     (response.payload && response.payload.error) ||
-                      "There was an error signing a message"
-                  )
+                      'There was an error signing a message',
+                  ),
                 );
               }
             });
@@ -471,7 +471,7 @@ function trezor(options: TrezorOptions): WalletInit {
         }
 
         const trezorProvider = getHardwareWalletProvider(
-          () => currentChain?.rpcUrl
+          () => currentChain?.rpcUrl,
         );
 
         const provider = createEIP1193Provider(trezorProvider, {
@@ -479,17 +479,17 @@ function trezor(options: TrezorOptions): WalletInit {
             const accounts = await getAccountFromAccountSelect();
             if (!Array.isArray(accounts))
               throw new Error(
-                "No account selected. Must call eth_requestAccounts first."
+                'No account selected. Must call eth_requestAccounts first.',
               );
             if (accounts.length === 0) {
               throw new ProviderRpcError({
                 code: 4001,
-                message: "User rejected the request.",
+                message: 'User rejected the request.',
               });
             }
-            if (!accounts[0].hasOwnProperty("address"))
+            if (!accounts[0].hasOwnProperty('address'))
               throw new Error(
-                "No address property associated with the selected account"
+                'No address property associated with the selected account',
               );
             return [accounts[0].address];
           },
@@ -500,21 +500,21 @@ function trezor(options: TrezorOptions): WalletInit {
           eth_accounts: async () =>
             Array.isArray(accounts) &&
             accounts.length &&
-            accounts[0].hasOwnProperty("address")
+            accounts[0].hasOwnProperty('address')
               ? [accounts[0].address]
               : [],
           eth_chainId: async () =>
-            currentChain.hasOwnProperty("id") ? currentChain.id : "",
+            currentChain.hasOwnProperty('id') ? currentChain.id : '',
           eth_signTransaction: async ({ params: [transactionObject] }) =>
             signTransaction(transactionObject),
           eth_sendTransaction: async ({ baseRequest, params }) => {
             const signedTx = await provider.request({
-              method: "eth_signTransaction",
+              method: 'eth_signTransaction',
               params,
             });
 
             const transactionHash = await baseRequest({
-              method: "eth_sendRawTransaction",
+              method: 'eth_sendRawTransaction',
               params: [signedTx],
             });
 
@@ -527,30 +527,30 @@ function trezor(options: TrezorOptions): WalletInit {
           eth_signTypedData: async ({ params: [address, typedData] }) => {
             if (!(accounts && accounts.length && accounts.length > 0))
               throw new Error(
-                "No account selected. Must call eth_requestAccounts first."
+                'No account selected. Must call eth_requestAccounts first.',
               );
 
             const account =
-              accounts.find((account) => account.address === address) ||
+              accounts.find(account => account.address === address) ||
               accounts[0];
 
-            if (typeof typedData === "string") {
+            if (typeof typedData === 'string') {
               typedData = JSON.parse(typedData);
             }
 
             const domainHash = TypedDataUtils.hashStruct(
-              "EIP712Domain",
+              'EIP712Domain',
               typedData.domain,
               typedData.types,
-              SignTypedDataVersion.V3
-            ).toString("hex");
+              SignTypedDataVersion.V3,
+            ).toString('hex');
 
             const messageHash = TypedDataUtils.hashStruct(
               typedData.primaryType,
               typedData.message,
               typedData.types,
-              SignTypedDataVersion.V3
-            ).toString("hex");
+              SignTypedDataVersion.V3,
+            ).toString('hex');
 
             return TrezorConnect.ethereumSignTypedData({
               path: account.derivationPath,
@@ -564,37 +564,37 @@ function trezor(options: TrezorOptions): WalletInit {
               }
               throw new Error(
                 (result.payload && result.payload.error) ||
-                  "There was an error signing a message"
+                  'There was an error signing a message',
               );
             });
           },
           eth_signTypedData_v4: async ({ params: [address, typedData] }) => {
             if (!(accounts && accounts.length && accounts.length > 0))
               throw new Error(
-                "No account selected. Must call eth_requestAccounts first."
+                'No account selected. Must call eth_requestAccounts first.',
               );
 
             const account =
-              accounts.find((account) => account.address === address) ||
+              accounts.find(account => account.address === address) ||
               accounts[0];
 
-            if (typeof typedData === "string") {
+            if (typeof typedData === 'string') {
               typedData = JSON.parse(typedData);
             }
 
             const domainHash = TypedDataUtils.hashStruct(
-              "EIP712Domain",
+              'EIP712Domain',
               typedData.domain,
               typedData.types,
-              SignTypedDataVersion.V4
-            ).toString("hex");
+              SignTypedDataVersion.V4,
+            ).toString('hex');
 
             const messageHash = TypedDataUtils.hashStruct(
               typedData.primaryType,
               typedData.message,
               typedData.types,
-              SignTypedDataVersion.V4
-            ).toString("hex");
+              SignTypedDataVersion.V4,
+            ).toString('hex');
 
             return TrezorConnect.ethereumSignTypedData({
               path: account.derivationPath,
@@ -609,7 +609,7 @@ function trezor(options: TrezorOptions): WalletInit {
               }
               throw new Error(
                 (result.payload && result.payload.error) ||
-                  "There was an error signing a message"
+                  'There was an error signing a message',
               );
             });
           },
@@ -617,9 +617,9 @@ function trezor(options: TrezorOptions): WalletInit {
             currentChain =
               chains.find(({ id }) => id === chainId) || currentChain;
             if (!currentChain)
-              throw new Error("chain must be set before switching");
+              throw new Error('chain must be set before switching');
 
-            eventEmitter.emit("chainChanged", currentChain.id);
+            eventEmitter.emit('chainChanged', currentChain.id);
             return null;
           },
           wallet_addEthereumChain: null,
@@ -634,5 +634,5 @@ function trezor(options: TrezorOptions): WalletInit {
     };
   };
 }
-``;
+
 export default trezor;

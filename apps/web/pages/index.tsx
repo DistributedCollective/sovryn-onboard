@@ -1,13 +1,16 @@
-import { useCallback, useEffect, useState, FC } from "react";
-import { WalletState } from "@sovryn/onboard-core";
-import dynamic from "next/dynamic";
-import { Button } from "@sovryn/ui";
-import { onboard } from "../lib/connector";
-import { Wallet } from "../components/Wallet";
+import { useCallback, useEffect, useState, FC } from 'react';
+
+import dynamic from 'next/dynamic';
+
+import { WalletState } from '@sovryn/onboard-core';
+import { Button } from '@sovryn/ui';
+
+import { Wallet } from '../components/Wallet';
+import { onboard } from '../lib/connector';
 
 const OnboardProvider = dynamic(
-  () => import("@sovryn/onboard-react").then((mod) => mod.OnboardProvider),
-  { ssr: false }
+  () => import('@sovryn/onboard-react').then(mod => mod.OnboardProvider),
+  { ssr: false },
 ) as FC;
 
 export default function Web() {
@@ -18,7 +21,7 @@ export default function Web() {
   const [wallets, setWallets] = useState<WalletState[]>([]);
 
   useEffect(() => {
-    const sub = onboard.state.select("wallets").subscribe(setWallets);
+    const sub = onboard.state.select('wallets').subscribe(setWallets);
     return () => sub.unsubscribe();
   }, []);
 
@@ -29,14 +32,14 @@ export default function Web() {
       <div>
         <Button
           onClick={handleConnectClick}
-          text={wallets.length > 0 ? "Connect another wallet" : "Connect"}
+          text={wallets.length > 0 ? 'Connect another wallet' : 'Connect'}
         />
       </div>
 
       {wallets.length > 0 && (
         <div>
           <h2>Connected Wallets</h2>
-          {wallets.map((wallet) => (
+          {wallets.map(wallet => (
             <Wallet wallet={wallet} key={wallet.accounts[0].address} />
           ))}
         </div>

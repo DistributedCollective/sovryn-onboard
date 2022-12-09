@@ -1,5 +1,5 @@
-import { accounts$, selectAccounts$ } from "./streams";
-import type { Account } from "./types";
+import { accounts$, selectAccounts$ } from './streams';
+import type { Account } from './types';
 
 export const selectAccount = (account: Account) => accounts$.next([account]);
 
