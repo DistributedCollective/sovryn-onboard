@@ -1,5 +1,14 @@
 # @sovryn/onboard-walletconnect
 
+## 0.0.2
+
+### Patch Changes
+
+- d4d66c7: SOV-930: prettified files
+- Updated dependencies [d4d66c7]
+  - @sovryn/onboard-common@0.0.2
+  - @sovryn/onboard-hw-common@0.0.3
+
 ## 0.0.1
 
 ### Patch Changes
