@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 0.0.7
+
+### Patch Changes
+
+- cac02bf: SOV-1243: chore: adjustments for close button in WC flow
+
 ## 0.0.6
 
 ### Patch Changes
