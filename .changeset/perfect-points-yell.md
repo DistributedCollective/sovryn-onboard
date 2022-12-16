@@ -1,5 +1,5 @@
 ---
-"@sovryn/onboard-react": patch
+"@sovryn/onboard-react": minor
 ---
 
-chore: adjustments for close button in WC flow
+SOV-1243: chore: adjustments for close button in WC flow
