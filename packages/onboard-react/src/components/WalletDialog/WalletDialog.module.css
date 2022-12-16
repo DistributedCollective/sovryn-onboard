@@ -3,10 +3,10 @@
 }
 
 .dialog {
-  @apply p-4 flex flex-col justify-center;
+  @apply p-4 flex flex-col justify-center bg-gray-90;
 
   @screen sm {
-    @apply p-0;
+    @apply p-0 bg-sovryn-black;
   }
 
   @screen md {
