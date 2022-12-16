@@ -100,6 +100,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       width={DialogSize.xl2}
       disableFocusTrap
       className={styles.dialog}
+      buttonCloseText={'Close'}
     >
       {isMobile ? (
         <VerticalTabsMobile
