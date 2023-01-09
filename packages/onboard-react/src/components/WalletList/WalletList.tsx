@@ -19,9 +19,10 @@ export enum FilterType {
 
 export type WalletListProps = {
   filter: FilterType;
+  dataAttribute?: string;
 };
 
-export const WalletList: FC<WalletListProps> = ({ filter }) => {
+export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
   const { error } = useSubscription(connectWallet$);
 
   const connectedWallets = useObservable(
@@ -94,6 +95,7 @@ export const WalletList: FC<WalletListProps> = ({ filter }) => {
           className={styles.item}
           disabled={isSelected}
           onClick={handleOnClick(module.label)}
+          dataAttribute={dataAttribute}
           icon={
             <div
               className={styles.icon}

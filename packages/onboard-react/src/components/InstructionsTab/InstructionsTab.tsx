@@ -4,7 +4,13 @@ import { Link, Paragraph } from '@sovryn/ui';
 
 import styles from './InstructionsTab.module.css';
 
-export const InstructionsTab: FC = () => {
+type InstructionsTabProps = {
+  dataAttribute?: string;
+};
+
+export const InstructionsTab: FC<InstructionsTabProps> = ({
+  dataAttribute,
+}) => {
   return (
     <>
       <div className={styles.text}>
@@ -26,7 +32,9 @@ export const InstructionsTab: FC = () => {
         href="https://wiki.sovryn.app/en/getting-started/wallet-setup"
         text="Get a wallet to use on Sovryn"
         className={styles.link}
-        dataLayoutId="instruction-link"
+        dataAttribute={`${
+          dataAttribute ? `${dataAttribute}-` : ''
+        }instruction-link`}
       />
     </>
   );

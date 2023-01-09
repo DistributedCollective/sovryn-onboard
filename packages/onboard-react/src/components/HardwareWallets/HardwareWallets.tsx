@@ -12,7 +12,12 @@ import {
 import { FilterType, WalletList } from '../WalletList/WalletList';
 import styles from './HardwareWallets.module.css';
 
-export const HardwareWallets: FC = () => {
+type HardwareWalletsProps = {
+  dataAttribute?: string;
+};
+export const HardwareWallets: FC<HardwareWalletsProps> = ({
+  dataAttribute,
+}) => {
   const { inProgress } = useSubscription(selectAccounts$);
   const [step, setStep] = useState(HardwareWalletStep.derivationPathForm);
   const { isMobile } = useIsMobile();
@@ -43,7 +48,10 @@ export const HardwareWallets: FC = () => {
   return (
     <>
       {!inProgress ? (
-        <WalletList filter={FilterType.hardware} />
+        <WalletList
+          filter={FilterType.hardware}
+          dataAttribute={dataAttribute}
+        />
       ) : (
         <>
           {buttonBack}

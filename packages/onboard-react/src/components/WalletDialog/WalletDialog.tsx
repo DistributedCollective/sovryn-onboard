@@ -24,9 +24,10 @@ import styles from './WalletDialog.module.css';
 
 type WalletDialogProps = {
   isOpen: boolean;
+  dataAttribute?: string;
 };
 
-const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
+const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
   const { inProgress } = useSubscription(selectAccounts$);
   const { isMobile } = useIsMobile();
   const [index, setIndex] = useState(0);
@@ -46,7 +47,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
     ),
     [onChangeIndex],
   );
-
+  const dataPrefix = dataAttribute ? `${dataAttribute}-` : '';
   const items: VerticalTabsItem[] = useMemo(
     () => [
       {
@@ -55,10 +56,10 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         content: (
           <>
             {isMobile && !inProgress && buttonBack}
-            <HardwareWallets />
+            <HardwareWallets dataAttribute={dataPrefix} />
           </>
         ),
-        dataLayoutId: 'hardware',
+        dataAttribute: `${dataPrefix}hardware`,
       },
       {
         label: 'Browser Wallet',
@@ -66,10 +67,13 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         content: (
           <>
             {isMobile && buttonBack}
-            <WalletList filter={FilterType.browser} />
+            <WalletList
+              filter={FilterType.browser}
+              dataAttribute={dataPrefix}
+            />
           </>
         ),
-        dataLayoutId: 'browser',
+        dataAttribute: `${dataPrefix}browser`,
       },
       {
         label: "Don't have a wallet?",
@@ -77,13 +81,13 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         content: (
           <>
             {isMobile && buttonBack}
-            <InstructionsTab />
+            <InstructionsTab dataAttribute={dataPrefix} />
           </>
         ),
-        dataLayoutId: 'instructions',
+        dataAttribute: `${dataPrefix}instructions`,
       },
     ],
-    [isMobile, inProgress, buttonBack],
+    [dataPrefix, isMobile, inProgress, buttonBack],
   );
 
   const handleCloseClick = useCallback(() => {

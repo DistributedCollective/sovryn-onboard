@@ -10,12 +10,14 @@ type ButtonBackProps = {
   onClick: () => void;
   label?: string;
   className?: string;
+  dataAttribute?: string;
 };
 
 export const ButtonBack: FC<ButtonBackProps> = ({
   onClick,
   label,
   className,
+  dataAttribute,
 }) => (
   <button className={classNames(styles.button, className)} onClick={onClick}>
     <Icon icon={IconNames.ARROW_RIGHT} className={styles.icon} size={14} />

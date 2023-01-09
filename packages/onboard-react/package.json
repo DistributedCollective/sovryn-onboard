@@ -23,7 +23,7 @@
     "@sovryn/onboard-hw-common": "0.0.3"
   },
   "peerDependencies": {
-    "@sovryn/ui": "0.0.13",
+    "@sovryn/ui": "0.0.16",
     "ethers": "5.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -40,7 +40,7 @@
     "@sovryn/onboard-eslint-config": "*",
     "@sovryn/onboard-tsconfig": "*",
     "@sovryn/tailwindcss-config": "*",
-    "@sovryn/ui": "0.0.15",
+    "@sovryn/ui": "0.0.16",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",

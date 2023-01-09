@@ -79,7 +79,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
 
         <FormGroup
           label="Derivation path:"
-          dataLayoutId="derivation-path"
+          dataAttribute="derivation-path"
           errorLabel={error ? error.toString() : undefined}
           helper={
             <HelperButton

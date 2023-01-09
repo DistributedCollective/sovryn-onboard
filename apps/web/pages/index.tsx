@@ -45,7 +45,7 @@ export default function Web() {
         </div>
       )}
 
-      <OnboardProvider />
+      <OnboardProvider dataAttribute="test" />
     </div>
   );
 }
