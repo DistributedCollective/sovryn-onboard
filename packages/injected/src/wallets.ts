@@ -15,6 +15,7 @@ import {
   InjectedNameSpace,
   ProviderIdentityFlag,
   ProviderLabel,
+  ProviderDataAttribute,
 } from './types';
 
 declare const window: CustomWindow;
@@ -34,6 +35,7 @@ function getInjectedInterface(
 
 const metamask: InjectedWalletModule = {
   label: ProviderLabel.MetaMask,
+  dataAttribute: ProviderDataAttribute.MetaMask,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.MetaMask],
@@ -44,6 +46,7 @@ const metamask: InjectedWalletModule = {
 
 const exodus: InjectedWalletModule = {
   label: ProviderLabel.Exodus,
+  dataAttribute: ProviderDataAttribute.Exodus,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Exodus],
@@ -54,6 +57,7 @@ const exodus: InjectedWalletModule = {
 
 const brave: InjectedWalletModule = {
   label: ProviderLabel.Brave,
+  dataAttribute: ProviderDataAttribute.Brave,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.BraveWallet],
@@ -64,6 +68,7 @@ const brave: InjectedWalletModule = {
 
 const binance: InjectedWalletModule = {
   label: ProviderLabel.Binance,
+  dataAttribute: ProviderDataAttribute.Binance,
   injectedNamespace: InjectedNameSpace.Binance,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Binance],
@@ -112,6 +117,7 @@ const binance: InjectedWalletModule = {
 
 const coinbase: InjectedWalletModule = {
   label: ProviderLabel.Coinbase,
+  dataAttribute: ProviderDataAttribute.Coinbase,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     (!!provider && !!provider[ProviderIdentityFlag.Coinbase]) ||
@@ -142,6 +148,7 @@ const coinbase: InjectedWalletModule = {
 
 const detected: InjectedWalletModule = {
   label: ProviderLabel.Detected,
+  dataAttribute: ProviderDataAttribute.Detected,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Detected],
@@ -154,6 +161,7 @@ const detected: InjectedWalletModule = {
 
 const trust: InjectedWalletModule = {
   label: ProviderLabel.Trust,
+  dataAttribute: ProviderDataAttribute.Trust,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider &&
@@ -173,6 +181,7 @@ const trust: InjectedWalletModule = {
 
 const opera: InjectedWalletModule = {
   label: ProviderLabel.Opera,
+  dataAttribute: ProviderDataAttribute.Opera,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ device }) => device.browser.name === 'Opera',
   getIcon: async () => (await import('./icons/opera.js')).default,
@@ -188,6 +197,7 @@ const opera: InjectedWalletModule = {
 
 const status: InjectedWalletModule = {
   label: ProviderLabel.Status,
+  dataAttribute: ProviderDataAttribute.Status,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Status],
@@ -204,6 +214,7 @@ const status: InjectedWalletModule = {
 
 const alphawallet: InjectedWalletModule = {
   label: ProviderLabel.AlphaWallet,
+  dataAttribute: ProviderDataAttribute.AlphaWallet,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.AlphaWallet],
@@ -219,6 +230,7 @@ const alphawallet: InjectedWalletModule = {
 
 const atoken: InjectedWalletModule = {
   label: ProviderLabel.AToken,
+  dataAttribute: ProviderDataAttribute.AToken,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.AToken],
@@ -231,6 +243,7 @@ const atoken: InjectedWalletModule = {
 
 const bitpie: InjectedWalletModule = {
   label: ProviderLabel.Bitpie,
+  dataAttribute: ProviderDataAttribute.Bitpie,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: () => !!(window as any).Bitpie,
   getIcon: async () => (await import('./icons/bitpie.js')).default,
@@ -245,6 +258,7 @@ const bitpie: InjectedWalletModule = {
 
 const blockwallet: InjectedWalletModule = {
   label: ProviderLabel.BlockWallet,
+  dataAttribute: ProviderDataAttribute.BlockWallet,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.BlockWallet],
@@ -255,6 +269,7 @@ const blockwallet: InjectedWalletModule = {
 
 const frame: InjectedWalletModule = {
   label: ProviderLabel.Frame,
+  dataAttribute: ProviderDataAttribute.Frame,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Frame],
@@ -267,6 +282,7 @@ const frame: InjectedWalletModule = {
 
 const huobiwallet: InjectedWalletModule = {
   label: ProviderLabel.HuobiWallet,
+  dataAttribute: ProviderDataAttribute.HuobiWallet,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.HuobiWallet],
@@ -282,6 +298,7 @@ const huobiwallet: InjectedWalletModule = {
 
 const hyperpay: InjectedWalletModule = {
   label: ProviderLabel.HyperPay,
+  dataAttribute: ProviderDataAttribute.HyperPay,
   injectedNamespace: InjectedNameSpace.Ethereum,
   // Note: The property `hiWallet` is as of now the only known way of identifying hyperpay
   // wallet as it is a direct clone of metamask. `checkProviderIdentity` implementation is subject to
@@ -299,6 +316,7 @@ const hyperpay: InjectedWalletModule = {
 
 const imtoken: InjectedWalletModule = {
   label: ProviderLabel.ImToken,
+  dataAttribute: ProviderDataAttribute.ImToken,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.ImToken],
@@ -314,6 +332,7 @@ const imtoken: InjectedWalletModule = {
 
 const liquality: InjectedWalletModule = {
   label: ProviderLabel.Liquality,
+  dataAttribute: ProviderDataAttribute.Liquality,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Liquality],
@@ -333,6 +352,7 @@ const liquality: InjectedWalletModule = {
 
 const meetone: InjectedWalletModule = {
   label: ProviderLabel.MeetOne,
+  dataAttribute: ProviderDataAttribute.MeetOne,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && provider[ProviderIdentityFlag.MeetOne] === 'MEETONE',
@@ -345,6 +365,7 @@ const meetone: InjectedWalletModule = {
 
 const mykey: InjectedWalletModule = {
   label: ProviderLabel.MyKey,
+  dataAttribute: ProviderDataAttribute.MyKey,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.MyKey],
@@ -357,6 +378,7 @@ const mykey: InjectedWalletModule = {
 
 const ownbit: InjectedWalletModule = {
   label: ProviderLabel.OwnBit,
+  dataAttribute: ProviderDataAttribute.OwnBit,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.OwnBit],
@@ -379,6 +401,7 @@ const ownbit: InjectedWalletModule = {
 
 const tokenpocket: InjectedWalletModule = {
   label: ProviderLabel.TokenPocket,
+  dataAttribute: ProviderDataAttribute.TokenPocket,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider &&
@@ -410,6 +433,7 @@ const tokenpocket: InjectedWalletModule = {
 
 const tp: InjectedWalletModule = {
   label: ProviderLabel.TP,
+  dataAttribute: ProviderDataAttribute.TP,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.TP],
@@ -425,6 +449,7 @@ const tp: InjectedWalletModule = {
 
 const xdefi: InjectedWalletModule = {
   label: ProviderLabel.XDEFI,
+  dataAttribute: ProviderDataAttribute.XDEFI,
   injectedNamespace: InjectedNameSpace.XFI,
   checkProviderIdentity: ({ provider }) =>
     provider &&
@@ -439,6 +464,7 @@ const xdefi: InjectedWalletModule = {
 
 const oneInch: InjectedWalletModule = {
   label: ProviderLabel.OneInch,
+  dataAttribute: ProviderDataAttribute.OneInch,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.OneInch],
@@ -451,6 +477,7 @@ const oneInch: InjectedWalletModule = {
 
 const tokenary: InjectedWalletModule = {
   label: ProviderLabel.Tokenary,
+  dataAttribute: ProviderDataAttribute.Tokenary,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Tokenary],
@@ -463,6 +490,7 @@ const tokenary: InjectedWalletModule = {
 
 const tally: InjectedWalletModule = {
   label: ProviderLabel.Tally,
+  dataAttribute: ProviderDataAttribute.Tally,
   injectedNamespace: InjectedNameSpace.Tally,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Tally],
@@ -475,6 +503,7 @@ const tally: InjectedWalletModule = {
 
 const rabby: InjectedWalletModule = {
   label: ProviderLabel.Rabby,
+  dataAttribute: ProviderDataAttribute.Rabby,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Rabby],
@@ -487,6 +516,7 @@ const rabby: InjectedWalletModule = {
 
 const mathwallet: InjectedWalletModule = {
   label: ProviderLabel.MathWallet,
+  dataAttribute: ProviderDataAttribute.MathWallet,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.MathWallet],
@@ -497,6 +527,7 @@ const mathwallet: InjectedWalletModule = {
 
 const gamestop: InjectedWalletModule = {
   label: ProviderLabel.GameStop,
+  dataAttribute: ProviderDataAttribute.GameStop,
   injectedNamespace: InjectedNameSpace.GameStop,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.GameStop],
@@ -509,6 +540,7 @@ const gamestop: InjectedWalletModule = {
 
 const bitkeep: InjectedWalletModule = {
   label: ProviderLabel.BitKeep,
+  dataAttribute: ProviderDataAttribute.BitKeep,
   injectedNamespace: InjectedNameSpace.BitKeep,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider['ethereum'][ProviderIdentityFlag.BitKeep],
@@ -521,6 +553,7 @@ const bitkeep: InjectedWalletModule = {
 
 const sequence: InjectedWalletModule = {
   label: ProviderLabel.Sequence,
+  dataAttribute: ProviderDataAttribute.Sequence,
   injectedNamespace: InjectedNameSpace.Ethereum,
   checkProviderIdentity: ({ provider }) =>
     !!provider && !!provider[ProviderIdentityFlag.Sequence],

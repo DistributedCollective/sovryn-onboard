@@ -127,6 +127,7 @@ function trezor(options: TrezorOptions): WalletInit {
 
     return {
       label: 'Trezor',
+      dataAttribute: 'trezor',
       getIcon,
       getInterface: async ({ EventEmitter, chains }) => {
         const { default: Trezor } = await import('trezor-connect');

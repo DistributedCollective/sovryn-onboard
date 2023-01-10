@@ -74,7 +74,7 @@ function injected(options?: InjectedWalletOptions): WalletInit {
           provider.isMetaMask &&
           !provider.overrideIsMetaMask &&
           label !== ProviderLabel.MetaMask &&
-          label !== 'Detected Wallet'
+          label !== ProviderLabel.Detected
         ) {
           removeMetaMask = true;
         }
@@ -93,8 +93,9 @@ function injected(options?: InjectedWalletOptions): WalletInit {
             metamask: moreThanOneWallet && removeMetaMask,
           }),
         )
-        .map(({ label, getIcon, getInterface }) => ({
+        .map(({ label, dataAttribute, getIcon, getInterface }) => ({
           label,
+          dataAttribute,
           getIcon,
           getInterface,
         }));

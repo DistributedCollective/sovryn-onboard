@@ -17,11 +17,13 @@ export enum HardwareWalletStep {
 type HardwareWalletStepsProps = {
   step: HardwareWalletStep;
   onStepChanged: (step: HardwareWalletStep) => void;
+  dataAttribute?: string;
 };
 
 export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
   step,
   onStepChanged,
+  dataAttribute,
 }) => {
   const chainId = selectAccountOptions.chains[0].id;
   const asset = selectAccountOptions.assets[0];
@@ -73,6 +75,7 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
           basePaths={selectAccountOptions.basePaths}
           error={error}
           loading={scanning}
+          dataAttribute={dataAttribute}
         />
       )}
 
@@ -80,6 +83,7 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
         <AddressListTable
           items={accounts}
           onAccountSelected={handleSelectedAccount}
+          dataAttribute={dataAttribute}
         />
       )}
     </>

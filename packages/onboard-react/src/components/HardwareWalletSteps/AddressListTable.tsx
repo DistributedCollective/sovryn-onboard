@@ -21,6 +21,7 @@ type AddressListTableProps = {
   items: Account[];
   onAccountSelected: (account: Account) => void;
   perPage?: number;
+  dataAttribute?: string;
 };
 
 type Item = {
@@ -35,6 +36,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   items,
   onAccountSelected,
   perPage = DEFAULT_PER_PAGE,
+  dataAttribute,
 }) => {
   // todo: detect to which chain user is supposed to connect
   const chain = selectAccountOptions.chains[0];
@@ -128,6 +130,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           disabled={!selected}
           text="Confirm"
           className={styles.button}
+          dataAttribute={`${dataAttribute}-addresslist-confirm`}
         />
       </div>
     </div>

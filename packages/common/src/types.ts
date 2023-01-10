@@ -176,6 +176,7 @@ export type DeviceType = 'desktop' | 'mobile' | 'tablet';
 export interface WalletModule {
   // The label of the wallet
   label: string;
+  dataAttribute: string;
   /**
    * Gets the icon of the wallet
    * @returns

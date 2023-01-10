@@ -22,6 +22,7 @@ type DerivationPathFormProps = {
   basePaths: BasePath[];
   loading: boolean;
   error?: string;
+  dataAttribute?: string;
 };
 
 export const DerivationPathForm: FC<DerivationPathFormProps> = ({
@@ -30,6 +31,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
   basePaths,
   loading,
   error,
+  dataAttribute,
 }) => {
   const [selectedPath, setSelectedPath] = useState(value);
   const [customPath, setCustomPath] = useState(value);
@@ -79,7 +81,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
 
         <FormGroup
           label="Derivation path:"
-          dataAttribute="derivation-path"
+          dataAttribute={`${dataAttribute}-derivation-path`}
           errorLabel={error ? error.toString() : undefined}
           helper={
             <HelperButton
@@ -124,6 +126,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
           style={ButtonStyle.secondary}
           onClick={handleSubmit}
           className={styles.button}
+          dataAttribute={`${dataAttribute}-derivation-confirm`}
         />
         {loading && (
           <Paragraph className={styles.loadingText}>
@@ -135,6 +138,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
           href="https://wiki.sovryn.app/en/getting-started/direct-hardware-wallet-integrations"
           className={styles.infoLink}
           text="Learn how to setup your hardware wallet"
+          dataAttribute={`${dataAttribute}-derivation-info`}
         />
       </div>
     </div>

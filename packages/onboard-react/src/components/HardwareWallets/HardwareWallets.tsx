@@ -31,16 +31,19 @@ export const HardwareWallets: FC<HardwareWalletsProps> = ({
   }, [step]);
 
   const buttonBack = useMemo(() => {
-    const buttonText =
-      step === HardwareWalletStep.addressList
-        ? 'Back to derivation path'
-        : 'Back to wallet menu';
+    const isBackToDerivationPage = step === HardwareWalletStep.addressList;
+    const buttonText = isBackToDerivationPage
+      ? 'Back to derivation path'
+      : 'Back to wallet menu';
 
     return (
       <ButtonBack
         label={isMobile ? buttonText : ''}
         className={!isMobile && styles.closeButton}
         onClick={handleStepBack}
+        dataAttribute={`${dataAttribute}-back-${
+          isBackToDerivationPage ? 'derivation' : 'wallet'
+        }`}
       />
     );
   }, [step, isMobile, handleStepBack]);
@@ -56,7 +59,11 @@ export const HardwareWallets: FC<HardwareWalletsProps> = ({
         <>
           {buttonBack}
           <div>
-            <HardwareWalletSteps step={step} onStepChanged={setStep} />
+            <HardwareWalletSteps
+              step={step}
+              onStepChanged={setStep}
+              dataAttribute={dataAttribute}
+            />
           </div>
         </>
       )}

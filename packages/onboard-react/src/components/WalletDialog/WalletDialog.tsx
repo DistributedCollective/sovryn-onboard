@@ -47,7 +47,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
     ),
     [onChangeIndex],
   );
-  const dataPrefix = dataAttribute ? `${dataAttribute}-` : '';
+  const dataPrefix = dataAttribute ?? '';
   const items: VerticalTabsItem[] = useMemo(
     () => [
       {
@@ -59,7 +59,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
             <HardwareWallets dataAttribute={dataPrefix} />
           </>
         ),
-        dataAttribute: `${dataPrefix}hardware`,
+        dataAttribute: `${dataPrefix}-hardware`,
       },
       {
         label: 'Browser Wallet',
@@ -73,7 +73,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
             />
           </>
         ),
-        dataAttribute: `${dataPrefix}browser`,
+        dataAttribute: `${dataPrefix}-browser`,
       },
       {
         label: "Don't have a wallet?",
@@ -84,7 +84,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
             <InstructionsTab dataAttribute={dataPrefix} />
           </>
         ),
-        dataAttribute: `${dataPrefix}instructions`,
+        dataAttribute: `${dataPrefix}-instructions`,
       },
     ],
     [dataPrefix, isMobile, inProgress, buttonBack],
@@ -95,7 +95,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
       inProgress: false,
     });
   }, []);
-
+  console.log(items);
   return (
     <Dialog
       isOpen={isOpen}
@@ -105,6 +105,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
       disableFocusTrap
       className={styles.dialog}
       buttonCloseText={'Close'}
+      dataAttribute={dataAttribute}
     >
       {isMobile ? (
         <VerticalTabsMobile
@@ -133,6 +134,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
               text="Close"
               onClick={handleCloseClick}
               style={ButtonStyle.ghost}
+              dataAttribute={`${dataAttribute}-close`}
             />
           )}
         />

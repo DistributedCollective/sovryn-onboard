@@ -104,6 +104,7 @@ function ledger({
     let accounts: Account[] | undefined;
     return {
       label: 'Ledger',
+      dataAttribute: 'ledger',
       getIcon,
       getInterface: async ({ EventEmitter, chains }: GetInterfaceHelpers) => {
         const Eth = (await import('@ledgerhq/hw-app-eth')).default;
