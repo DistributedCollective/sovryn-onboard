@@ -43,9 +43,10 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
       <ButtonBack
         label="Back to wallet menu"
         onClick={() => onChangeIndex(null)}
+        dataAttribute={`${dataAttribute}-back-wallet`}
       />
     ),
-    [onChangeIndex],
+    [onChangeIndex, dataAttribute],
   );
   const dataPrefix = dataAttribute ?? '';
   const items: VerticalTabsItem[] = useMemo(
@@ -95,7 +96,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
       inProgress: false,
     });
   }, []);
-  console.log(items);
+
   return (
     <Dialog
       isOpen={isOpen}

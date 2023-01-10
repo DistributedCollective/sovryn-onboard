@@ -46,7 +46,7 @@ export const HardwareWallets: FC<HardwareWalletsProps> = ({
         }`}
       />
     );
-  }, [step, isMobile, handleStepBack]);
+  }, [step, isMobile, dataAttribute, handleStepBack]);
 
   return (
     <>
