@@ -16,6 +16,7 @@ import {
 
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useSubscription } from '../../hooks/useSubscription';
+import { formatDataPrefix } from '../../utils';
 import { ButtonBack } from '../ButtonBack/ButtonBack';
 import { HardwareWallets } from '../HardwareWallets/HardwareWallets';
 import { InstructionsTab } from '../InstructionsTab/InstructionsTab';
@@ -48,7 +49,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
     ),
     [onChangeIndex, dataAttribute],
   );
-  const dataPrefix = dataAttribute ?? '';
+  const dataPrefix = formatDataPrefix(dataAttribute);
   const items: VerticalTabsItem[] = useMemo(
     () => [
       {
@@ -60,7 +61,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
             <HardwareWallets dataAttribute={dataPrefix} />
           </>
         ),
-        dataAttribute: `${dataPrefix}-hardware`,
+        dataAttribute: `${dataPrefix}hardware`,
       },
       {
         label: 'Browser Wallet',
@@ -74,7 +75,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
             />
           </>
         ),
-        dataAttribute: `${dataPrefix}-browser`,
+        dataAttribute: `${dataPrefix}browser`,
       },
       {
         label: "Don't have a wallet?",
@@ -85,7 +86,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
             <InstructionsTab dataAttribute={dataPrefix} />
           </>
         ),
-        dataAttribute: `${dataPrefix}-instructions`,
+        dataAttribute: `${dataPrefix}instructions`,
       },
     ],
     [dataPrefix, isMobile, inProgress, buttonBack],

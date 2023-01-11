@@ -96,7 +96,7 @@ export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
           className={styles.item}
           disabled={isSelected}
           onClick={handleOnClick(module.label)}
-          dataAttribute={`${dataAttribute}-${slugify(module.label)}`}
+          dataAttribute={`${dataAttribute}${slugify(module.label)}`}
           icon={
             <div
               className={styles.icon}

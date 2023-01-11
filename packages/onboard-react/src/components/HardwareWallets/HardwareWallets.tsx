@@ -4,6 +4,7 @@ import { closeAccountSelect, selectAccounts$ } from '@sovryn/onboard-hw-common';
 
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useSubscription } from '../../hooks/useSubscription';
+import { formatDataPrefix } from '../../utils';
 import { ButtonBack } from '../ButtonBack/ButtonBack';
 import {
   HardwareWalletStep,
@@ -18,6 +19,7 @@ type HardwareWalletsProps = {
 export const HardwareWallets: FC<HardwareWalletsProps> = ({
   dataAttribute,
 }) => {
+  const dataPrefix = formatDataPrefix(dataAttribute);
   const { inProgress } = useSubscription(selectAccounts$);
   const [step, setStep] = useState(HardwareWalletStep.derivationPathForm);
   const { isMobile } = useIsMobile();
@@ -41,12 +43,12 @@ export const HardwareWallets: FC<HardwareWalletsProps> = ({
         label={isMobile ? buttonText : ''}
         className={!isMobile && styles.closeButton}
         onClick={handleStepBack}
-        dataAttribute={`${dataAttribute}-back-${
+        dataAttribute={`${dataPrefix}back-${
           isBackToDerivationPage ? 'derivation' : 'wallet'
         }`}
       />
     );
-  }, [step, isMobile, dataAttribute, handleStepBack]);
+  }, [step, isMobile, dataPrefix, handleStepBack]);
 
   return (
     <>
