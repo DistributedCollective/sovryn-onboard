@@ -93,9 +93,8 @@ function injected(options?: InjectedWalletOptions): WalletInit {
             metamask: moreThanOneWallet && removeMetaMask,
           }),
         )
-        .map(({ label, dataAttribute, getIcon, getInterface }) => ({
+        .map(({ label, getIcon, getInterface }) => ({
           label,
-          dataAttribute,
           getIcon,
           getInterface,
         }));

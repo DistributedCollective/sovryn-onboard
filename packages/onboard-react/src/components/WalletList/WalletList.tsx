@@ -9,6 +9,7 @@ import { WalletContainer } from '@sovryn/ui';
 
 import { useObservable } from '../../hooks/useObservable';
 import { useSubscription } from '../../hooks/useSubscription';
+import { slugify } from '../../utils';
 import styles from './WalletList.module.css';
 import { isHardwareWallet } from './helpers';
 
@@ -95,7 +96,7 @@ export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
           className={styles.item}
           disabled={isSelected}
           onClick={handleOnClick(module.label)}
-          dataAttribute={`${dataAttribute}-${module.dataAttribute}`}
+          dataAttribute={`${dataAttribute}-${slugify(module.label)}`}
           icon={
             <div
               className={styles.icon}

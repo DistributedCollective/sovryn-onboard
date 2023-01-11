@@ -86,43 +86,6 @@ export enum ProviderLabel {
   Sequence = 'Sequence',
 }
 
-export enum ProviderDataAttribute {
-  AlphaWallet = 'alphaWallet',
-  AToken = 'aToken',
-  Binance = 'binanceSmartWallet',
-  Bitpie = 'bitpie',
-  BlockWallet = 'blockWallet',
-  Brave = 'braveWallet',
-  Coinbase = 'coinbaseWallet',
-  Dcent = `dcent`,
-  Detected = 'detectedWallet',
-  Exodus = 'exodus',
-  Frame = 'frame',
-  HuobiWallet = 'huobiWallet',
-  HyperPay = 'hyperPay',
-  ImToken = 'imToken',
-  Liquality = 'liquality',
-  MeetOne = 'meetOne',
-  MetaMask = 'metaMask',
-  MyKey = 'myKey',
-  Opera = 'operaWallet',
-  OwnBit = 'ownBit',
-  Status = 'statusWallet',
-  Trust = 'trustWallet',
-  TokenPocket = 'tokenPocket',
-  TP = 'tpWallet',
-  WalletIo = 'walletIo',
-  XDEFI = 'xDefiWallet',
-  OneInch = '1inchWallet',
-  Tokenary = 'tokenaryWallet',
-  Tally = 'tallyWallet',
-  Rabby = 'rabby',
-  MathWallet = 'mathWallet',
-  GameStop = 'gameStopWallet',
-  BitKeep = 'bitKeep',
-  Sequence = 'sequence',
-}
-
 export interface MeetOneProvider extends ExternalProvider {
   wallet?: string;
 }
