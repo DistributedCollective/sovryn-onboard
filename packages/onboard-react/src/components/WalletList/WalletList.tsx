@@ -9,6 +9,7 @@ import { WalletContainer } from '@sovryn/ui';
 
 import { useObservable } from '../../hooks/useObservable';
 import { useSubscription } from '../../hooks/useSubscription';
+import { slugify } from '../../utils';
 import styles from './WalletList.module.css';
 import { isHardwareWallet } from './helpers';
 
@@ -19,9 +20,10 @@ export enum FilterType {
 
 export type WalletListProps = {
   filter: FilterType;
+  dataAttribute?: string;
 };
 
-export const WalletList: FC<WalletListProps> = ({ filter }) => {
+export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
   const { error } = useSubscription(connectWallet$);
 
   const connectedWallets = useObservable(
@@ -94,6 +96,7 @@ export const WalletList: FC<WalletListProps> = ({ filter }) => {
           className={styles.item}
           disabled={isSelected}
           onClick={handleOnClick(module.label)}
+          dataAttribute={`${dataAttribute}${slugify(module.label)}`}
           icon={
             <div
               className={styles.icon}

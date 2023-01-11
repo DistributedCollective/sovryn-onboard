@@ -8,7 +8,7 @@ import { Button } from '@sovryn/ui';
 import { Wallet } from '../components/Wallet';
 import { onboard } from '../lib/connector';
 
-const OnboardProvider = dynamic(
+const OnboardProvider: FC<any> = dynamic(
   () => import('@sovryn/onboard-react').then(mod => mod.OnboardProvider),
   { ssr: false },
 ) as FC;
@@ -45,7 +45,7 @@ export default function Web() {
         </div>
       )}
 
-      <OnboardProvider />
+      <OnboardProvider dataAttribute="onboard-demo" />
     </div>
   );
 }

@@ -16,6 +16,7 @@ import {
 
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useSubscription } from '../../hooks/useSubscription';
+import { formatDataPrefix } from '../../utils';
 import { ButtonBack } from '../ButtonBack/ButtonBack';
 import { HardwareWallets } from '../HardwareWallets/HardwareWallets';
 import { InstructionsTab } from '../InstructionsTab/InstructionsTab';
@@ -24,9 +25,10 @@ import styles from './WalletDialog.module.css';
 
 type WalletDialogProps = {
   isOpen: boolean;
+  dataAttribute?: string;
 };
 
-const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
+const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
   const { inProgress } = useSubscription(selectAccounts$);
   const { isMobile } = useIsMobile();
   const [index, setIndex] = useState(0);
@@ -42,11 +44,12 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       <ButtonBack
         label="Back to wallet menu"
         onClick={() => onChangeIndex(null)}
+        dataAttribute={`${dataAttribute}-back-wallet`}
       />
     ),
-    [onChangeIndex],
+    [onChangeIndex, dataAttribute],
   );
-
+  const dataPrefix = formatDataPrefix(dataAttribute);
   const items: VerticalTabsItem[] = useMemo(
     () => [
       {
@@ -55,10 +58,10 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         content: (
           <>
             {isMobile && !inProgress && buttonBack}
-            <HardwareWallets />
+            <HardwareWallets dataAttribute={dataPrefix} />
           </>
         ),
-        dataLayoutId: 'hardware',
+        dataAttribute: `${dataPrefix}hardware`,
       },
       {
         label: 'Browser Wallet',
@@ -66,10 +69,13 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         content: (
           <>
             {isMobile && buttonBack}
-            <WalletList filter={FilterType.browser} />
+            <WalletList
+              filter={FilterType.browser}
+              dataAttribute={dataPrefix}
+            />
           </>
         ),
-        dataLayoutId: 'browser',
+        dataAttribute: `${dataPrefix}browser`,
       },
       {
         label: "Don't have a wallet?",
@@ -77,13 +83,13 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
         content: (
           <>
             {isMobile && buttonBack}
-            <InstructionsTab />
+            <InstructionsTab dataAttribute={dataPrefix} />
           </>
         ),
-        dataLayoutId: 'instructions',
+        dataAttribute: `${dataPrefix}instructions`,
       },
     ],
-    [isMobile, inProgress, buttonBack],
+    [dataPrefix, isMobile, inProgress, buttonBack],
   );
 
   const handleCloseClick = useCallback(() => {
@@ -101,6 +107,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
       disableFocusTrap
       className={styles.dialog}
       buttonCloseText={'Close'}
+      dataAttribute={dataAttribute}
     >
       {isMobile ? (
         <VerticalTabsMobile
@@ -129,6 +136,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen }) => {
               text="Close"
               onClick={handleCloseClick}
               style={ButtonStyle.ghost}
+              dataAttribute={`${dataAttribute}-close`}
             />
           )}
         />

@@ -3582,10 +3582,10 @@
     postcss-preset-env "^7.7.1"
     tailwindcss "^3.1.3"
 
-"@sovryn/ui@0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.13.tgz#3f5dd710cbec717f17c244e14ea2288fe8308c89"
-  integrity sha512-0ngK9GQ7aUcLSDqDbl4tUaElN1jlNnKsKx7NGzPtRYAcgynhTOA7173gpXzvudeDaIhONPx5Gz11nN8BVmgvLA==
+"@sovryn/ui@0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.16.tgz#51d9608d994df72a881ba64048713478068986bb"
+  integrity sha512-bOnPk0uzmZhZd96R/+JDZw/fJIeULHXwN7g0Cvlj98w6KOyoI1NC/FRxI9MyUro1ieHjyW94f6oC7T+LV5RDBQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "6.2.0"
     "@fortawesome/free-solid-svg-icons" "6.2.0"
@@ -3596,10 +3596,10 @@
     jest-canvas-mock "2.4.0"
     lottie-react "2.3.1"
 
-"@sovryn/ui@0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.15.tgz#29c4f84edacf5043ee87e13ac35df12768a882dc"
-  integrity sha512-1cPgtO8xp9PFDiplwWAYH12TtRKfs6pbTBExuedpoOpl+CHYmWQi1y9q2HBmytez2JX9KclPkZOfkol7ncD2QQ==
+"@sovryn/ui@0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-0.0.17.tgz#1925519ab2bc870d2dbec84a710fb9d8fe2c89e6"
+  integrity sha512-tKuq+o/BymqMwgq8cNNcdC7T+bVh9AUuh8kw8TcdH8DGk/juXjtAMWfoidXupfxR4qv3j50o7AqE+vlW0zhZuA==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "6.2.0"
     "@fortawesome/free-solid-svg-icons" "6.2.0"

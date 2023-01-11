@@ -74,7 +74,7 @@ function injected(options?: InjectedWalletOptions): WalletInit {
           provider.isMetaMask &&
           !provider.overrideIsMetaMask &&
           label !== ProviderLabel.MetaMask &&
-          label !== 'Detected Wallet'
+          label !== ProviderLabel.Detected
         ) {
           removeMetaMask = true;
         }

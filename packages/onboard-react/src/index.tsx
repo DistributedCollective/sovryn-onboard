@@ -7,12 +7,18 @@ import ErrorBoundary from './components/ErrorBoundary';
 import WalletDialog from './components/WalletDialog/WalletDialog';
 import { useSubscription } from './hooks/useSubscription';
 
-export const OnboardProvider: FC = () => {
+type OnboardProviderProps = {
+  dataAttribute?: string;
+};
+
+export const OnboardProvider: FC<OnboardProviderProps> = ({
+  dataAttribute,
+}) => {
   const { inProgress } = useSubscription(connectWallet$);
 
   return (
     <ErrorBoundary>
-      <WalletDialog isOpen={inProgress} />
+      <WalletDialog isOpen={inProgress} dataAttribute={dataAttribute} />
     </ErrorBoundary>
   );
 };

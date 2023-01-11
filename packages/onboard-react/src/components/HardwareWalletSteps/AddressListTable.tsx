@@ -13,6 +13,7 @@ import {
   ButtonSize,
 } from '@sovryn/ui';
 
+import { formatDataPrefix } from '../../utils';
 import styles from './AddressListTable.module.css';
 
 const DEFAULT_PER_PAGE = 5;
@@ -21,6 +22,7 @@ type AddressListTableProps = {
   items: Account[];
   onAccountSelected: (account: Account) => void;
   perPage?: number;
+  dataAttribute?: string;
 };
 
 type Item = {
@@ -35,10 +37,11 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   items,
   onAccountSelected,
   perPage = DEFAULT_PER_PAGE,
+  dataAttribute,
 }) => {
   // todo: detect to which chain user is supposed to connect
   const chain = selectAccountOptions.chains[0];
-
+  const dataPrefix = formatDataPrefix(dataAttribute);
   const [selected, setSelected] = useState<Account>();
   const [page, setPage] = useState(0);
 
@@ -104,7 +107,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
         columns={columns}
         rows={paginatedItems}
         rowKey={item => item.account.address}
-        dataAttribute="addressTable"
+        dataAttribute={`${dataPrefix}addresslist`}
         onRowClick={handleSelect}
         isClickable
         className={styles.table}
@@ -128,6 +131,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           disabled={!selected}
           text="Confirm"
           className={styles.button}
+          dataAttribute={`${dataPrefix}addresslist-confirm`}
         />
       </div>
     </div>

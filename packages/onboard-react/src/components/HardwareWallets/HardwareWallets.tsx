@@ -4,6 +4,7 @@ import { closeAccountSelect, selectAccounts$ } from '@sovryn/onboard-hw-common';
 
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useSubscription } from '../../hooks/useSubscription';
+import { formatDataPrefix } from '../../utils';
 import { ButtonBack } from '../ButtonBack/ButtonBack';
 import {
   HardwareWalletStep,
@@ -12,7 +13,13 @@ import {
 import { FilterType, WalletList } from '../WalletList/WalletList';
 import styles from './HardwareWallets.module.css';
 
-export const HardwareWallets: FC = () => {
+type HardwareWalletsProps = {
+  dataAttribute?: string;
+};
+export const HardwareWallets: FC<HardwareWalletsProps> = ({
+  dataAttribute,
+}) => {
+  const dataPrefix = formatDataPrefix(dataAttribute);
   const { inProgress } = useSubscription(selectAccounts$);
   const [step, setStep] = useState(HardwareWalletStep.derivationPathForm);
   const { isMobile } = useIsMobile();
@@ -26,29 +33,39 @@ export const HardwareWallets: FC = () => {
   }, [step]);
 
   const buttonBack = useMemo(() => {
-    const buttonText =
-      step === HardwareWalletStep.addressList
-        ? 'Back to derivation path'
-        : 'Back to wallet menu';
+    const isBackToDerivationPage = step === HardwareWalletStep.addressList;
+    const buttonText = isBackToDerivationPage
+      ? 'Back to derivation path'
+      : 'Back to wallet menu';
 
     return (
       <ButtonBack
         label={isMobile ? buttonText : ''}
         className={!isMobile && styles.closeButton}
         onClick={handleStepBack}
+        dataAttribute={`${dataPrefix}back-${
+          isBackToDerivationPage ? 'derivation' : 'wallet'
+        }`}
       />
     );
-  }, [step, isMobile, handleStepBack]);
+  }, [step, isMobile, dataPrefix, handleStepBack]);
 
   return (
     <>
       {!inProgress ? (
-        <WalletList filter={FilterType.hardware} />
+        <WalletList
+          filter={FilterType.hardware}
+          dataAttribute={dataAttribute}
+        />
       ) : (
         <>
           {buttonBack}
           <div>
-            <HardwareWalletSteps step={step} onStepChanged={setStep} />
+            <HardwareWalletSteps
+              step={step}
+              onStepChanged={setStep}
+              dataAttribute={dataAttribute}
+            />
           </div>
         </>
       )}
