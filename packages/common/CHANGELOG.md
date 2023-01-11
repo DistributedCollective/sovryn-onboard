@@ -1,5 +1,11 @@
 # @sovryn/onboard-common
 
+## 0.0.3
+
+### Patch Changes
+
+- 2fed757: SOV-1355: add data attributes to onboard flow
+
 ## 0.0.2
 
 ### Patch Changes

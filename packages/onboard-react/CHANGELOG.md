@@ -1,5 +1,13 @@
 # @sovryn/onboard-react
 
+## 0.0.8
+
+### Patch Changes
+
+- 2fed757: SOV-1355: add data attributes to onboard flow
+- Updated dependencies [2fed757]
+  - @sovryn/onboard-common@0.0.3
+
 ## 0.0.7
 
 ### Patch Changes
