@@ -1,5 +1,13 @@
 # @sovryn/onboard-trezor
 
+## 0.0.4
+
+### Patch Changes
+
+- 2fed757: SOV-1355: add data attributes to onboard flow
+- Updated dependencies [2fed757]
+  - @sovryn/onboard-common@0.0.3
+
 ## 0.0.3
 
 ### Patch Changes
