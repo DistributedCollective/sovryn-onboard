@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 0.0.9
+
+### Patch Changes
+
+- 877f2bb: SOV-1408: Clear error messages when switching between tabs
+
 ## 0.0.8
 
 ### Patch Changes
