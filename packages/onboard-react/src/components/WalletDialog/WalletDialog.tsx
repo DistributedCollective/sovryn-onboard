@@ -35,6 +35,11 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
   const [indexMobile, setIndexMobile] = useState<null | number>(null);
 
   const onChangeIndex = useCallback((index: number | null) => {
+    connectWallet$.next({
+      inProgress: true,
+      error: undefined,
+    });
+
     index !== null ? setIndex(index) : setIndex(0);
     setIndexMobile(index);
   }, []);
