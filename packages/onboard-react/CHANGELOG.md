@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 0.0.10
+
+### Patch Changes
+
+- 90bb0fd: SOV-1407: Wallet dialog reset on close
+
 ## 0.0.9
 
 ### Patch Changes
