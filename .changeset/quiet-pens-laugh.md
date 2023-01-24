@@ -2,4 +2,4 @@
 "@sovryn/onboard-react": patch
 ---
 
-fix: Wallet dialog reset on close
+SOV-1407: Wallet dialog reset on close
