@@ -1,5 +1,13 @@
 # @sovryn/onboard-hw-common
 
+## 0.0.4
+
+### Patch Changes
+
+- d21a955: fix: \* as package version
+- Updated dependencies [d21a955]
+  - @sovryn/onboard-core@0.0.5
+
 ## 0.0.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@sovryn/onboard-trezor",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -22,7 +22,7 @@
     "@ethereumjs/tx": "3.5.2",
     "@metamask/eth-sig-util": "4.0.1",
     "@sovryn/onboard-common": "0.0.3",
-    "@sovryn/onboard-hw-common": "0.0.3",
+    "@sovryn/onboard-hw-common": "0.0.4",
     "eth-crypto": "2.3.0",
     "ethers": "5.7.0",
     "hdkey": "2.0.1",
