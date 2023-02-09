@@ -1,5 +1,13 @@
 # @sovryn/onboard-trezor
 
+## 0.0.5
+
+### Patch Changes
+
+- d21a955: fix: \* as package version
+- Updated dependencies [d21a955]
+  - @sovryn/onboard-hw-common@0.0.4
+
 ## 0.0.4
 
 ### Patch Changes

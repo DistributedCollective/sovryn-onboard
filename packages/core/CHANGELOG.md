@@ -1,5 +1,11 @@
 # @sovryn/onboard-core
 
+## 0.0.5
+
+### Patch Changes
+
+- d21a955: fix: \* as package version
+
 ## 0.0.4
 
 ### Patch Changes
