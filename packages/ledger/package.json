@@ -26,12 +26,12 @@
     "@ledgerhq/hw-transport-u2f": "^5.36.0-deprecated",
     "@ledgerhq/hw-transport-webusb": "^6.27.2",
     "@metamask/eth-sig-util": "^4.0.1",
-    "@sovryn/onboard-common": "*",
-    "@sovryn/onboard-hw-common": "*",
+    "@sovryn/onboard-common": "0.0.3",
+    "@sovryn/onboard-hw-common": "0.0.3",
     "ethers": "^5.7.0",
     "eventemitter3": "^4.0.7",
     "joi": "^17.6.0",
     "lodash.partition": "^4.6.0",
-    "rxjs": "^7.5.6"
+    "rxjs": "7.5.6"
   }
 }
