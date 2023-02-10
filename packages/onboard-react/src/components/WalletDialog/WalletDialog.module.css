@@ -34,3 +34,7 @@
 .content {
   @apply flex flex-col justify-start w-full h-auto self-stretch pt-[9.125rem];
 }
+
+.invisibleDialog {
+  @apply hidden invisible;
+}

@@ -24,7 +24,7 @@ export type WalletListProps = {
 };
 
 export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
-  const { error } = useSubscription(connectWallet$);
+  const { error, module } = useSubscription(connectWallet$);
 
   const connectedWallets = useObservable(
     state
@@ -86,6 +86,12 @@ export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
     },
     [walletModules],
   );
+
+  useEffect(() => {
+    if (module) {
+      handleOnClick(module)();
+    }
+  }, [module, handleOnClick]);
 
   return (
     <div className={styles.container}>
