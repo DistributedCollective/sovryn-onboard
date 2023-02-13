@@ -1,8 +1,12 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
+
+import classNames from 'classnames';
 
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
+import { selectAccounts$ } from '@sovryn/onboard-hw-common';
 import { Dialog, DialogSize } from '@sovryn/ui';
 
+import { useSubscription } from '../../hooks/useSubscription';
 import styles from './WalletDialog.module.css';
 import { WalletDialogContent } from './components/WalletDialogContent/WalletDialogContent';
 
@@ -12,6 +16,14 @@ type WalletDialogProps = {
 };
 
 const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
+  const { module } = useSubscription(connectWallet$);
+  const { inProgress } = useSubscription(selectAccounts$);
+
+  const invisible = useMemo(
+    () => (!!module && !inProgress) || !isOpen,
+    [module, inProgress, isOpen],
+  );
+
   const handleCloseClick = useCallback(() => {
     connectWallet$.next({
       inProgress: false,
@@ -25,7 +37,14 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
       closeOnEscape
       width={DialogSize.xl2}
       disableFocusTrap
-      className={styles.dialog}
+      className={classNames(styles.dialog, {
+        [styles.invisibleDialog]: invisible,
+      })}
+      overlayProps={{
+        className: classNames({
+          [styles.invisibleDialog]: invisible,
+        }),
+      }}
       buttonCloseText={'Close'}
       dataAttribute={dataAttribute}
     >
