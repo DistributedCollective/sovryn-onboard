@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 0.0.12
+
+### Patch Changes
+
+- 5d9139f: SOV-1561: reconnect wallet after refresh
+
 ## 0.0.11
 
 ### Patch Changes
