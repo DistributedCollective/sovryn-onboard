@@ -1,5 +1,13 @@
 # web
 
+## 0.0.5
+
+### Patch Changes
+
+- 5d9139f: SOV-1561: reconnect wallet after refresh
+- Updated dependencies [5d9139f]
+  - @sovryn/onboard-react@0.0.12
+
 ## 0.0.4
 
 ### Patch Changes
