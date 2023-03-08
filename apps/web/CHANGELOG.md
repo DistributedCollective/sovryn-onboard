@@ -1,5 +1,21 @@
 # web
 
+## 1.0.0
+
+### Major Changes
+
+- 2226a84: SOV-1864: initial public release
+
+### Patch Changes
+
+- Updated dependencies [2226a84]
+  - @sovryn/onboard-common@1.0.0
+  - @sovryn/onboard-core@1.0.0
+  - @sovryn/onboard-injected@1.0.0
+  - @sovryn/onboard-ledger@1.0.0
+  - @sovryn/onboard-react@1.0.0
+  - @sovryn/onboard-walletconnect@1.0.0
+
 ## 0.0.5
 
 ### Patch Changes
