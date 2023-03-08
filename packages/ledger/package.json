@@ -1,6 +1,6 @@
 {
   "name": "@sovryn/onboard-ledger",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -26,8 +26,8 @@
     "@ledgerhq/hw-transport-u2f": "^5.36.0-deprecated",
     "@ledgerhq/hw-transport-webusb": "^6.27.2",
     "@metamask/eth-sig-util": "^4.0.1",
-    "@sovryn/onboard-common": "0.0.3",
-    "@sovryn/onboard-hw-common": "0.0.4",
+    "@sovryn/onboard-common": "1.0.0",
+    "@sovryn/onboard-hw-common": "1.0.0",
     "ethers": "^5.7.0",
     "eventemitter3": "^4.0.7",
     "joi": "^17.6.0",

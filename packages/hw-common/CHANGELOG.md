@@ -1,5 +1,17 @@
 # @sovryn/onboard-hw-common
 
+## 1.0.0
+
+### Major Changes
+
+- 2226a84: SOV-1864: initial public release
+
+### Patch Changes
+
+- Updated dependencies [2226a84]
+  - @sovryn/onboard-common@1.0.0
+  - @sovryn/onboard-core@1.0.0
+
 ## 0.0.4
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@sovryn/onboard-walletconnect",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@ethersproject/providers": "5.7.1",
-    "@sovryn/onboard-common": "0.0.3",
-    "@sovryn/onboard-hw-common": "0.0.4",
+    "@sovryn/onboard-common": "1.0.0",
+    "@sovryn/onboard-hw-common": "1.0.0",
     "@walletconnect/client": "1.8.0",
     "@walletconnect/qrcode-modal": "1.8.0",
     "rxjs": "7.5.6"
