@@ -89,6 +89,10 @@ Returns Promise with list of connected wallets.
   <img src="https://contrib.rocks/image?repo=DistributedCollective/sovryn-onboard" />
 </a>
 
+### Guidelines
+
+Find out all about our working practices on our wiki [here](https://github.com/DistributedCollective/sovryn-dapp/wiki).
+
 ### Support Questions
 
 Sovryn's GitHub issue trackers are not intended to provide help or support. Use one of the following channels instead:
@@ -108,7 +112,7 @@ Remember, bug reports are created in the hope that others with the same problem 
 
 ### Which Branch?
 
-The `dev` branch acts as a testnet containing the latest changes. The `main` branch is production branch that is published. Depending on your feature you are contributing with, select the proper branch as a starting point. Most of the time, it will be the `dev` branch unless you provide hotfixes or features that should be released before other features - then it can be `main`. By doing so, we merge all features to `dev` and then `dev` to `main` to make one big release batch, after full testing and review.
+The `dev` branch acts as a testnet containing the latest changes. The `main` branch is production branch for the packages in this repository. Depending on your feature you are contributing with, select the proper branch as a starting point. Most of the time, it will be the `dev` branch unless you provide hotfixes or features that should be released before other features - then it can be `main`. By doing so, we merge all features to `dev` and then `dev` to `main` to make one big release batch, after full testing and review.
 
 **All** bug fixes should be sent to the latest stable `main` branch. Bug fixes should never be sent to the development branch unless they fix features that exist only in the upcoming release.
 
