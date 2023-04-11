@@ -67,6 +67,10 @@ const App = () => {
 
 A full working example of Sovryn Onboard usage can be found in the [Sovryn dapp repo](https://github.com/DistributedCollective/sovryn-dapp).
 
+### Advanced Usage
+
+To learn how to use internal functions or make a custom UI check on our [advanced usage docs](./docs/README.md)
+
 ## API
 
 `onboard.connectWallet(wallet?: string)` - if wallet arg is given user will be connected to the wallet module without UI interaction, if wallet arg not provided - UI flow will be triggered for user to select wallet.
