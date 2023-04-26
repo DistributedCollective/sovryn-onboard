@@ -1,5 +1,13 @@
 # web
 
+## 1.0.1
+
+### Patch Changes
+
+- c103e66: SOV-2224: bump ui package version
+- Updated dependencies [c103e66]
+  - @sovryn/onboard-react@1.0.1
+
 ## 1.0.0
 
 ### Major Changes
