@@ -1,5 +1,11 @@
 # @sovryn/onboard-core
 
+## 1.0.1
+
+### Patch Changes
+
+- ba49692: SOV-2042: wallet flashing on re-connect
+
 ## 1.0.0
 
 ### Major Changes

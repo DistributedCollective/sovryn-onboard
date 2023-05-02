@@ -1,5 +1,14 @@
 # @sovryn/onboard-react
 
+## 1.0.2
+
+### Patch Changes
+
+- ba49692: SOV-2042: wallet flashing on re-connect
+- Updated dependencies [ba49692]
+  - @sovryn/onboard-core@1.0.1
+  - @sovryn/onboard-hw-common@1.0.1
+
 ## 1.0.1
 
 ### Patch Changes
