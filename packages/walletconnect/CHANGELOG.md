@@ -1,5 +1,11 @@
 # @sovryn/onboard-walletconnect
 
+## 1.0.1
+
+### Patch Changes
+
+- @sovryn/onboard-hw-common@1.0.1
+
 ## 1.0.0
 
 ### Major Changes
