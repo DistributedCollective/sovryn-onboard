@@ -105,6 +105,7 @@ export const loadWalletModule = async (
 export const connectWallet = async (walletModule: WalletModule) => {
   try {
     connectWallet$.next({
+      module: walletModule.label,
       error: undefined,
       inProgress: true,
     });

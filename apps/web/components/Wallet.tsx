@@ -187,7 +187,7 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
         <hr />
         <ol className="list-disc list-inside">
           {onboard.state.get().chains.map(chain => (
-            <li>
+            <li key={chain.id}>
               <button
                 onClick={switchNetwork(chain)}
                 className={styles.button}
