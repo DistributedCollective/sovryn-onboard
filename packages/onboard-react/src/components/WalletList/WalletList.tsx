@@ -11,7 +11,6 @@ import { useObservable } from '../../hooks/useObservable';
 import { useSubscription } from '../../hooks/useSubscription';
 import { slugify } from '../../utils';
 import styles from './WalletList.module.css';
-import { isHardwareWallet } from './helpers';
 
 export enum FilterType {
   hardware,
@@ -61,8 +60,8 @@ export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
     return walletModules
       .filter(
         filter === FilterType.hardware
-          ? item => isHardwareWallet(item.label)
-          : item => !isHardwareWallet(item.label),
+          ? item => helpers.isHardwareWallet(item.label)
+          : item => !helpers.isHardwareWallet(item.label),
       )
       .map(module => {
         return {

@@ -2,6 +2,7 @@ import setChain from './chain';
 import { updateConfiguration } from './configuration';
 import connect, { connectWallet, loadWalletModule } from './connect';
 import disconnectWallet from './disconnect';
+import { isHardwareWallet } from './helpers';
 import { state } from './store';
 import { addChains, setPrimaryWallet, setWalletModules } from './store/actions';
 import { InitOptions } from './types';
@@ -27,6 +28,7 @@ const API = {
 const helpers = {
   loadWalletModule,
   connectWallet,
+  isHardwareWallet,
 };
 
 export type OnboardAPI = typeof API;
