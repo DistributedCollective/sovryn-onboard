@@ -6,6 +6,7 @@ import { filter, withLatestFrom, map } from 'rxjs/operators';
 import { ProviderRpcErrorCode, WalletModule } from '@sovryn/onboard-common';
 
 import { configuration } from './configuration';
+import { isHardwareWallet } from './helpers';
 import { getChainId, requestAccounts, trackWallet } from './provider';
 import { state } from './store';
 import { addWallet, setWalletModules } from './store/actions';
@@ -105,9 +106,13 @@ export const loadWalletModule = async (
 export const connectWallet = async (walletModule: WalletModule) => {
   try {
     connectWallet$.next({
+      module: isHardwareWallet(walletModule.label)
+        ? undefined
+        : walletModule.label,
       error: undefined,
       inProgress: true,
     });
+
     const selectedWallet = await loadWalletModule(walletModule);
 
     const { provider, label } = selectedWallet;
