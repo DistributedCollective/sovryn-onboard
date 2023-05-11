@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 1.0.3
+
+### Patch Changes
+
+- 43c2830: SOV-2374: bump sovryn ui package version
+
 ## 1.0.2
 
 ### Patch Changes
