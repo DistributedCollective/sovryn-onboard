@@ -7,6 +7,7 @@ import { state, helpers } from '@sovryn/onboard-core';
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
 import { WalletContainer } from '@sovryn/ui';
 
+import { useGetNormalizedError } from '../../hooks/useGetNormalizedError';
 import { useObservable } from '../../hooks/useObservable';
 import { useSubscription } from '../../hooks/useSubscription';
 import { slugify } from '../../utils';
@@ -23,7 +24,8 @@ export type WalletListProps = {
 };
 
 export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
-  const { error, module } = useSubscription(connectWallet$);
+  const { module } = useSubscription(connectWallet$);
+  const { hasUserDeclinedTx, normalizedError } = useGetNormalizedError();
 
   const connectedWallets = useObservable(
     state
@@ -111,7 +113,9 @@ export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
         />
       ))}
 
-      {error && <div className={styles.error}>{error}</div>}
+      {(hasUserDeclinedTx || normalizedError) && (
+        <div className={styles.error}>{normalizedError}</div>
+      )}
     </div>
   );
 };
