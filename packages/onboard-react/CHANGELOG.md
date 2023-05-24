@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 1.0.4
+
+### Patch Changes
+
+- f6a5901: SOV-2271 fix ugly error message
+
 ## 1.0.3
 
 ### Patch Changes
