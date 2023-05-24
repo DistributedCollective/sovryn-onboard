@@ -16,7 +16,7 @@ export const useGetNormalizedError = () => {
 
   const normalizedError = useMemo(() => {
     if (hasUserDeclinedTx) {
-      return 'User declined transaction signature';
+      return 'User rejected the request.';
     }
 
     if (error?.includes('LIQUALITY_ERROR_FROM_ERROR_PARSER_PACKAGE')) {
