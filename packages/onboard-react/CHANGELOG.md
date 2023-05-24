@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 1.0.5
+
+### Patch Changes
+
+- afb92d7: chore: sov-2271 update text message
+
 ## 1.0.4
 
 ### Patch Changes
