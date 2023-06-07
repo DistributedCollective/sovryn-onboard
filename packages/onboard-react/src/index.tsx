@@ -18,24 +18,22 @@ export const OnboardProvider: FC<OnboardProviderProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const sub = connectWallet$.subscribe(
-      ({ inProgress, module, actionRequired }) => {
-        if (inProgress) {
-          if (module) {
-            loadAndConnectToModule(module);
-          }
-
-          if (!module || (module && helpers.isHardwareWallet(module))) {
-            setIsOpen(true);
-          } else {
-            setIsOpen(false);
-          }
-
-          return;
-        }
+    const sub = connectWallet$.subscribe(({ inProgress, module }) => {
+      if (!inProgress) {
         setIsOpen(false);
-      },
-    );
+      }
+
+      if (module) {
+        loadAndConnectToModule(module);
+      }
+
+      if (
+        inProgress &&
+        (!module || (module && helpers.isHardwareWallet(module)))
+      ) {
+        setIsOpen(true);
+      }
+    });
 
     return () => {
       sub.unsubscribe();
