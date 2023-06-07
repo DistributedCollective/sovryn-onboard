@@ -32,6 +32,8 @@ export const OnboardProvider: FC<OnboardProviderProps> = ({
         (!module || (module && helpers.isHardwareWallet(module)))
       ) {
         setIsOpen(true);
+      } else {
+        setIsOpen(false);
       }
     });
 
