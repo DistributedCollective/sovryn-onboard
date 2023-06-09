@@ -106,11 +106,9 @@ export const loadWalletModule = async (
 export const connectWallet = async (walletModule: WalletModule) => {
   try {
     connectWallet$.next({
-      module: isHardwareWallet(walletModule.label)
-        ? undefined
-        : walletModule.label,
       error: undefined,
       inProgress: true,
+      actionRequired: isHardwareWallet(walletModule.label) ? 'hw' : undefined,
     });
 
     const selectedWallet = await loadWalletModule(walletModule);

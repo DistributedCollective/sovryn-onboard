@@ -1,3 +1,5 @@
+import { helpers, state } from '@sovryn/onboard-core';
+
 /** Slugify text - https://gist.github.com/codeguy/6684588?permalink_comment_id=3243980#gistcomment-3243980 */
 export const slugify = (text: string) =>
   text
@@ -10,3 +12,11 @@ export const slugify = (text: string) =>
 
 export const formatDataPrefix = (prefix: string | undefined) =>
   prefix ? `${prefix}-` : '';
+
+export const loadAndConnectToModule = (label: string) => {
+  const wallet = state.get().walletModules.find(m => m.label === label);
+  if (!wallet) {
+    throw new Error(`Wallet module ${label} not found`);
+  }
+  helpers.connectWallet(wallet);
+};

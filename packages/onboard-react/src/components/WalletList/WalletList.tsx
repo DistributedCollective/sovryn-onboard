@@ -4,13 +4,11 @@ import { shareReplay, startWith } from 'rxjs/operators';
 
 import { WalletModule } from '@sovryn/onboard-common';
 import { state, helpers } from '@sovryn/onboard-core';
-import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
 import { WalletContainer } from '@sovryn/ui';
 
 import { useGetNormalizedError } from '../../hooks/useGetNormalizedError';
 import { useObservable } from '../../hooks/useObservable';
-import { useSubscription } from '../../hooks/useSubscription';
-import { slugify } from '../../utils';
+import { loadAndConnectToModule, slugify } from '../../utils';
 import styles from './WalletList.module.css';
 
 export enum FilterType {
@@ -24,7 +22,6 @@ export type WalletListProps = {
 };
 
 export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
-  const { module } = useSubscription(connectWallet$);
   const { hasUserDeclinedTx, normalizedError } = useGetNormalizedError();
 
   const connectedWallets = useObservable(
@@ -78,21 +75,9 @@ export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
   }, [walletModules, connectedWallets, filter]);
 
   const handleOnClick = useCallback(
-    (label: string) => async () => {
-      const wallet = walletModules.find(m => m.label === label) as WalletModule;
-
-      if (wallet) {
-        helpers.connectWallet(wallet);
-      }
-    },
-    [walletModules],
+    (label: string) => () => loadAndConnectToModule(label),
+    [],
   );
-
-  useEffect(() => {
-    if (module) {
-      handleOnClick(module)();
-    }
-  }, [module, handleOnClick]);
 
   return (
     <div className={styles.container}>

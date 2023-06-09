@@ -1,11 +1,12 @@
 /// <reference path="./custom.d.ts" />
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
+import { helpers } from '@sovryn/onboard-core';
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
 
 import ErrorBoundary from './components/ErrorBoundary';
 import WalletDialog from './components/WalletDialog/WalletDialog';
-import { useSubscription } from './hooks/useSubscription';
+import { loadAndConnectToModule } from './utils';
 
 type OnboardProviderProps = {
   dataAttribute?: string;
@@ -14,11 +15,36 @@ type OnboardProviderProps = {
 export const OnboardProvider: FC<OnboardProviderProps> = ({
   dataAttribute,
 }) => {
-  const { inProgress } = useSubscription(connectWallet$);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const sub = connectWallet$.subscribe(({ inProgress, module }) => {
+      if (!inProgress) {
+        setIsOpen(false);
+      }
+
+      if (module) {
+        loadAndConnectToModule(module);
+      }
+
+      if (
+        inProgress &&
+        (!module || (module && helpers.isHardwareWallet(module)))
+      ) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    });
+
+    return () => {
+      sub.unsubscribe();
+    };
+  }, []);
 
   return (
     <ErrorBoundary>
-      <WalletDialog isOpen={inProgress} dataAttribute={dataAttribute} />
+      <WalletDialog isOpen={isOpen} dataAttribute={dataAttribute} />
     </ErrorBoundary>
   );
 };
