@@ -1,6 +1,6 @@
 {
   "name": "@sovryn/onboard-hw-common",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@ethereumjs/common": "^2.6.5",
-    "@sovryn/onboard-core": "1.0.1",
+    "@sovryn/onboard-core": "1.0.2",
     "@sovryn/onboard-common": "1.0.0",
     "ethers": "^5.7.0",
     "joi": "^17.6.0",
