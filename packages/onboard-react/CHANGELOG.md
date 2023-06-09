@@ -1,5 +1,14 @@
 # @sovryn/onboard-react
 
+## 1.0.6
+
+### Patch Changes
+
+- 9086e94: fix: metamask connection errors
+- Updated dependencies [9086e94]
+  - @sovryn/onboard-core@1.0.2
+  - @sovryn/onboard-hw-common@1.0.2
+
 ## 1.0.5
 
 ### Patch Changes

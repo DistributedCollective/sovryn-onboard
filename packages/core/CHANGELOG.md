@@ -1,5 +1,11 @@
 # @sovryn/onboard-core
 
+## 1.0.2
+
+### Patch Changes
+
+- 9086e94: fix: metamask connection errors
+
 ## 1.0.1
 
 ### Patch Changes
