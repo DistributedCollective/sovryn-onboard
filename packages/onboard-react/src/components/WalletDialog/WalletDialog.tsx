@@ -47,6 +47,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
       }}
       buttonCloseText={'Close'}
       dataAttribute={dataAttribute}
+      initialZIndex={20}
     >
       <WalletDialogContent
         dataAttribute={dataAttribute}
