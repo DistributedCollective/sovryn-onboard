@@ -22,9 +22,13 @@ const trezor = trezorModule({
   basePaths,
   assets,
 });
-const walletConnect = walletConnectModule();
+// const walletConnectV1 = walletConnectModule({ version: 1 });
+const walletConnectV2 = walletConnectModule({
+  version: 2,
+  projectId: 'd3483196fbaa8259ab4191347c67f973',
+});
 export const onboard = Onboard({
-  wallets: [injected, ledger, trezor, walletConnect],
+  wallets: [injected, ledger, trezor, walletConnectV2],
   chains: [
     {
       id: '0x1e',
