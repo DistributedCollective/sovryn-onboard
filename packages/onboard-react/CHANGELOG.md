@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 1.0.7
+
+### Patch Changes
+
+- 535741a: SOV-2606: upgrade wallet connect to v2
+
 ## 1.0.6
 
 ### Patch Changes

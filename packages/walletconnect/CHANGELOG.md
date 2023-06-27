@@ -1,5 +1,11 @@
 # @sovryn/onboard-walletconnect
 
+## 1.0.3
+
+### Patch Changes
+
+- 535741a: SOV-2606: upgrade wallet connect to v2
+
 ## 1.0.2
 
 ### Patch Changes
