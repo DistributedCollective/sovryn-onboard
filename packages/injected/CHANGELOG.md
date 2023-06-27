@@ -1,5 +1,11 @@
 # @sovryn/onboard-injected
 
+## 1.0.1
+
+### Patch Changes
+
+- fe89ed1: SOV-2679: Fix exodus wallet on connection modal
+
 ## 1.0.0
 
 ### Major Changes

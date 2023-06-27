@@ -1,5 +1,16 @@
 # web
 
+## 1.0.4
+
+### Patch Changes
+
+- 535741a: SOV-2606: upgrade wallet connect to v2
+- Updated dependencies [fe89ed1]
+- Updated dependencies [535741a]
+  - @sovryn/onboard-injected@1.0.1
+  - @sovryn/onboard-react@1.0.7
+  - @sovryn/onboard-walletconnect@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes
