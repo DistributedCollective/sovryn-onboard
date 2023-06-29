@@ -76,28 +76,16 @@ const getAddresses = async (
   account: AccountData,
   asset: Asset,
   provider: StaticJsonRpcProvider,
+  start: number,
+  limit: number,
 ): Promise<Account[]> => {
   const accounts = [];
-  let index = 0;
-  let zeroBalanceAccounts = 0;
+  let index = start;
 
-  // Iterates until a 0 balance account is found
-  // Then adds 4 more 0 balance accounts to the array
-  while (zeroBalanceAccounts < 5) {
+  // Iterates from start index until the limit is reached
+  while (index < start + limit) {
     const acc = await getAccount(account, asset, index, provider);
-    if (
-      acc &&
-      acc.hasOwnProperty('balance') &&
-      acc.balance.hasOwnProperty('value') &&
-      acc.balance.value.isZero()
-    ) {
-      zeroBalanceAccounts++;
-      accounts.push(acc);
-    } else {
-      accounts.push(acc);
-      // Reset the number of 0 balance accounts
-      zeroBalanceAccounts = 0;
-    }
+    accounts.push(acc);
     index++;
   }
 
@@ -169,10 +157,13 @@ function trezor(options: TrezorOptions): WalletInit {
           | undefined;
 
         let ethersProvider: StaticJsonRpcProvider;
+
         const scanAccounts = async ({
           derivationPath,
           chainId,
           asset,
+          start,
+          limit,
         }: ScanAccountsOptions): Promise<Account[]> => {
           currentChain =
             chains.find(({ id }) => id === chainId) || currentChain;
@@ -204,6 +195,8 @@ function trezor(options: TrezorOptions): WalletInit {
             },
             asset,
             ethersProvider,
+            start,
+            limit,
           );
         };
 

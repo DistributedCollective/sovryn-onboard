@@ -46,6 +46,8 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
           derivationPath: path,
           chainId,
           asset,
+          start: 0,
+          limit: 5,
         });
         setAccounts(list);
         onStepChanged(HardwareWalletStep.addressList);
@@ -84,6 +86,7 @@ export const HardwareWalletSteps: FC<HardwareWalletStepsProps> = ({
           items={accounts}
           onAccountSelected={handleSelectedAccount}
           dataAttribute={dataAttribute}
+          derivationPath={derivationPath}
         />
       )}
     </>

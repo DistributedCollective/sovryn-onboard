@@ -21,6 +21,7 @@ const DEFAULT_PER_PAGE = 5;
 type AddressListTableProps = {
   items: Account[];
   onAccountSelected: (account: Account) => void;
+  derivationPath: string;
   perPage?: number;
   dataAttribute?: string;
 };
@@ -36,11 +37,16 @@ type Item = {
 export const AddressListTable: FC<AddressListTableProps> = ({
   items,
   onAccountSelected,
+  derivationPath,
   perPage = DEFAULT_PER_PAGE,
   dataAttribute,
 }) => {
   // todo: detect to which chain user is supposed to connect
   const chain = selectAccountOptions.chains[0];
+  const asset = selectAccountOptions.assets[0];
+
+  const [addresses, setAddresses] = useState(items);
+
   const dataPrefix = formatDataPrefix(dataAttribute);
   const [selected, setSelected] = useState<Account>();
   const [page, setPage] = useState(0);
@@ -55,16 +61,32 @@ export const AddressListTable: FC<AddressListTableProps> = ({
     [selected, onAccountSelected],
   );
 
+  const onPageChange = useCallback(
+    async (page: number) => {
+      const list = await selectAccountOptions.scanAccounts({
+        derivationPath,
+        chainId: chain.id,
+        asset,
+        start: page === 0 ? 0 : (page - 1) * perPage,
+        limit: perPage,
+      });
+
+      setPage(page);
+      setAddresses(list);
+    },
+    [asset, chain.id, derivationPath, perPage],
+  );
+
   const paginatedItems: Item[] = useMemo(
     () =>
-      items.slice(page * perPage, (page + 1) * perPage).map((item, index) => ({
+      addresses.map((item, index) => ({
         index: page * perPage + index,
         address: item.address,
         balance: utils.formatEther(item.balance.value),
         asset: item.balance.asset,
         account: item,
       })),
-    [items, page, perPage],
+    [addresses, page, perPage],
   );
 
   const columns: ColumnOptions<Item>[] = useMemo(
@@ -116,13 +138,13 @@ export const AddressListTable: FC<AddressListTableProps> = ({
 
       <div className={styles.centering}>
         <Pagination
-          onChange={setPage}
+          onChange={onPageChange}
           page={page}
           itemsPerPage={perPage}
           className={styles.pagination}
-          totalItems={items.length}
           hideFirstPageButton
           hideLastPageButton
+          isNextButtonDisabled={false}
         />
 
         <Button

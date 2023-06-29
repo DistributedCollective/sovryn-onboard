@@ -69,6 +69,8 @@ export type ScanAccountsOptions = {
   derivationPath: DerivationPath;
   chainId: Chain['id'];
   asset: Asset;
+  start: number;
+  limit: number;
 };
 
 export type Account = {

@@ -68,24 +68,16 @@ const getAddresses = async (
   asset: Asset,
   provider: StaticJsonRpcProvider,
   eth: Eth,
+  start: number,
+  limit: number,
 ): Promise<Account[]> => {
   const accounts = [];
-  let index = 0;
-  let zeroBalanceAccounts = 0;
+  let index = start;
 
-  // Iterates until a 0 balance account is found
-  // Then adds 4 more 0 balance accounts to the array
-  while (zeroBalanceAccounts < 5) {
+  // Iterates from start index until the limit is reached
+  while (index < start + limit) {
     const acc = await getAccount(derivationPath, asset, index, provider, eth);
-
-    if (acc.balance.value.isZero()) {
-      zeroBalanceAccounts++;
-      accounts.push(acc);
-    } else {
-      accounts.push(acc);
-      // Reset the number of 0 balance accounts
-      zeroBalanceAccounts = 0;
-    }
+    accounts.push(acc);
     index++;
   }
 
@@ -142,6 +134,8 @@ function ledger({
           derivationPath,
           chainId,
           asset,
+          start,
+          limit,
         }: ScanAccountsOptions): Promise<Account[]> => {
           try {
             currentChain =
@@ -170,6 +164,8 @@ function ledger({
               asset,
               ethersProvider,
               eth,
+              start,
+              limit,
             );
 
             return accounts;
