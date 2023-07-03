@@ -11,6 +11,7 @@ import {
   TransactionId,
   Align,
   ButtonSize,
+  Paragraph,
 } from '@sovryn/ui';
 
 import { formatDataPrefix } from '../../utils';
@@ -46,6 +47,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   const asset = selectAccountOptions.assets[0];
 
   const [addresses, setAddresses] = useState(items);
+  const [scanning, setScanning] = useState(false);
 
   const dataPrefix = formatDataPrefix(dataAttribute);
   const [selected, setSelected] = useState<Account>();
@@ -63,16 +65,26 @@ export const AddressListTable: FC<AddressListTableProps> = ({
 
   const onPageChange = useCallback(
     async (page: number) => {
-      const list = await selectAccountOptions.scanAccounts({
-        derivationPath,
-        chainId: chain.id,
-        asset,
-        start: page === 0 ? 0 : (page - 1) * perPage,
-        limit: perPage,
-      });
+      setScanning(true);
 
-      setPage(page);
-      setAddresses(list);
+      try {
+        const list = await selectAccountOptions.scanAccounts({
+          derivationPath,
+          chainId: chain.id,
+          asset,
+          start: page * perPage,
+          limit: perPage,
+        });
+
+        setPage(page);
+        setAddresses(list);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error);
+        }
+      } finally {
+        setScanning(false);
+      }
     },
     [asset, chain.id, derivationPath, perPage],
   );
@@ -155,6 +167,12 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           className={styles.button}
           dataAttribute={`${dataPrefix}addresslist-confirm`}
         />
+
+        {scanning && (
+          <Paragraph className={styles.loadingText}>
+            Scanning wallet addresses, please wait.
+          </Paragraph>
+        )}
       </div>
     </div>
   );

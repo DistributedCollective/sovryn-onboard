@@ -29,3 +29,7 @@
     }
   }
 }
+
+.loadingText {
+  @apply text-gray-20 mt-1 mb-2;
+}
