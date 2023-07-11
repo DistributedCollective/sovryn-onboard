@@ -1,6 +1,6 @@
 {
   "name": "@sovryn/onboard-walletconnect",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -22,7 +22,7 @@
   "dependencies": {
     "@ethersproject/providers": "5.7.1",
     "@sovryn/onboard-common": "1.0.0",
-    "@sovryn/onboard-hw-common": "1.0.2",
+    "@sovryn/onboard-hw-common": "1.0.3",
     "@walletconnect/client": "1.8.0",
     "@walletconnect/ethereum-provider": "2.8.1",
     "@walletconnect/modal": "2.4.7",
