@@ -11,6 +11,7 @@ import {
   TransactionId,
   Align,
   ButtonSize,
+  Paragraph,
 } from '@sovryn/ui';
 
 import { formatDataPrefix } from '../../utils';
@@ -21,6 +22,7 @@ const DEFAULT_PER_PAGE = 5;
 type AddressListTableProps = {
   items: Account[];
   onAccountSelected: (account: Account) => void;
+  derivationPath: string;
   perPage?: number;
   dataAttribute?: string;
 };
@@ -36,11 +38,17 @@ type Item = {
 export const AddressListTable: FC<AddressListTableProps> = ({
   items,
   onAccountSelected,
+  derivationPath,
   perPage = DEFAULT_PER_PAGE,
   dataAttribute,
 }) => {
   // todo: detect to which chain user is supposed to connect
   const chain = selectAccountOptions.chains[0];
+  const asset = selectAccountOptions.assets[0];
+
+  const [addresses, setAddresses] = useState(items);
+  const [scanning, setScanning] = useState(false);
+
   const dataPrefix = formatDataPrefix(dataAttribute);
   const [selected, setSelected] = useState<Account>();
   const [page, setPage] = useState(0);
@@ -55,16 +63,42 @@ export const AddressListTable: FC<AddressListTableProps> = ({
     [selected, onAccountSelected],
   );
 
+  const onPageChange = useCallback(
+    async (page: number) => {
+      setScanning(true);
+
+      try {
+        const list = await selectAccountOptions.scanAccounts({
+          derivationPath,
+          chainId: chain.id,
+          asset,
+          start: page * perPage,
+          limit: perPage,
+        });
+
+        setPage(page);
+        setAddresses(list);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error);
+        }
+      } finally {
+        setScanning(false);
+      }
+    },
+    [asset, chain.id, derivationPath, perPage],
+  );
+
   const paginatedItems: Item[] = useMemo(
     () =>
-      items.slice(page * perPage, (page + 1) * perPage).map((item, index) => ({
+      addresses.map((item, index) => ({
         index: page * perPage + index,
         address: item.address,
         balance: utils.formatEther(item.balance.value),
         asset: item.balance.asset,
         account: item,
       })),
-    [items, page, perPage],
+    [addresses, page, perPage],
   );
 
   const columns: ColumnOptions<Item>[] = useMemo(
@@ -116,13 +150,13 @@ export const AddressListTable: FC<AddressListTableProps> = ({
 
       <div className={styles.centering}>
         <Pagination
-          onChange={setPage}
+          onChange={onPageChange}
           page={page}
           itemsPerPage={perPage}
           className={styles.pagination}
-          totalItems={items.length}
           hideFirstPageButton
           hideLastPageButton
+          isNextButtonDisabled={false}
         />
 
         <Button
@@ -133,6 +167,12 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           className={styles.button}
           dataAttribute={`${dataPrefix}addresslist-confirm`}
         />
+
+        {scanning && (
+          <Paragraph className={styles.loadingText}>
+            Scanning wallet addresses, please wait.
+          </Paragraph>
+        )}
       </div>
     </div>
   );
