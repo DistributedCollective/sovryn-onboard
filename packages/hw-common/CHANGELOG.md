@@ -1,5 +1,11 @@
 # @sovryn/onboard-hw-common
 
+## 1.0.3
+
+### Patch Changes
+
+- d3d87e9: SOV-2670: Unlimited HW addresses
+
 ## 1.0.2
 
 ### Patch Changes

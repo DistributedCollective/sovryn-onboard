@@ -1,6 +1,6 @@
 {
   "name": "@sovryn/onboard-react",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
   "types": "./dist/typings.d.ts",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@sovryn/onboard-common": "1.0.0",
     "@sovryn/onboard-core": "1.0.2",
-    "@sovryn/onboard-hw-common": "1.0.2"
+    "@sovryn/onboard-hw-common": "1.0.3"
   },
   "peerDependencies": {
     "@sovryn/ui": "1.0.6",

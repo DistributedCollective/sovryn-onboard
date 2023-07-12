@@ -1,5 +1,13 @@
 # @sovryn/onboard-react
 
+## 1.0.8
+
+### Patch Changes
+
+- d3d87e9: SOV-2670: Unlimited HW addresses
+- Updated dependencies [d3d87e9]
+  - @sovryn/onboard-hw-common@1.0.3
+
 ## 1.0.7
 
 ### Patch Changes
