@@ -1,5 +1,11 @@
 # @sovryn/onboard-injected
 
+## 1.0.2
+
+### Patch Changes
+
+- 82501b6: SOV-2686: Add Defiant Wallet
+
 ## 1.0.1
 
 ### Patch Changes
