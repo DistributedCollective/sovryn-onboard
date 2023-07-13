@@ -280,6 +280,21 @@ const huobiwallet: InjectedWalletModule = {
   platforms: ['mobile'],
 };
 
+const defiantwallet: InjectedWalletModule = {
+  label: ProviderLabel.Defiant,
+  injectedNamespace: InjectedNameSpace.Ethereum,
+  checkProviderIdentity: ({ provider }) =>
+    !!provider && !!provider[ProviderIdentityFlag.Defiant],
+  getIcon: async () => (await import('./icons/defiantwallet.js')).default,
+  getInterface: async () => ({
+    provider: createEIP1193Provider(window.ethereum, {
+      wallet_switchEthereumChain: UNSUPPORTED_METHOD,
+      eth_selectAccounts: UNSUPPORTED_METHOD,
+    }),
+  }),
+  platforms: ['mobile'],
+};
+
 const hyperpay: InjectedWalletModule = {
   label: ProviderLabel.HyperPay,
   injectedNamespace: InjectedNameSpace.Ethereum,
@@ -536,6 +551,7 @@ const wallets = [
   metamask,
   binance,
   coinbase,
+  defiantwallet,
   detected,
   trust,
   opera,
