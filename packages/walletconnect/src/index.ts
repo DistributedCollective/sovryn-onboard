@@ -2,8 +2,8 @@ import { EthereumProviderOptions } from '@walletconnect/ethereum-provider/dist/t
 
 import type { WalletInit } from '@sovryn/onboard-common';
 
-import v1 from './v1.js';
-import v2 from './v2.js';
+import v1 from './v1';
+import v2 from './v2';
 import { validateWCInitOptions } from './validation';
 
 export type WalletConnectOptions = {

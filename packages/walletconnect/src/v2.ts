@@ -10,8 +10,8 @@ import type {
   EIP1193Provider,
 } from '@sovryn/onboard-common';
 
-import type { WalletConnectOptions } from './index.js';
-import { isHexString } from './index.js';
+import type { WalletConnectOptions } from './index';
+import { isHexString } from './index';
 
 // methods that require user interaction
 const methods = [

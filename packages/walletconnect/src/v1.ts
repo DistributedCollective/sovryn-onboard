@@ -9,8 +9,8 @@ import type {
   AccountAddress,
 } from '@sovryn/onboard-common';
 
-import type { WalletConnectOptions } from './index.js';
-import { isHexString } from './index.js';
+import type { WalletConnectOptions } from './index';
+import { isHexString } from './index';
 
 function walletConnect(options: WalletConnectOptions): WalletInit {
   if (options.version !== 1)
