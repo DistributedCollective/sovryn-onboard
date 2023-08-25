@@ -1,6 +1,7 @@
+import type { EthereumProviderOptions } from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import type { CoreTypes } from '@walletconnect/types';
 
-import { JQueryStyleEventEmitter } from 'rxjs/internal/observable/fromEvent';
+import type { JQueryStyleEventEmitter } from 'rxjs/internal/observable/fromEvent';
 
 import type {
   Chain,
@@ -9,7 +10,8 @@ import type {
   EIP1193Provider,
 } from '@sovryn/onboard-common';
 
-import { isHexString, WalletConnectOptions } from './index.js';
+import type { WalletConnectOptions } from './index';
+import { isHexString } from './index';
 
 // methods that require user interaction
 const methods = [
@@ -21,18 +23,26 @@ const methods = [
   'eth_signTypedData_v4',
 ];
 
-function walletConnect(options?: WalletConnectOptions): WalletInit {
-  if (!options || options.version !== 2) {
+function walletConnect(options: WalletConnectOptions): WalletInit {
+  if (options.version !== 2 || !options.projectId) {
     throw new Error(
       'WalletConnect requires a projectId. Please visit https://cloud.walletconnect.com to get one.',
     );
   }
-  const { projectId, handleUri, requiredChains, qrModalOptions } = options;
+  const {
+    projectId,
+    handleUri,
+    requiredChains,
+    optionalChains,
+    qrModalOptions,
+    additionalOptionalMethods,
+    dappUrl,
+  } = options;
 
   return () => {
     return {
       label: 'WalletConnect',
-      getIcon: async () => (await import('./icon.js')).default,
+      getIcon: async () => (await import('./icon')).default,
       getInterface: async ({ chains, EventEmitter, appMetadata }) => {
         const { ProviderRpcError, ProviderRpcErrorCode } = await import(
           '@sovryn/onboard-common'
@@ -47,10 +57,17 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
 
         const getMetaData = (): CoreTypes.Metadata | undefined => {
           if (!appMetadata) return undefined;
+          const url = dappUrl || appMetadata.explore || '';
+
+          !url &&
+            !url.length &&
+            console.warn(
+              `It is strongly recommended to supply a dappUrl as it is required by some wallets (i.e. MetaMask) to allow connection.`,
+            );
           const wcMetaData: CoreTypes.Metadata = {
             name: appMetadata.name,
             description: appMetadata.description || '',
-            url: appMetadata.explore || appMetadata.gettingStartedGuide || '',
+            url,
             icons: [],
           };
 
@@ -74,13 +91,28 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
             ? // @ts-ignore
               // Required as WC package does not support hex numbers
               requiredChains.map(chainID => parseInt(chainID))
-            : [1];
+            : [];
+
+        // Defaults to the chains provided within the web3-onboard init chain property
+        const optionalChainsParsed: number[] =
+          Array.isArray(optionalChains) &&
+          optionalChains.length &&
+          optionalChains.every(num => !isNaN(num))
+            ? // @ts-ignore
+              // Required as WC package does not support hex numbers
+              optionalChains.map(chainID => parseInt(chainID))
+            : chains.map(({ id }) => parseInt(id, 16));
+
+        const optionalMethods =
+          additionalOptionalMethods && Array.isArray(additionalOptionalMethods)
+            ? [...additionalOptionalMethods, ...methods]
+            : methods;
 
         const connector = await EthereumProvider.init({
           projectId,
           chains: requiredChainsParsed, // default to mainnet
-          optionalChains: chains.map(({ id }) => parseInt(id, 16)),
-          optionalMethods: methods,
+          optionalChains: optionalChainsParsed,
+          optionalMethods,
           showQrModal: true,
           rpcMap: chains
             .map(({ id, rpcUrl }) => ({ id, rpcUrl }))
@@ -90,7 +122,7 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
             }, {}),
           metadata: getMetaData(),
           qrModalOptions: qrModalOptions,
-        });
+        } as EthereumProviderOptions);
 
         const emitter = new EventEmitter();
         class EthProvider {
@@ -98,11 +130,11 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
           public connector: InstanceType<typeof EthereumProvider>;
           public chains: Chain[];
           public disconnect: EIP1193Provider['disconnect'];
-          // @ts-ignore - TS thinks that there is no default property on the `QRCodeModal` but sometimes there is
+          // @ts-ignore
           public emit: typeof EventEmitter['emit'];
-          // @ts-ignore - TS thinks that there is no default property on the `QRCodeModal` but sometimes there is
+          // @ts-ignore
           public on: typeof EventEmitter['on'];
-          // @ts-ignore - TS thinks that there is no default property on the `QRCodeModal` but sometimes there is
+          // @ts-ignore
           public removeListener: typeof EventEmitter['removeListener'];
 
           private disconnected$: InstanceType<typeof Subject>;
@@ -126,7 +158,8 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
             fromEvent(this.connector, 'accountsChanged', payload => payload)
               .pipe(takeUntil(this.disconnected$))
               .subscribe({
-                next: accounts => {
+                next: payload => {
+                  const accounts = Array.isArray(payload) ? payload : [payload];
                   this.emit('accountsChanged', accounts);
                 },
                 error: console.warn,
@@ -182,9 +215,7 @@ function walletConnect(options?: WalletConnectOptions): WalletInit {
                   try {
                     handleUri && (await handleUri(uri));
                   } catch (error) {
-                    throw new Error(
-                      `An error occurred when handling the URI. Error: ${error}`,
-                    );
+                    throw `An error occurred when handling the URI. Error: ${error}`;
                   }
                 });
             }
