@@ -1,5 +1,11 @@
 # @sovryn/onboard-walletconnect
 
+## 1.0.5
+
+### Patch Changes
+
+- 94d1059: SOV-2935: include onboard chains as optional WC chains
+
 ## 1.0.4
 
 ### Patch Changes
