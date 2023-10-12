@@ -67,6 +67,7 @@ const walletInit = Joi.array().items(Joi.function()).required();
 const initOptions = Joi.object({
   wallets: walletInit,
   chains: chains.required(),
+  i18n: Joi.object().allow(null),
 });
 
 const setChainOptions = Joi.object({

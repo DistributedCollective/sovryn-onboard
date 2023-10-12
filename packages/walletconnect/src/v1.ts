@@ -1,5 +1,7 @@
 import type { StaticJsonRpcProvider as StaticJsonRpcProviderType } from '@ethersproject/providers';
 
+import { t } from 'i18next';
+
 import type {
   Chain,
   ProviderAccounts,
@@ -211,7 +213,7 @@ function walletConnect(options: WalletConnectOptions): WalletInit {
                             reject(
                               new ProviderRpcError({
                                 code: 4001,
-                                message: 'User rejected the request.',
+                                message: t('errors.userReject'),
                               }),
                             ),
                           qrcodeModalOptions,

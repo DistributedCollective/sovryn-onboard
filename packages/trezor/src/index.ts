@@ -10,6 +10,7 @@ import { SignTypedDataVersion, TypedDataUtils } from '@metamask/eth-sig-util';
 
 // cannot be dynamically imported
 import { Buffer } from 'buffer';
+import { t } from 'i18next';
 
 import type {
   Chain,
@@ -477,7 +478,7 @@ function trezor(options: TrezorOptions): WalletInit {
             if (accounts.length === 0) {
               throw new ProviderRpcError({
                 code: 4001,
-                message: 'User rejected the request.',
+                message: t('errors.userReject'),
               });
             }
             if (!accounts[0].hasOwnProperty('address'))

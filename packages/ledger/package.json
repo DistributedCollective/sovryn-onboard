@@ -30,6 +30,7 @@
     "@sovryn/onboard-hw-common": "1.0.3",
     "ethers": "^5.7.0",
     "eventemitter3": "^4.0.7",
+    "i18next": "23.5.1",
     "joi": "^17.6.0",
     "lodash.partition": "^4.6.0",
     "rxjs": "7.5.6"

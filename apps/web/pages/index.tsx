@@ -64,6 +64,11 @@ export default function Web() {
         </div>
       )}
 
+      <Button
+        onClick={() => onboard.changeLanguage('es')}
+        text="Change to es"
+      />
+
       <OnboardProvider dataAttribute="onboard-demo" />
     </div>
   );

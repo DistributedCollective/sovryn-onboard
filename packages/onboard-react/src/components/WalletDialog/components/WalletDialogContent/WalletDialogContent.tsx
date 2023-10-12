@@ -1,5 +1,7 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
 import { selectAccounts$ } from '@sovryn/onboard-hw-common';
 import {
@@ -30,6 +32,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
   dataAttribute,
   onClose,
 }) => {
+  const { t } = useTranslation();
   const { inProgress } = useSubscription(selectAccounts$);
   const { isMobile } = useIsMobile();
   const [index, setIndex] = useState(0);
@@ -48,19 +51,19 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
   const buttonBack = useMemo(
     () => (
       <ButtonBack
-        label="Back to wallet menu"
+        label={t('common.backToMenu')}
         onClick={() => onChangeIndex(null)}
         dataAttribute={`${dataAttribute}-back-wallet`}
       />
     ),
-    [onChangeIndex, dataAttribute],
+    [t, dataAttribute, onChangeIndex],
   );
   const dataPrefix = formatDataPrefix(dataAttribute);
   const items: VerticalTabsItem[] = useMemo(
     () => [
       {
-        label: 'Hardware Wallet',
-        infoText: 'Select the hardware wallet you want to connect',
+        label: t('wallets.hardware.title'),
+        infoText: t('wallets.hardware.info'),
         content: (
           <>
             {isMobile && !inProgress && buttonBack}
@@ -70,8 +73,8 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         dataAttribute: `${dataPrefix}hardware`,
       },
       {
-        label: 'Browser Wallet',
-        infoText: 'Select the web3 wallet you want to connect',
+        label: t('wallets.browser.title'),
+        infoText: t('wallets.browser.info'),
         content: (
           <>
             {isMobile && buttonBack}
@@ -84,8 +87,8 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         dataAttribute: `${dataPrefix}browser`,
       },
       {
-        label: "Don't have a wallet?",
-        infoText: 'Read the following instructions',
+        label: t('wallets.noWallet.title'),
+        infoText: t('wallets.noWallet.info'),
         content: (
           <>
             {isMobile && buttonBack}
@@ -95,7 +98,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         dataAttribute: `${dataPrefix}instructions`,
       },
     ],
-    [dataPrefix, isMobile, inProgress, buttonBack],
+    [t, isMobile, inProgress, buttonBack, dataPrefix],
   );
 
   return (
@@ -104,9 +107,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         <VerticalTabsMobile
           selectedIndex={indexMobile}
           header={() => (
-            <Heading type={HeadingType.h2}>
-              Select the type of wallet you have
-            </Heading>
+            <Heading type={HeadingType.h2}>{t('wallets.select')}</Heading>
           )}
           items={items}
           onChange={onChangeIndex}
@@ -121,10 +122,10 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
           className={styles.container}
           tabsClassName={styles.tabs}
           contentClassName={styles.content}
-          header={() => <Heading>Connect Wallet</Heading>}
+          header={() => <Heading>{t('wallets.connectWallet')}</Heading>}
           footer={() => (
             <Button
-              text="Close"
+              text={t('common.close')}
               onClick={onClose}
               style={ButtonStyle.ghost}
               dataAttribute={`${dataAttribute}-close`}

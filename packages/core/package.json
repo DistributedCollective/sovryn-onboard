@@ -15,6 +15,7 @@
   "devDependencies": {
     "@sovryn/onboard-eslint-config": "*",
     "@sovryn/onboard-tsconfig": "*",
+    "@types/lodash.merge": "4.6.7",
     "@types/lodash.partition": "^4.6.7",
     "eslint": "^7.32.0",
     "typescript": "^4.5.2"
@@ -24,8 +25,12 @@
     "bowser": "^2.11.0",
     "ethers": "^5.7.0",
     "eventemitter3": "^4.0.7",
+    "i18next": "23.5.1",
+    "i18next-browser-languagedetector": "7.1.0",
     "joi": "^17.6.0",
+    "lodash.merge": "4.6.2",
     "lodash.partition": "^4.6.0",
+    "react-i18next": "13.2.2",
     "rxjs": "^7.5.6"
   }
 }

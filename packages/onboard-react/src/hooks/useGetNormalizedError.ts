@@ -1,11 +1,14 @@
 import { useMemo } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
 
 import { useSubscription } from './useSubscription';
 
 export const useGetNormalizedError = () => {
   const { error } = useSubscription(connectWallet$);
+  const { t } = useTranslation();
 
   const hasUserDeclinedTx = useMemo(() => {
     return (
@@ -16,7 +19,7 @@ export const useGetNormalizedError = () => {
 
   const normalizedError = useMemo(() => {
     if (hasUserDeclinedTx) {
-      return 'User rejected the request.';
+      return t('errors.userReject');
     }
 
     if (error?.includes('LIQUALITY_ERROR_FROM_ERROR_PARSER_PACKAGE')) {
@@ -36,7 +39,7 @@ export const useGetNormalizedError = () => {
     }
 
     return error;
-  }, [hasUserDeclinedTx, error]);
+  }, [hasUserDeclinedTx, error, t]);
 
   return {
     hasUserDeclinedTx,

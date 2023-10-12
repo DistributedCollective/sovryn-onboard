@@ -1,5 +1,7 @@
 import { ChangeEvent, FC, useCallback, useMemo, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { BasePath } from '@sovryn/onboard-hw-common';
 import {
   Button,
@@ -34,6 +36,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
   error,
   dataAttribute,
 }) => {
+  const { t } = useTranslation();
   const dataPrefix = formatDataPrefix(dataAttribute);
   const [selectedPath, setSelectedPath] = useState(value);
   const [customPath, setCustomPath] = useState(value);
@@ -77,8 +80,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
     <div className={styles.container}>
       <div>
         <Paragraph className={styles.infoText}>
-          Click &quot;Continue&quot; to connect your wallet or add a custom
-          derivation path.
+          {t('hardwareWalletSteps.customDerivation')}
         </Paragraph>
 
         <FormGroup
@@ -89,10 +91,10 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
             <HelperButton
               content={
                 <Paragraph>
-                  New to this term?{' '}
+                  {t('hardwareWalletSteps.newTerm')}{' '}
                   <Link
                     href="https://wiki.sovryn.app/en/technical-documents/wallet-derivation-paths"
-                    text="See the wiki"
+                    text={t('hardwareWalletSteps.wiki')}
                   />
                 </Paragraph>
               }
@@ -121,7 +123,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
 
       <div>
         <Button
-          text="Continue"
+          text={t('hardwareWalletSteps.continue')}
           loading={loading}
           disabled={loading || !derivationPath}
           type={ButtonType.submit}
@@ -132,14 +134,14 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
         />
         {loading && (
           <Paragraph className={styles.loadingText}>
-            Scanning wallet addresses, please wait.
+            {t('hardwareWalletSteps.scanning')}
           </Paragraph>
         )}
 
         <Link
           href="https://wiki.sovryn.app/en/getting-started/direct-hardware-wallet-integrations"
           className={styles.infoLink}
-          text="Learn how to setup your hardware wallet"
+          text={t('hardwareWalletSteps.setupWallet')}
           dataAttribute={`${dataPrefix}derivation-info`}
         />
       </div>

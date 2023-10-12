@@ -1,0 +1,49 @@
+{
+  "common": {
+    "close": "Close",
+    "backToMenu": "Back to wallet menu"
+  },
+  "wallets": {
+    "hardware": {
+      "title": "Hardware Wallet",
+      "info": "Select the hardware wallet you want to connect"
+    },
+    "browser": {
+      "title": "Browser Wallet",
+      "info": "Select the web3 wallet you want to connect"
+    },
+    "noWallet": {
+      "title": "Don't have a wallet?",
+      "info": "Read the following instructions"
+    },
+    "select": "Select the type of wallet you have",
+    "connectWallet": "Connect Wallet"
+  },
+  "instructionsTab": {
+    "getWallet": "Get a wallet to use on Sovryn",
+    "title": "What is a wallet?",
+    "p1": "A wallet is a home for your digital assets, such as cryptocurrencies or NFTs. You can use it to send, receive, and store digital assets.",
+    "p2": "It’s also a new way to log in. Instead of creating a new account and password on every website or dapp, you can just connect your wallet.",
+    "p3": "Find out how to get a wallet to use on Sovryn in the wiki."
+  },
+  "hardware": {
+    "backDerivation": "Back to derivation path"
+  },
+  "hardwareWalletSteps": {
+    "index": "Index",
+    "address": "Address",
+    "balance": "Balance",
+    "confirm": "Confirm",
+    "scanning": "Scanning wallet addresses, please wait.",
+    "noMore": "No more accounts found.",
+    "derivationPath": "Derivation path:",
+    "customDerivation": "Click \"Continue\" to connect your wallet or add a custom derivation path.",
+    "newTerm": "New to this term?",
+    "wiki": "See the wiki",
+    "continue": "Continue",
+    "setupWallet": "Learn how to setup your hardware wallet"
+  },
+  "errors": {
+    "userReject": "User rejected the request."
+  }
+}
