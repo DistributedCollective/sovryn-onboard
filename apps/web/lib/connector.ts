@@ -55,12 +55,17 @@ export const onboard = Onboard({
   i18n: {
     en: {
       wallets: {
-        connectWallet: 'Connect Wallet ENNNN',
+        connectWallet: 'Connect Wallet EN',
       },
     },
     es: {
       wallets: {
-        connectWallet: 'Connect Wallet ESSS',
+        connectWallet: 'Connect Wallet ES',
+      },
+    },
+    custom: {
+      wallets: {
+        connectWallet: 'Custom',
       },
     },
   },

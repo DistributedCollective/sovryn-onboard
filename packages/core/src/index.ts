@@ -3,7 +3,7 @@ import { updateConfiguration } from './configuration';
 import connect, { connectWallet, loadWalletModule } from './connect';
 import disconnectWallet from './disconnect';
 import { isHardwareWallet } from './helpers';
-import initI18N, { changeLanguage } from './i18n/index.js';
+import initI18N, { changeLanguage } from './i18n';
 import { state } from './store';
 import { addChains, setPrimaryWallet, setWalletModules } from './store/actions';
 import { InitOptions } from './types';

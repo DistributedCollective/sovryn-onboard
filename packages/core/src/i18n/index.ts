@@ -10,7 +10,7 @@ import es from './es.json';
 export const languageLocalStorageKey = 'i18nextLng_dapp';
 
 export default function initialize(options?: i18nOptions): void {
-  const translationsJson = {
+  const translationsJson: any = {
     en: {
       translation: merge(en, options?.en || {}),
     },
@@ -18,6 +18,16 @@ export default function initialize(options?: i18nOptions): void {
       translation: merge(es, options?.es || {}),
     },
   };
+
+  if (options) {
+    const customLocales = Object.keys(options).filter(
+      key => key !== 'en' && key !== 'es',
+    );
+
+    customLocales.forEach(locale => {
+      translationsJson[locale] = { translation: options[locale] };
+    });
+  }
 
   const languages = Object.keys(translationsJson);
 
