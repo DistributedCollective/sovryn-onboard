@@ -3,6 +3,7 @@ import { updateConfiguration } from './configuration';
 import connect, { connectWallet, loadWalletModule } from './connect';
 import disconnectWallet from './disconnect';
 import { isHardwareWallet } from './helpers';
+import initI18N, { changeLanguage } from './i18n';
 import { state } from './store';
 import { addChains, setPrimaryWallet, setWalletModules } from './store/actions';
 import { InitOptions } from './types';
@@ -23,6 +24,7 @@ const API = {
       setPrimaryWallet,
     },
   },
+  changeLanguage,
 };
 
 const helpers = {
@@ -45,13 +47,15 @@ function init(options: InitOptions): OnboardAPI {
     }
   }
 
-  const { wallets, chains } = options;
+  const { wallets, chains, i18n } = options;
 
   addChains(chainIdToHex(chains));
 
   updateConfiguration({
     initialWalletInit: wallets,
   });
+
+  initI18N(i18n);
 
   return API;
 }

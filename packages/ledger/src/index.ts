@@ -4,6 +4,8 @@ import type Eth from '@ledgerhq/hw-app-eth';
 import type Transport from '@ledgerhq/hw-transport';
 import { TypedDataUtils } from '@metamask/eth-sig-util';
 
+import { t } from 'i18next';
+
 import type {
   Chain,
   WalletInit,
@@ -229,10 +231,11 @@ function ledger({
               throw new Error(
                 'No account selected. Must call eth_requestAccounts first.',
               );
+
             if (accounts.length === 0) {
               throw new ProviderRpcError({
                 code: 4001,
-                message: 'User rejected the request.',
+                message: t('errors.userReject'),
               });
             }
             if (!accounts[0].hasOwnProperty('address'))

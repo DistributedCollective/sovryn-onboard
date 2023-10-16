@@ -1,6 +1,7 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
 import { utils } from 'ethers';
+import { useTranslation } from 'react-i18next';
 
 import { Account, selectAccountOptions } from '@sovryn/onboard-hw-common';
 import {
@@ -42,6 +43,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
   perPage = DEFAULT_PER_PAGE,
   dataAttribute,
 }) => {
+  const { t } = useTranslation();
   // todo: detect to which chain user is supposed to connect
   const chain = selectAccountOptions.chains[0];
   const asset = selectAccountOptions.assets[0];
@@ -106,14 +108,14 @@ export const AddressListTable: FC<AddressListTableProps> = ({
       {
         id: 'index',
         align: Align.left,
-        title: 'Index',
+        title: t('addressTable.index'),
         cellRenderer: (row: Item) =>
           `${String(row.index + 1).padStart(2, '0')}.`,
       },
       {
         id: 'address',
         align: Align.center,
-        title: 'Address',
+        title: t('addressTable.address'),
         cellRenderer: (row: Item) => (
           <TransactionId
             value={row.address}
@@ -124,7 +126,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
       {
         id: 'balance',
         align: Align.right,
-        title: 'Balance',
+        title: t('addressTable.balance'),
         cellRenderer: (row: Item) =>
           `${Number(row.balance).toLocaleString(undefined, {
             minimumFractionDigits: 4,
@@ -132,7 +134,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           })} ${row.asset}`,
       },
     ],
-    [chain.blockExplorerUrl],
+    [chain.blockExplorerUrl, t],
   );
 
   return (
@@ -145,7 +147,7 @@ export const AddressListTable: FC<AddressListTableProps> = ({
         onRowClick={handleSelect}
         isClickable
         className={styles.table}
-        noData="No more accounts found."
+        noData={t('hardwareWalletSteps.noMore')}
       />
 
       <div className={styles.centering}>
@@ -163,14 +165,14 @@ export const AddressListTable: FC<AddressListTableProps> = ({
           size={ButtonSize.large}
           onClick={handleConfirm}
           disabled={!selected}
-          text="Confirm"
+          text={t('hardwareWalletSteps.confirm')}
           className={styles.button}
           dataAttribute={`${dataPrefix}addresslist-confirm`}
         />
 
         {scanning && (
           <Paragraph className={styles.loadingText}>
-            Scanning wallet addresses, please wait.
+            {t('hardwareWalletSteps.scanning')}
           </Paragraph>
         )}
       </div>

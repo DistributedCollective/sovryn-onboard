@@ -1,6 +1,7 @@
 import type { EthereumProviderOptions } from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import type { CoreTypes } from '@walletconnect/types';
 
+import { t } from 'i18next';
 import type { JQueryStyleEventEmitter } from 'rxjs/internal/observable/fromEvent';
 
 import type {
@@ -269,7 +270,7 @@ function walletConnect(options: WalletConnectOptions): WalletInit {
                         reject(
                           new ProviderRpcError({
                             code: 4001,
-                            message: 'User rejected the request.',
+                            message: t('errors.userReject'),
                           }),
                         );
                       });

@@ -7,9 +7,20 @@ import type {
   WalletModule,
 } from '@sovryn/onboard-common';
 
+import type en from './i18n/en.json';
+
+type RecursivePartial<T> = {
+  [P in keyof T]?: RecursivePartial<T[P]>;
+};
+export type i18n = RecursivePartial<typeof en>;
+
+type Locale = string; // eg 'en', 'es'
+export type i18nOptions = Record<Locale, i18n>;
+
 export interface InitOptions {
   wallets: WalletInit[];
   chains: Chain[] | ChainWithDecimalId[];
+  i18n?: i18nOptions;
 }
 
 export type Configuration = {

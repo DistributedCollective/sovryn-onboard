@@ -1,5 +1,7 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { closeAccountSelect, selectAccounts$ } from '@sovryn/onboard-hw-common';
 
 import { useIsMobile } from '../../hooks/useIsMobile';
@@ -19,6 +21,7 @@ type HardwareWalletsProps = {
 export const HardwareWallets: FC<HardwareWalletsProps> = ({
   dataAttribute,
 }) => {
+  const { t } = useTranslation();
   const dataPrefix = formatDataPrefix(dataAttribute);
   const { inProgress } = useSubscription(selectAccounts$);
   const [step, setStep] = useState(HardwareWalletStep.derivationPathForm);
@@ -35,8 +38,8 @@ export const HardwareWallets: FC<HardwareWalletsProps> = ({
   const buttonBack = useMemo(() => {
     const isBackToDerivationPage = step === HardwareWalletStep.addressList;
     const buttonText = isBackToDerivationPage
-      ? 'Back to derivation path'
-      : 'Back to wallet menu';
+      ? t('hardware.backDerivation')
+      : t('common.backToMenu');
 
     return (
       <ButtonBack
@@ -48,7 +51,7 @@ export const HardwareWallets: FC<HardwareWalletsProps> = ({
         }`}
       />
     );
-  }, [step, isMobile, dataPrefix, handleStepBack]);
+  }, [step, t, isMobile, handleStepBack, dataPrefix]);
 
   return (
     <>

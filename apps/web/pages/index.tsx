@@ -64,6 +64,15 @@ export default function Web() {
         </div>
       )}
 
+      <div className="flex items-center gap-2">
+        <Button onClick={() => onboard.changeLanguage('en')} text="EN" />
+        <Button onClick={() => onboard.changeLanguage('es')} text="ES" />
+        <Button
+          onClick={() => onboard.changeLanguage('custom')}
+          text="Custom"
+        />
+      </div>
+
       <OnboardProvider dataAttribute="onboard-demo" />
     </div>
   );

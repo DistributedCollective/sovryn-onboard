@@ -52,4 +52,21 @@ export const onboard = Onboard({
       blockExplorerUrl: 'https://explorer.testnet.rsk.co',
     },
   ],
+  i18n: {
+    en: {
+      wallets: {
+        connectWallet: 'Connect Wallet EN',
+      },
+    },
+    es: {
+      wallets: {
+        connectWallet: 'Connect Wallet ES',
+      },
+    },
+    custom: {
+      wallets: {
+        connectWallet: 'Custom',
+      },
+    },
+  },
 });
