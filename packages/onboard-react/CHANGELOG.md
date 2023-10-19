@@ -1,5 +1,14 @@
 # @sovryn/onboard-react
 
+## 1.0.9
+
+### Patch Changes
+
+- d960dd7: SOV-3227: add sovryn-onboard localisations
+- Updated dependencies [d960dd7]
+  - @sovryn/onboard-core@1.0.3
+  - @sovryn/onboard-hw-common@1.0.4
+
 ## 1.0.8
 
 ### Patch Changes

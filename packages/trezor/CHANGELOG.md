@@ -1,5 +1,13 @@
 # @sovryn/onboard-trezor
 
+## 1.0.4
+
+### Patch Changes
+
+- b102b78: SOV-3355: upgrade Trezor connect
+- d960dd7: SOV-3227: add sovryn-onboard localisations
+  - @sovryn/onboard-hw-common@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes

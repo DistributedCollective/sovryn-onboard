@@ -1,5 +1,12 @@
 # @sovryn/onboard-walletconnect
 
+## 1.0.6
+
+### Patch Changes
+
+- d960dd7: SOV-3227: add sovryn-onboard localisations
+  - @sovryn/onboard-hw-common@1.0.4
+
 ## 1.0.5
 
 ### Patch Changes

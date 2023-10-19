@@ -1,5 +1,11 @@
 # @sovryn/onboard-core
 
+## 1.0.3
+
+### Patch Changes
+
+- d960dd7: SOV-3227: add sovryn-onboard localisations
+
 ## 1.0.2
 
 ### Patch Changes
