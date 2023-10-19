@@ -2,4 +2,4 @@
 '@sovryn/onboard-trezor': patch
 ---
 
-chore(trezor): SOV-3355 upgrade trezor connect
+SOV-3355: upgrade Trezor connect
