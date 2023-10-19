@@ -1,5 +1,13 @@
 # @sovryn/onboard-ledger
 
+## 1.0.4
+
+### Patch Changes
+
+- 511cc75: SOV-3230: update ledger icon
+- d960dd7: SOV-3227: add sovryn-onboard localisations
+  - @sovryn/onboard-hw-common@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes

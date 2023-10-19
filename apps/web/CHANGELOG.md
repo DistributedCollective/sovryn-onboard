@@ -1,5 +1,17 @@
 # web
 
+## 1.0.5
+
+### Patch Changes
+
+- d960dd7: SOV-3227: add sovryn-onboard localisations
+- Updated dependencies [511cc75]
+- Updated dependencies [d960dd7]
+  - @sovryn/onboard-ledger@1.0.4
+  - @sovryn/onboard-core@1.0.3
+  - @sovryn/onboard-react@1.0.9
+  - @sovryn/onboard-walletconnect@1.0.6
+
 ## 1.0.4
 
 ### Patch Changes
