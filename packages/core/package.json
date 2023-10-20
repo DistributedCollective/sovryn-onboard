@@ -1,6 +1,6 @@
 {
   "name": "@sovryn/onboard-core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -25,12 +25,12 @@
     "bowser": "^2.11.0",
     "ethers": "^5.7.0",
     "eventemitter3": "^4.0.7",
-    "i18next": "23.5.1",
-    "i18next-browser-languagedetector": "7.1.0",
+    "i18next": "22.0.4",
+    "i18next-browser-languagedetector": "7.0.0",
     "joi": "^17.6.0",
     "lodash.merge": "4.6.2",
     "lodash.partition": "^4.6.0",
-    "react-i18next": "13.2.2",
+    "react-i18next": "12.0.0",
     "rxjs": "^7.5.6"
   }
 }

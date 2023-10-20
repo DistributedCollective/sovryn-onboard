@@ -1,5 +1,11 @@
 # @sovryn/onboard-core
 
+## 1.0.4
+
+### Patch Changes
+
+- fix: localization
+
 ## 1.0.3
 
 ### Patch Changes

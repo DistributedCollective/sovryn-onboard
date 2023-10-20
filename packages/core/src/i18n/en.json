@@ -45,5 +45,10 @@
   },
   "errors": {
     "userReject": "User rejected the request."
+  },
+  "addressTable": {
+    "index": "Index",
+    "address": "Address",
+    "balance": "Balance"
   }
 }
