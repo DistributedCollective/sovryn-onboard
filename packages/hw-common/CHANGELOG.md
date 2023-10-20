@@ -1,5 +1,12 @@
 # @sovryn/onboard-hw-common
 
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies [4f37240]
+  - @sovryn/onboard-core@1.0.5
+
 ## 1.0.5
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@sovryn/onboard-ledger",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -27,7 +27,7 @@
     "@ledgerhq/hw-transport-webusb": "^6.27.2",
     "@metamask/eth-sig-util": "^4.0.1",
     "@sovryn/onboard-common": "1.0.0",
-    "@sovryn/onboard-hw-common": "1.0.5",
+    "@sovryn/onboard-hw-common": "1.0.6",
     "ethers": "^5.7.0",
     "eventemitter3": "^4.0.7",
     "i18next": "22.0.4",

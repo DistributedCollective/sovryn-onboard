@@ -1,5 +1,11 @@
 # @sovryn/onboard-core
 
+## 1.0.5
+
+### Patch Changes
+
+- 4f37240: fix: missing translations
+
 ## 1.0.4
 
 ### Patch Changes
