@@ -1,5 +1,13 @@
 # @sovryn/onboard-react
 
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies [4f37240]
+  - @sovryn/onboard-core@1.0.5
+  - @sovryn/onboard-hw-common@1.0.6
+
 ## 1.0.10
 
 ### Patch Changes
