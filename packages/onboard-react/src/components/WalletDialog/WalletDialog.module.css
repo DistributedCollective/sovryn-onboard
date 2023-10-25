@@ -38,3 +38,11 @@
 .invisibleDialog {
   @apply hidden invisible;
 }
+
+.noWallet {
+  @apply ml-[3.75rem];
+}
+
+.info {
+  @apply text-gray-30 mt-20;
+}

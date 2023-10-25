@@ -1,7 +1,8 @@
 {
   "common": {
     "close": "Close",
-    "backToMenu": "Back to wallet menu"
+    "backToMenu": "Back to wallet menu",
+    "download": "Download"
   },
   "wallets": {
     "hardware": {
@@ -10,7 +11,12 @@
     },
     "browser": {
       "title": "Browser Wallet",
-      "info": "Select the web3 wallet you want to connect"
+      "info": "Desktop or mobile Web3 browser",
+      "extra": "If you have multiple browser wallets on desktop, ensure only one of them is enabled to avoid errors."
+    },
+    "walletConnect": {
+      "title": "WalletConnect",
+      "info": "For all types of wallets"
     },
     "noWallet": {
       "title": "Don't have a wallet?",
@@ -18,6 +24,14 @@
     },
     "select": "Select the type of wallet you have",
     "connectWallet": "Connect Wallet"
+  },
+  "noWallet": {
+    "title": "We couldn't detect a Web3 wallet",
+    "install": "Install a Web3 wallet",
+    "mobileTitle": "To connect wallet on mobile, use one following options:",
+    "p1": "Use the browser in your mobile wallet app to visit sovryn.app and connect via Browser Wallet",
+    "p2": "Connect mobile wallet via ",
+    "p3": "If you don’t have a mobile wallet then "
   },
   "instructionsTab": {
     "getWallet": "Get a wallet to use on Sovryn",
@@ -50,5 +64,9 @@
     "index": "Index",
     "address": "Address",
     "balance": "Balance"
+  },
+  "walletSuggestion": {
+    "title": "Get a hardware wallet or install one of these Web3 wallets in your browser:",
+    "mobileTitle": "Install one of the Web3 wallets on your mobile:"
   }
 }

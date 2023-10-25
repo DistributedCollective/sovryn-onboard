@@ -9,6 +9,7 @@ import { WalletContainer } from '@sovryn/ui';
 import { useGetNormalizedError } from '../../hooks/useGetNormalizedError';
 import { useObservable } from '../../hooks/useObservable';
 import { loadAndConnectToModule, slugify } from '../../utils';
+import { NoWallet } from '../NoWallet/NoWallet';
 import styles from './WalletList.module.css';
 
 export enum FilterType {
@@ -19,9 +20,16 @@ export enum FilterType {
 export type WalletListProps = {
   filter: FilterType;
   dataAttribute?: string;
+  handleNoWallet?: () => void;
+  handleWalletConnect?: () => void;
 };
 
-export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
+export const WalletList: FC<WalletListProps> = ({
+  filter,
+  dataAttribute,
+  handleNoWallet,
+  handleWalletConnect,
+}) => {
   const { hasUserDeclinedTx, normalizedError } = useGetNormalizedError();
 
   const connectedWallets = useObservable(
@@ -60,7 +68,9 @@ export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
       .filter(
         filter === FilterType.hardware
           ? item => helpers.isHardwareWallet(item.label)
-          : item => !helpers.isHardwareWallet(item.label),
+          : item =>
+              !helpers.isHardwareWallet(item.label) &&
+              item.label !== 'WalletConnect',
       )
       .map(module => {
         return {
@@ -78,7 +88,14 @@ export const WalletList: FC<WalletListProps> = ({ filter, dataAttribute }) => {
     (label: string) => () => loadAndConnectToModule(label),
     [],
   );
-
+  if (items.length === 0) {
+    return (
+      <NoWallet
+        handleNoWallet={handleNoWallet}
+        handleWalletConnect={handleWalletConnect}
+      />
+    );
+  }
   return (
     <div className={styles.container}>
       {items.map(({ module, icon, isSelected }) => (

@@ -12,15 +12,20 @@ import {
   ButtonStyle,
   Heading,
   HeadingType,
+  Paragraph,
 } from '@sovryn/ui';
 
+import BrowserIcon from '../../../../assets/Browser';
+import HardwareIcon from '../../../../assets/HardwareWallet';
+import WalletConnectIcon from '../../../../assets/WalletConnect';
 import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { useSubscription } from '../../../../hooks/useSubscription';
 import { formatDataPrefix } from '../../../../utils';
 import { ButtonBack } from '../../../ButtonBack/ButtonBack';
 import { HardwareWallets } from '../../../HardwareWallets/HardwareWallets';
-import { InstructionsTab } from '../../../InstructionsTab/InstructionsTab';
+import { WalletConnect } from '../../../WalletConnect/WalletConnect';
 import { FilterType, WalletList } from '../../../WalletList/WalletList';
+import { WalletSuggestion } from '../../../WalletSuggestion/WalletSuggestion';
 import styles from '../../WalletDialog.module.css';
 
 type WalletDialogContentProps = {
@@ -48,6 +53,12 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
     setIndexMobile(index);
   }, []);
 
+  const handleNoWallet = useCallback(() => onChangeIndex(3), [onChangeIndex]);
+  const handleWalletConnect = useCallback(
+    () => onChangeIndex(2),
+    [onChangeIndex],
+  );
+
   const buttonBack = useMemo(
     () => (
       <ButtonBack
@@ -63,7 +74,6 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
     () => [
       {
         label: t('wallets.hardware.title'),
-        infoText: t('wallets.hardware.info'),
         content: (
           <>
             {isMobile && !inProgress && buttonBack}
@@ -71,6 +81,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
           </>
         ),
         dataAttribute: `${dataPrefix}hardware`,
+        icon: <div dangerouslySetInnerHTML={{ __html: HardwareIcon }} />,
       },
       {
         label: t('wallets.browser.title'),
@@ -81,24 +92,52 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
             <WalletList
               filter={FilterType.browser}
               dataAttribute={dataPrefix}
+              handleNoWallet={handleNoWallet}
+              handleWalletConnect={handleWalletConnect}
             />
+            {!isMobile && (
+              <Paragraph className={styles.info}>
+                {t('wallets.browser.extra')}
+              </Paragraph>
+            )}
           </>
         ),
         dataAttribute: `${dataPrefix}browser`,
+        icon: <div dangerouslySetInnerHTML={{ __html: BrowserIcon }} />,
       },
       {
-        label: t('wallets.noWallet.title'),
-        infoText: t('wallets.noWallet.info'),
+        label: t('wallets.walletConnect.title'),
+        infoText: t('wallets.walletConnect.info'),
         content: (
           <>
             {isMobile && buttonBack}
-            <InstructionsTab dataAttribute={dataPrefix} />
+            <WalletConnect />
+          </>
+        ),
+        dataAttribute: `${dataPrefix}walletConnect`,
+        icon: <div dangerouslySetInnerHTML={{ __html: WalletConnectIcon }} />,
+      },
+      {
+        label: t('wallets.noWallet.title'),
+        content: (
+          <>
+            {isMobile && buttonBack}
+            <WalletSuggestion />
           </>
         ),
         dataAttribute: `${dataPrefix}instructions`,
+        className: styles.noWallet,
       },
     ],
-    [t, isMobile, inProgress, buttonBack, dataPrefix],
+    [
+      t,
+      isMobile,
+      inProgress,
+      buttonBack,
+      dataPrefix,
+      handleNoWallet,
+      handleWalletConnect,
+    ],
   );
 
   return (

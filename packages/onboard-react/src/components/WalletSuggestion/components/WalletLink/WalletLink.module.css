@@ -1,0 +1,11 @@
+.wrapper {
+  @apply flex items-center justify-between my-1.5;
+}
+
+.title {
+  @apply flex items-center gap-3;
+}
+
+.icon {
+  @apply bg-gray-10 rounded w-8 h-8 grayscale;
+}

@@ -3750,25 +3750,10 @@
     postcss-preset-env "^7.7.1"
     tailwindcss "^3.1.3"
 
-"@sovryn/ui@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-1.0.6.tgz#6bd667e199a59f01f13476edb4c5bf95a7244539"
-  integrity sha512-k75aQcnHzKVKUdSercDhGYk0TujHw1e64zrOQp89DRyMNtBihbegY7e83OC5K15gmLxcxsu5xIrsweMENkJuXg==
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" "6.2.0"
-    "@fortawesome/free-solid-svg-icons" "6.2.0"
-    "@fortawesome/react-fontawesome" "0.2.0"
-    classnames "2.3.1"
-    focus-trap-react "10.0.0"
-    framer-motion "8.5.3"
-    identity-obj-proxy "3.0.0"
-    jest-canvas-mock "2.4.0"
-    lottie-react "2.3.1"
-
-"@sovryn/ui@1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-1.0.8.tgz#f0cc19b014c76fe92d4157eecebd8edd95172f10"
-  integrity sha512-xp5efuBLZ3bWvrHcqdyj43dhJZO5eBZ4zFe8dqStzBEA+BqY6FAo4x5oM9ZuvALJhAbMVFz8UU3LncWJ6mnh/w==
+"@sovryn/ui@1.0.18":
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-1.0.18.tgz#8fc97214edc0715bf924d6640b739f96ece31378"
+  integrity sha512-yH0+/CduhLwrlul+NyejpaopFaqGVcGbbKcUodLzibcKuaGRacs04oMI4SSU1UoHAJbLddTwkjEuxQgpebx8LQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "6.2.0"
     "@fortawesome/free-solid-svg-icons" "6.2.0"
