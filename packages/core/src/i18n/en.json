@@ -7,7 +7,7 @@
   "wallets": {
     "hardware": {
       "title": "Hardware Wallet",
-      "info": "Select the hardware wallet you want to connect"
+      "info": "Select the hardware wallet you want to connect to"
     },
     "browser": {
       "title": "Browser Wallet",
@@ -67,6 +67,7 @@
   },
   "walletSuggestion": {
     "title": "Get a hardware wallet or install one of these Web3 wallets in your browser:",
-    "mobileTitle": "Install one of the Web3 wallets on your mobile:"
+    "mobileTitle": "Install one of the Web3 wallets on your mobile:",
+    "guide": "Sovryn wallet guide"
   }
 }

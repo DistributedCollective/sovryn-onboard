@@ -1,11 +1,15 @@
 .wrapper {
-  @apply flex items-center justify-between my-1.5;
+  @apply flex items-center justify-between py-2 my-3;
 }
 
 .title {
-  @apply flex items-center gap-3;
+  @apply flex items-center gap-3 grayscale hover:grayscale-0;
 }
 
 .icon {
-  @apply bg-gray-10 rounded w-8 h-8 grayscale;
+  @apply flex items-center justify-center bg-gray-70 rounded w-8 h-8;
+}
+
+.icon svg {
+  @apply w-6 h-6;
 }

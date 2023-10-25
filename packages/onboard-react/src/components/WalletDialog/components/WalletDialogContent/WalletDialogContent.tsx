@@ -13,6 +13,7 @@ import {
   Heading,
   HeadingType,
   Paragraph,
+  ParagraphSize,
 } from '@sovryn/ui';
 
 import BrowserIcon from '../../../../assets/Browser';
@@ -54,10 +55,9 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
   }, []);
 
   const handleNoWallet = useCallback(() => onChangeIndex(3), [onChangeIndex]);
-  const handleWalletConnect = useCallback(
-    () => onChangeIndex(2),
-    [onChangeIndex],
-  );
+  const handleWalletConnect = useCallback(() => onChangeIndex(2), [
+    onChangeIndex,
+  ]);
 
   const buttonBack = useMemo(
     () => (
@@ -77,6 +77,14 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         content: (
           <>
             {isMobile && !inProgress && buttonBack}
+            {isMobile && (
+              <Paragraph
+                size={ParagraphSize.base}
+                className={styles.hardwareInfo}
+              >
+                {t('wallets.hardware.info')}
+              </Paragraph>
+            )}
             <HardwareWallets dataAttribute={dataPrefix} />
           </>
         ),

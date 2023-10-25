@@ -16,7 +16,6 @@ export const WalletConnect: FC = () => {
 
   useEffect(() => {
     if (connect && !ref.current) {
-      console.log('connect!');
       ref.current = true;
       connect();
     }

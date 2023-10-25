@@ -43,6 +43,10 @@
   @apply ml-[3.75rem];
 }
 
+.hardwareInfo {
+  @apply text-gray-10 text-sm mb-8;
+}
+
 .info {
   @apply text-gray-30 mt-20;
 }
