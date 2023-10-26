@@ -24,7 +24,8 @@
     "react-i18next": "12.0.0"
   },
   "peerDependencies": {
-    "@sovryn/ui": "1.0.16",
+    "@sovryn/ui": "1.0.18",
+    "@sovryn/onboard-injected": "*",
     "ethers": "5.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
