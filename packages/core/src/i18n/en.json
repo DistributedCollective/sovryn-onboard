@@ -2,7 +2,8 @@
   "common": {
     "close": "Close",
     "backToMenu": "Back to wallet menu",
-    "download": "Download"
+    "download": "Download",
+    "new": "New"
   },
   "wallets": {
     "hardware": {

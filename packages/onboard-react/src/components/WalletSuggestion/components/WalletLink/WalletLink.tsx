@@ -10,31 +10,39 @@ interface WalletLinkProps {
   title: string;
   link: string;
   getIcon: () => Promise<string>;
+  isNew?: boolean;
 }
 
-export const WalletLink: FC<WalletLinkProps> = ({ title, link, getIcon }) => {
+export const WalletLink: FC<WalletLinkProps> = ({
+  title,
+  link,
+  getIcon,
+  isNew,
+}) => {
   const [icon, setIcon] = useState<string>('');
   const { t } = useTranslation();
 
   useEffect(() => {
-    getIcon()
-      .then(setIcon)
-      .catch(console.log);
+    getIcon().then(setIcon).catch(console.log);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>
-        {icon && (
-          <div
-            className={styles.icon}
-            dangerouslySetInnerHTML={{ __html: icon }}
-          />
-        )}
+      <div className={styles.left}>
+        <div className={styles.title}>
+          {icon && (
+            <div
+              className={styles.icon}
+              dangerouslySetInnerHTML={{ __html: icon }}
+            />
+          )}
 
-        {title}
+          {title}
+        </div>
+        {isNew && <span className={styles.newBadge}>{t('common.new')}</span>}
       </div>
+
       <Link text={t('common.download')} href={link} openNewTab />
     </div>
   );

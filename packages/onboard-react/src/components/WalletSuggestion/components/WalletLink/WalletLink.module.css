@@ -13,3 +13,15 @@
 .icon svg {
   @apply w-6 h-6;
 }
+
+.newBadge {
+  @apply rounded ml-1 text-tiny;
+  color: #24d0c6;
+  background-color: #255c60;
+  padding: 3px 2px;
+  line-height: 10px;
+}
+
+.left {
+  @apply flex items-center;
+}

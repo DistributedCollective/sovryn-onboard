@@ -12,9 +12,10 @@ export const WalletSuggestion: FC = () => {
   const { t } = useTranslation();
   const { isMobile } = useIsMobile();
 
-  const list = useMemo(() => (isMobile ? mobileWallets : desktopWallets), [
-    isMobile,
-  ]);
+  const list = useMemo(
+    () => (isMobile ? mobileWallets : desktopWallets),
+    [isMobile],
+  );
 
   return (
     <div>
@@ -32,6 +33,7 @@ export const WalletSuggestion: FC = () => {
             title={wallet.title}
             link={wallet.link}
             getIcon={wallet.getIcon}
+            isNew={wallet.isNew}
           />
         ))}
       <Link
