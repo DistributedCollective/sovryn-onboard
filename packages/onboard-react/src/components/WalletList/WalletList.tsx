@@ -22,6 +22,7 @@ export type WalletListProps = {
   dataAttribute?: string;
   handleNoWallet?: () => void;
   handleWalletConnect?: () => void;
+  className?: string;
 };
 
 export const WalletList: FC<WalletListProps> = ({

@@ -16,7 +16,7 @@
     "@sovryn/onboard-ledger": "*",
     "@sovryn/onboard-react": "*",
     "@sovryn/onboard-walletconnect": "*",
-    "@sovryn/ui": "1.0.18",
+    "@sovryn/ui": "1.0.19",
     "ethers": "5.7.0",
     "next": "12.2.3",
     "react": "18.2.0",

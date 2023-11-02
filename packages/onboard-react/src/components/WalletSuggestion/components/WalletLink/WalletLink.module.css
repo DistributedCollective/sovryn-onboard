@@ -3,7 +3,7 @@
 }
 
 .title {
-  @apply flex items-center gap-3 grayscale hover:grayscale-0;
+  @apply flex items-center gap-3 opacity-75 hover:opacity-100 grayscale hover:grayscale-0 transition;
 }
 
 .icon {

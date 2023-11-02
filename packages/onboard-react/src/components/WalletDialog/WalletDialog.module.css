@@ -32,7 +32,7 @@
 }
 
 .content {
-  @apply flex flex-col justify-start w-full h-auto self-stretch pt-[9.125rem];
+  @apply flex flex-col justify-center w-full h-auto self-stretch ;
 }
 
 .invisibleDialog {
@@ -40,7 +40,7 @@
 }
 
 .noWallet {
-  @apply ml-[3.75rem];
+  @apply md:ml-[3.75rem];
 }
 
 .hardwareInfo {
@@ -48,5 +48,9 @@
 }
 
 .info {
-  @apply text-gray-30 mt-20;
+  @apply text-gray-30 mt-32;
+}
+
+.walletTab {
+  @apply h-[4.375rem] md:h-auto;
 }

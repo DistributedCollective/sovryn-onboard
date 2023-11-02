@@ -24,7 +24,7 @@
     "react-i18next": "12.0.0"
   },
   "peerDependencies": {
-    "@sovryn/ui": "1.0.18",
+    "@sovryn/ui": "1.0.19",
     "@sovryn/onboard-injected": "*",
     "ethers": "5.7.0",
     "react": "18.2.0",
@@ -43,7 +43,7 @@
     "@sovryn/onboard-eslint-config": "*",
     "@sovryn/onboard-tsconfig": "*",
     "@sovryn/tailwindcss-config": "*",
-    "@sovryn/ui": "1.0.18",
+    "@sovryn/ui": "1.0.19",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",

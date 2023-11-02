@@ -1,5 +1,6 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
+import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
@@ -55,9 +56,10 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
   }, []);
 
   const handleNoWallet = useCallback(() => onChangeIndex(3), [onChangeIndex]);
-  const handleWalletConnect = useCallback(() => onChangeIndex(2), [
-    onChangeIndex,
-  ]);
+  const handleWalletConnect = useCallback(
+    () => onChangeIndex(2),
+    [onChangeIndex],
+  );
 
   const buttonBack = useMemo(
     () => (
@@ -90,6 +92,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         ),
         dataAttribute: `${dataPrefix}hardware`,
         icon: <div dangerouslySetInnerHTML={{ __html: HardwareIcon }} />,
+        className: styles.walletTab,
       },
       {
         label: t('wallets.browser.title'),
@@ -112,6 +115,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         ),
         dataAttribute: `${dataPrefix}browser`,
         icon: <div dangerouslySetInnerHTML={{ __html: BrowserIcon }} />,
+        className: styles.walletTab,
       },
       {
         label: t('wallets.walletConnect.title'),
@@ -124,6 +128,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         ),
         dataAttribute: `${dataPrefix}walletConnect`,
         icon: <div dangerouslySetInnerHTML={{ __html: WalletConnectIcon }} />,
+        className: styles.walletTab,
       },
       {
         label: t('wallets.noWallet.title'),
@@ -134,7 +139,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
           </>
         ),
         dataAttribute: `${dataPrefix}instructions`,
-        className: styles.noWallet,
+        className: classNames(styles.noWallet, styles.walletTab),
       },
     ],
     [
