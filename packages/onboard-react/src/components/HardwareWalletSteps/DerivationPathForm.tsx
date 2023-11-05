@@ -139,7 +139,7 @@ export const DerivationPathForm: FC<DerivationPathFormProps> = ({
         )}
 
         <Link
-          href="https://wiki.sovryn.app/en/getting-started/direct-hardware-wallet-integrations"
+          href="https://wiki.sovryn.com/en/getting-started/direct-hardware-wallet-integration"
           className={styles.infoLink}
           text={t('hardwareWalletSteps.setupWallet')}
           dataAttribute={`${dataPrefix}derivation-info`}
