@@ -1,5 +1,17 @@
 # @sovryn/onboard-react
 
+## 1.0.12
+
+### Patch Changes
+
+- e0802bc: SOV-3333: Implement new wallet connection flow updates
+- e0802bc: SOV-3370: Fix broken URL in onboarding package
+- Updated dependencies [e0802bc]
+- Updated dependencies [e0802bc]
+  - @sovryn/onboard-core@1.0.6
+  - @sovryn/onboard-injected@1.0.3
+  - @sovryn/onboard-hw-common@1.0.7
+
 ## 1.0.11
 
 ### Patch Changes

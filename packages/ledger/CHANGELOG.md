@@ -1,5 +1,11 @@
 # @sovryn/onboard-ledger
 
+## 1.0.7
+
+### Patch Changes
+
+- @sovryn/onboard-hw-common@1.0.7
+
 ## 1.0.6
 
 ### Patch Changes

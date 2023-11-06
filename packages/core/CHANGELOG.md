@@ -1,5 +1,12 @@
 # @sovryn/onboard-core
 
+## 1.0.6
+
+### Patch Changes
+
+- e0802bc: SOV-3333: Implement new wallet connection flow updates
+- e0802bc: SOV-3370: Fix broken URL in onboarding package
+
 ## 1.0.5
 
 ### Patch Changes
