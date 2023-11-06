@@ -1,0 +1,27 @@
+.wrapper {
+  @apply flex items-center justify-between py-2 my-3;
+}
+
+.title {
+  @apply flex items-center gap-3 opacity-75 hover:opacity-100 grayscale hover:grayscale-0 transition;
+}
+
+.icon {
+  @apply flex items-center justify-center bg-gray-70 rounded w-8 h-8;
+}
+
+.icon svg {
+  @apply w-6 h-6;
+}
+
+.newBadge {
+  @apply rounded ml-1 text-tiny;
+  color: #24d0c6;
+  background-color: #255c60;
+  padding: 3px 2px;
+  line-height: 10px;
+}
+
+.left {
+  @apply flex items-center;
+}

@@ -1,0 +1,7 @@
+.install {
+  @apply underline mt-0;
+}
+
+.list {
+  @apply list-disc pl-8 mt-2;
+}

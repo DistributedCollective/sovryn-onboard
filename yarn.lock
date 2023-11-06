@@ -393,6 +393,11 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.20.2.tgz#d1b9000752b18d0877cff85a5c376ce5c3121629"
   integrity sha512-8RvlJG2mj4huQ4pZ+rU9lqKi9ZKiRmuvGuM2HlWmkmgOhbs6zEAw6IEiJ5cQqGbDzGZOhwuOQNtZMi/ENLjZoQ==
 
+"@babel/helper-plugin-utils@^7.22.5":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.22.5.tgz#dd7ee3735e8a313b9f7b05a773d892e88e6d7295"
+  integrity sha512-uLls06UVKgFG9QD4OeFYLEGteMIAa5kpTPcFL28yuCIIzsf6ZyKZMllKVOCZFhiZ5ptnwX4mtKdWCBE/uT4amg==
+
 "@babel/helper-remap-async-to-generator@^7.18.6", "@babel/helper-remap-async-to-generator@^7.18.9":
   version "7.18.9"
   resolved "https://registry.yarnpkg.com/@babel/helper-remap-async-to-generator/-/helper-remap-async-to-generator-7.18.9.tgz#997458a0e3357080e54e1d79ec347f8a8cd28519"
@@ -807,6 +812,13 @@
   integrity sha512-6mmljtAedFGTWu2p/8WIORGwy+61PLgOMPOdazc7YoJ9ZCWUyFy3A6CpPkRKLKD1ToAesxX8KGEViAiLo9N+7Q==
   dependencies:
     "@babel/helper-plugin-utils" "^7.18.6"
+
+"@babel/plugin-syntax-jsx@^7.22.5":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-jsx/-/plugin-syntax-jsx-7.22.5.tgz#a6b68e84fb76e759fc3b93e901876ffabbe1d918"
+  integrity sha512-gvyP4hZrgrs/wWMaocvxZ44Hw0b3W8Pe+cMxc8V1ULQ07oh8VNbIRaoD1LRZVTvD+0nieDKjfgKg89sD7rrKrg==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.22.5"
 
 "@babel/plugin-syntax-logical-assignment-operators@^7.10.4", "@babel/plugin-syntax-logical-assignment-operators@^7.8.3":
   version "7.10.4"
@@ -3750,25 +3762,10 @@
     postcss-preset-env "^7.7.1"
     tailwindcss "^3.1.3"
 
-"@sovryn/ui@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-1.0.6.tgz#6bd667e199a59f01f13476edb4c5bf95a7244539"
-  integrity sha512-k75aQcnHzKVKUdSercDhGYk0TujHw1e64zrOQp89DRyMNtBihbegY7e83OC5K15gmLxcxsu5xIrsweMENkJuXg==
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" "6.2.0"
-    "@fortawesome/free-solid-svg-icons" "6.2.0"
-    "@fortawesome/react-fontawesome" "0.2.0"
-    classnames "2.3.1"
-    focus-trap-react "10.0.0"
-    framer-motion "8.5.3"
-    identity-obj-proxy "3.0.0"
-    jest-canvas-mock "2.4.0"
-    lottie-react "2.3.1"
-
-"@sovryn/ui@1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-1.0.8.tgz#f0cc19b014c76fe92d4157eecebd8edd95172f10"
-  integrity sha512-xp5efuBLZ3bWvrHcqdyj43dhJZO5eBZ4zFe8dqStzBEA+BqY6FAo4x5oM9ZuvALJhAbMVFz8UU3LncWJ6mnh/w==
+"@sovryn/ui@1.0.19":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@sovryn/ui/-/ui-1.0.19.tgz#b182ef5738e05aacc9d041b9a200ac30b47f8169"
+  integrity sha512-hBhQlTMnWzC3oEm0ufk4o1zHkBgtnTby4K3dt1sohLGt9wQLbVmAhnAWEZSno5drCs3cD8VK8kHBxHTnfrYKMA==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "6.2.0"
     "@fortawesome/free-solid-svg-icons" "6.2.0"
