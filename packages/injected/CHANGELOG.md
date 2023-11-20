@@ -1,5 +1,11 @@
 # @sovryn/onboard-injected
 
+## 1.0.4
+
+### Patch Changes
+
+- 6856739: SOV-3369: Add Enkrypt wallet to Browser Wallet list
+
 ## 1.0.3
 
 ### Patch Changes
