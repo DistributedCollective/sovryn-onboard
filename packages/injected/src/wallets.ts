@@ -52,6 +52,16 @@ const exodus: InjectedWalletModule = {
   platforms: ['all'],
 };
 
+const enkrypt: InjectedWalletModule = {
+  label: ProviderLabel.Enkrypt,
+  injectedNamespace: InjectedNameSpace.Ethereum,
+  checkProviderIdentity: ({ provider }) =>
+    !!provider && !!provider[ProviderIdentityFlag.Enkrypt],
+  getIcon: async () => (await import('./icons/enkrypt.js')).default,
+  getInterface: getInjectedInterface(ProviderIdentityFlag.Enkrypt),
+  platforms: ['all'],
+};
+
 const brave: InjectedWalletModule = {
   label: ProviderLabel.Brave,
   injectedNamespace: InjectedNameSpace.Ethereum,
@@ -548,6 +558,7 @@ const sequence: InjectedWalletModule = {
 
 const wallets = [
   exodus,
+  enkrypt,
   metamask,
   binance,
   coinbase,
