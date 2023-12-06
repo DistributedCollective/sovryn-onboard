@@ -76,27 +76,13 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
   );
   const dataPrefix = formatDataPrefix(dataAttribute);
   const items: VerticalTabsItem[] = useMemo(() => {
-    let hasWC,
-      hasLedger,
-      hasTrezor = false;
-    walletModules.forEach(item => {
-      switch (item.label) {
-        case 'WalletConnect':
-          hasWC = true;
-          break;
-        case 'Ledger':
-          hasLedger = true;
-          break;
-        case 'Trezor':
-          hasTrezor = true;
-          break;
-        default:
-          break;
-      }
-    });
     let list: VerticalTabsItem[] = [];
 
-    if (hasLedger || hasTrezor) {
+    if (
+      walletModules.some(
+        ({ label }) => label === 'Ledger' || label === 'Trezor',
+      )
+    ) {
       list.push({
         label: t('wallets.hardware.title'),
         content: (
@@ -142,7 +128,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
       className: styles.walletTab,
     });
 
-    if (hasWC) {
+    if (walletModules.some(({ label }) => label === 'WalletConnect')) {
       list.push({
         label: t('wallets.walletConnect.title'),
         infoText: t('wallets.walletConnect.info'),
