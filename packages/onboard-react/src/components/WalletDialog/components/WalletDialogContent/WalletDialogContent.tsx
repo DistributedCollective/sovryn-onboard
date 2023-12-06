@@ -3,6 +3,7 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
+import { WalletModule } from '@sovryn/onboard-common';
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
 import { selectAccounts$ } from '@sovryn/onboard-hw-common';
 import {
@@ -32,11 +33,13 @@ import styles from '../../WalletDialog.module.css';
 
 type WalletDialogContentProps = {
   dataAttribute?: string;
+  walletModules: WalletModule[];
   onClose: () => void;
 };
 
 export const WalletDialogContent: FC<WalletDialogContentProps> = ({
   dataAttribute,
+  walletModules,
   onClose,
 }) => {
   const { t } = useTranslation();
@@ -72,9 +75,15 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
     [t, dataAttribute, onChangeIndex],
   );
   const dataPrefix = formatDataPrefix(dataAttribute);
-  const items: VerticalTabsItem[] = useMemo(
-    () => [
-      {
+  const items: VerticalTabsItem[] = useMemo(() => {
+    let list: VerticalTabsItem[] = [];
+
+    if (
+      walletModules.some(
+        ({ label }) => label === 'Ledger' || label === 'Trezor',
+      )
+    ) {
+      list.push({
         label: t('wallets.hardware.title'),
         content: (
           <>
@@ -93,31 +102,34 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         dataAttribute: `${dataPrefix}hardware`,
         icon: <div dangerouslySetInnerHTML={{ __html: HardwareIcon }} />,
         className: styles.walletTab,
-      },
-      {
-        label: t('wallets.browser.title'),
-        infoText: t('wallets.browser.info'),
-        content: (
-          <>
-            {isMobile && buttonBack}
-            <WalletList
-              filter={FilterType.browser}
-              dataAttribute={dataPrefix}
-              handleNoWallet={handleNoWallet}
-              handleWalletConnect={handleWalletConnect}
-            />
-            {!isMobile && (
-              <Paragraph className={styles.info}>
-                {t('wallets.browser.extra')}
-              </Paragraph>
-            )}
-          </>
-        ),
-        dataAttribute: `${dataPrefix}browser`,
-        icon: <div dangerouslySetInnerHTML={{ __html: BrowserIcon }} />,
-        className: styles.walletTab,
-      },
-      {
+      });
+    }
+    list.push({
+      label: t('wallets.browser.title'),
+      infoText: t('wallets.browser.info'),
+      content: (
+        <>
+          {isMobile && buttonBack}
+          <WalletList
+            filter={FilterType.browser}
+            dataAttribute={dataPrefix}
+            handleNoWallet={handleNoWallet}
+            handleWalletConnect={handleWalletConnect}
+          />
+          {!isMobile && (
+            <Paragraph className={styles.info}>
+              {t('wallets.browser.extra')}
+            </Paragraph>
+          )}
+        </>
+      ),
+      dataAttribute: `${dataPrefix}browser`,
+      icon: <div dangerouslySetInnerHTML={{ __html: BrowserIcon }} />,
+      className: styles.walletTab,
+    });
+
+    if (walletModules.some(({ label }) => label === 'WalletConnect')) {
+      list.push({
         label: t('wallets.walletConnect.title'),
         infoText: t('wallets.walletConnect.info'),
         content: (
@@ -129,29 +141,30 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         dataAttribute: `${dataPrefix}walletConnect`,
         icon: <div dangerouslySetInnerHTML={{ __html: WalletConnectIcon }} />,
         className: styles.walletTab,
-      },
-      {
-        label: t('wallets.noWallet.title'),
-        content: (
-          <>
-            {isMobile && buttonBack}
-            <WalletSuggestion />
-          </>
-        ),
-        dataAttribute: `${dataPrefix}instructions`,
-        className: classNames(styles.noWallet, styles.walletTab),
-      },
-    ],
-    [
-      t,
-      isMobile,
-      inProgress,
-      buttonBack,
-      dataPrefix,
-      handleNoWallet,
-      handleWalletConnect,
-    ],
-  );
+      });
+    }
+    list.push({
+      label: t('wallets.noWallet.title'),
+      content: (
+        <>
+          {isMobile && buttonBack}
+          <WalletSuggestion />
+        </>
+      ),
+      dataAttribute: `${dataPrefix}instructions`,
+      className: classNames(styles.noWallet, styles.walletTab),
+    });
+    return list;
+  }, [
+    t,
+    isMobile,
+    inProgress,
+    buttonBack,
+    dataPrefix,
+    handleNoWallet,
+    handleWalletConnect,
+    walletModules,
+  ]);
 
   return (
     <>
