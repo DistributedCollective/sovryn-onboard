@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { shareReplay, startWith } from 'rxjs';
 
+import { WalletModule } from '@sovryn/onboard-common';
 import { state } from '@sovryn/onboard-core';
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
 import { selectAccounts$ } from '@sovryn/onboard-hw-common';
@@ -34,23 +35,14 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
     });
   }, []);
 
-  const [excludedWallets, setExcludedWallets] = useState<string[]>([]);
+  const [walletModules, setWalletModules] = useState<WalletModule[]>([]);
 
   useEffect(() => {
     const sub = state
       .select('walletModules')
       .pipe(startWith(state.get().walletModules), shareReplay(1))
       .subscribe(async modules => {
-        const wallets = await Promise.all(
-          modules.map(async module => {
-            return {
-              ...module,
-            };
-          }),
-        );
-        const hasWC =
-          wallets.filter(item => item.label === 'WalletConnect').length > 0;
-        setExcludedWallets(hasWC ? [] : ['WalletConnect']);
+        setWalletModules(modules);
       });
 
     return () => {
@@ -80,7 +72,7 @@ const WalletDialog: FC<WalletDialogProps> = ({ isOpen, dataAttribute }) => {
       <WalletDialogContent
         dataAttribute={dataAttribute}
         onClose={handleCloseClick}
-        excludeWallets={excludedWallets}
+        walletModules={walletModules}
       />
     </Dialog>
   );

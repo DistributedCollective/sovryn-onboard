@@ -3,6 +3,7 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
+import { WalletModule } from '@sovryn/onboard-common';
 import { connectWallet$ } from '@sovryn/onboard-core/dist/streams';
 import { selectAccounts$ } from '@sovryn/onboard-hw-common';
 import {
@@ -32,13 +33,13 @@ import styles from '../../WalletDialog.module.css';
 
 type WalletDialogContentProps = {
   dataAttribute?: string;
-  excludeWallets: string[];
+  walletModules: WalletModule[];
   onClose: () => void;
 };
 
 export const WalletDialogContent: FC<WalletDialogContentProps> = ({
   dataAttribute,
-  excludeWallets,
+  walletModules,
   onClose,
 }) => {
   const { t } = useTranslation();
@@ -75,8 +76,28 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
   );
   const dataPrefix = formatDataPrefix(dataAttribute);
   const items: VerticalTabsItem[] = useMemo(() => {
-    let list: VerticalTabsItem[] = [
-      {
+    let hasWC,
+      hasLedger,
+      hasTrezor = false;
+    walletModules.forEach(item => {
+      switch (item.label) {
+        case 'WalletConnect':
+          hasWC = true;
+          break;
+        case 'Ledger':
+          hasLedger = true;
+          break;
+        case 'Trezor':
+          hasTrezor = true;
+          break;
+        default:
+          break;
+      }
+    });
+    let list: VerticalTabsItem[] = [];
+
+    if (hasLedger || hasTrezor) {
+      list.push({
         label: t('wallets.hardware.title'),
         content: (
           <>
@@ -95,33 +116,33 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
         dataAttribute: `${dataPrefix}hardware`,
         icon: <div dangerouslySetInnerHTML={{ __html: HardwareIcon }} />,
         className: styles.walletTab,
-      },
-      {
-        label: t('wallets.browser.title'),
-        infoText: t('wallets.browser.info'),
-        content: (
-          <>
-            {isMobile && buttonBack}
-            <WalletList
-              filter={FilterType.browser}
-              dataAttribute={dataPrefix}
-              handleNoWallet={handleNoWallet}
-              handleWalletConnect={handleWalletConnect}
-            />
-            {!isMobile && (
-              <Paragraph className={styles.info}>
-                {t('wallets.browser.extra')}
-              </Paragraph>
-            )}
-          </>
-        ),
-        dataAttribute: `${dataPrefix}browser`,
-        icon: <div dangerouslySetInnerHTML={{ __html: BrowserIcon }} />,
-        className: styles.walletTab,
-      },
-    ];
+      });
+    }
+    list.push({
+      label: t('wallets.browser.title'),
+      infoText: t('wallets.browser.info'),
+      content: (
+        <>
+          {isMobile && buttonBack}
+          <WalletList
+            filter={FilterType.browser}
+            dataAttribute={dataPrefix}
+            handleNoWallet={handleNoWallet}
+            handleWalletConnect={handleWalletConnect}
+          />
+          {!isMobile && (
+            <Paragraph className={styles.info}>
+              {t('wallets.browser.extra')}
+            </Paragraph>
+          )}
+        </>
+      ),
+      dataAttribute: `${dataPrefix}browser`,
+      icon: <div dangerouslySetInnerHTML={{ __html: BrowserIcon }} />,
+      className: styles.walletTab,
+    });
 
-    if (!excludeWallets.includes('WalletConnect')) {
+    if (hasWC) {
       list.push({
         label: t('wallets.walletConnect.title'),
         infoText: t('wallets.walletConnect.info'),
@@ -156,7 +177,7 @@ export const WalletDialogContent: FC<WalletDialogContentProps> = ({
     dataPrefix,
     handleNoWallet,
     handleWalletConnect,
-    excludeWallets,
+    walletModules,
   ]);
 
   return (
