@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 1.0.13
+
+### Patch Changes
+
+- b6f6a37: SOV-3562: auto hide onboard sections based on provided modules
+
 ## 1.0.12
 
 ### Patch Changes
