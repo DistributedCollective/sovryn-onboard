@@ -532,17 +532,21 @@ const gamestop: InjectedWalletModule = {
   platforms: ['desktop'],
 };
 
-const bitkeep: InjectedWalletModule = {
-  label: ProviderLabel.BitKeep,
-  injectedNamespace: InjectedNameSpace.BitKeep,
+const bitget: InjectedWalletModule = {
+  label: ProviderLabel.Bitget,
+  injectedNamespace: InjectedNameSpace.Bitget,
   checkProviderIdentity: ({ provider }) =>
-    !!provider && !!provider['ethereum'][ProviderIdentityFlag.BitKeep],
-  getIcon: async () => (await import('./icons/bitkeep.js')).default,
+    !!provider && !!provider['ethereum'][ProviderIdentityFlag.Bitget],
+  getIcon: async () => (await import('./icons/bitget.js')).default,
   getInterface: async () => ({
     provider: window.bitkeep && window.bitkeep.ethereum,
   }),
   platforms: ['all'],
 };
+/**
+ * @deprecated Use 'bitget' instead."
+ */
+const bitkeep: InjectedWalletModule = bitget;
 
 const sequence: InjectedWalletModule = {
   label: ProviderLabel.Sequence,
@@ -590,6 +594,7 @@ const wallets = [
   mathwallet,
   gamestop,
   bitkeep,
+  bitget,
   sequence,
 ];
 

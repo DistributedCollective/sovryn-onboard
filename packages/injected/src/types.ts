@@ -47,7 +47,8 @@ export enum ProviderIdentityFlag {
   Rabby = 'isRabby',
   MathWallet = 'isMathWallet',
   GameStop = 'isGamestop',
-  BitKeep = 'isBitKeep',
+  // Bitget is still using 'isBitKeep' as the flag
+  Bitget = 'isBitKeep',
   Sequence = 'isSequence',
 }
 
@@ -86,7 +87,7 @@ export enum ProviderLabel {
   Rabby = 'Rabby',
   MathWallet = 'MathWallet',
   GameStop = 'GameStop Wallet',
-  BitKeep = 'BitKeep',
+  Bitget = 'Bitget Wallet',
   Sequence = 'Sequence',
 }
 
@@ -108,7 +109,8 @@ export enum InjectedNameSpace {
   Arbitrum = 'arbitrum',
   XFI = 'xfi',
   GameStop = 'gamestop',
-  BitKeep = 'bitkeep',
+  // Bitget is still using 'window.Bitkeep' as the entry
+  Bitget = 'bitkeep',
 }
 
 export interface CustomWindow extends Window {
@@ -121,6 +123,7 @@ export interface CustomWindow extends Window {
     ethereum: InjectedProvider;
   };
   gamestop: InjectedProvider;
+  // Bitget is still using 'window.Bitkeep' as the entry
   bitkeep: {
     ethereum: InjectedProvider;
   };
