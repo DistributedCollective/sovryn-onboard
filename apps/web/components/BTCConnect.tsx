@@ -6,7 +6,7 @@ import {
 
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Button } from '@sovryn/ui';
+import { Button, WalletIdentity } from '@sovryn/ui';
 
 const BTCConnect = () => {
   const { account } = useETHProvider();
@@ -55,11 +55,21 @@ const BTCConnect = () => {
   ) : (
     <div>
       <h1>Connected</h1>
-      <h2>BTC Wallet: {accounts[0]}</h2>
+      <div className="flex justify-around items-center">
+        <h2>BTC Wallet</h2>
+        <WalletIdentity
+          address={accounts[0]}
+          onDisconnect={disconnect}
+          submenuLabels={{
+            copyAddress: 'Copy Address',
+            disconnect: 'Disconnect',
+          }}
+          className="ml-4"
+        />
+      </div>
       <h2>Balance: {balanceBtc} BTC</h2>
       <div className="flex justify-around">
         <Button onClick={executeTxBtc} text="Execute BTC Transaction" />
-        <Button onClick={disconnect} text="Disconnect Wallet" />
       </div>
     </div>
   );
