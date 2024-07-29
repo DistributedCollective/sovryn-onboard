@@ -1,3 +1,12 @@
+import {
+  ConnectProvider,
+  UnisatConnector,
+  OKXConnector,
+  XverseConnector,
+  BybitConnector,
+} from '@particle-network/btc-connectkit';
+import { BOBTestnet } from '@particle-network/chains';
+
 import { useCallback, useEffect, useState, FC } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -8,6 +17,7 @@ import { Button } from '@sovryn/ui';
 
 import { Wallet } from '../components/Wallet';
 import { onboard } from '../lib/connector';
+import BTCConnect from '../components/BTCConnect';
 
 const OnboardProvider: FC<any> = dynamic(
   () => import('@sovryn/onboard-react').then(mod => mod.OnboardProvider),
@@ -72,7 +82,34 @@ export default function Web() {
           text="Custom"
         />
       </div>
-
+      <ConnectProvider
+        options={{
+          projectId: 'cb827d8b-a1af-4d46-98a7-e922ba68fe91', // this is a test project id
+          clientKey: 'cGEPcgHNFQ7Eb9HIkXVnjSxSlL793qTSH3i0iQzb', // this is a test key
+          appId: 'sibYxrpDDpKPtq5jZDq696rkVWeV8ITCZbM3KAbX', // this is a test app id
+          aaOptions: {
+            accountContracts: {
+              BTC: [
+                {
+                  chainIds: [BOBTestnet.id],
+                  version: '2.0.0',
+                },
+              ],
+            },
+          },
+          walletOptions: {
+            visible: true,
+          },
+        }}
+        connectors={[
+          new UnisatConnector(),
+          new OKXConnector(),
+          new XverseConnector(),
+          new BybitConnector(),
+        ]}
+      >
+        <BTCConnect />
+      </ConnectProvider>
       <OnboardProvider dataAttribute="onboard-demo" />
     </div>
   );

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@metamask/eth-sig-util": "4.0.1",
+    "@particle-network/btc-connectkit": "^1.0.0-alpha.26",
+    "@particle-network/chains": "^1.5.7",
     "@sovryn/onboard-common": "*",
     "@sovryn/onboard-core": "*",
     "@sovryn/onboard-injected": "*",
