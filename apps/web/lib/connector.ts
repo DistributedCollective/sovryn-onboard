@@ -1,3 +1,4 @@
+import bitgetModule from '@sovryn/onboard-bitget';
 import Onboard from '@sovryn/onboard-core';
 import { Asset, BasePath } from '@sovryn/onboard-hw-common';
 import injectedModule from '@sovryn/onboard-injected';
@@ -12,6 +13,7 @@ const basePaths: BasePath[] = [
 const assets: Asset[] = [{ label: 'RBTC' }, { label: 'ETH' }];
 
 const injected = injectedModule();
+const bitget = bitgetModule();
 const ledger = ledgerModule({
   basePaths,
   assets,
@@ -28,7 +30,7 @@ const walletConnectV2 = walletConnectModule({
   projectId: 'd3483196fbaa8259ab4191347c67f973',
 });
 export const onboard = Onboard({
-  wallets: [injected, ledger, trezor, walletConnectV2],
+  wallets: [injected, ledger, trezor, walletConnectV2, bitget],
   chains: [
     {
       id: '0x1e',
@@ -50,6 +52,20 @@ export const onboard = Onboard({
       label: 'RSK testnet',
       token: 'tRBTC',
       blockExplorerUrl: 'https://explorer.testnet.rsk.co',
+    },
+    {
+      id: '0xed88',
+      rpcUrl: 'https://rpc.gobob.xyz',
+      label: 'BOB',
+      token: 'ETH',
+      blockExplorerUrl: 'https://explorer.gobob.xyz',
+    },
+    {
+      id: '0x6f',
+      rpcUrl: 'https://testnet.rpc.gobob.xyz',
+      label: 'BOB testnet',
+      token: 'tETH',
+      blockExplorerUrl: 'https://testnet-explorer.gobob.xyz',
     },
   ],
   i18n: {

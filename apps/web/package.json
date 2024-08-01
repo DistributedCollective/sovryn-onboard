@@ -16,6 +16,7 @@
     "@sovryn/onboard-ledger": "*",
     "@sovryn/onboard-react": "*",
     "@sovryn/onboard-walletconnect": "*",
+    "@sovryn/onboard-bitget": "*",
     "@sovryn/ui": "1.0.19",
     "ethers": "5.7.0",
     "next": "12.2.3",
