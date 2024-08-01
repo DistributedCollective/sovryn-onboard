@@ -20,6 +20,7 @@ export enum ProviderIdentityFlag {
   BlockWallet = 'isBlockWallet',
   Coinbase = 'isToshi',
   CoinbaseExtension = 'isCoinbaseWallet',
+  /** @deprecated */
   Defiant = 'isDefiant',
   Detected = 'request',
   Dcent = 'isDcentWallet',
@@ -60,6 +61,7 @@ export enum ProviderLabel {
   Brave = 'Brave Wallet',
   Coinbase = 'Coinbase Wallet',
   Dcent = `D'CENT`,
+  /** @deprecated */
   Defiant = 'Defiant',
   Detected = 'Detected Wallet',
   Exodus = 'Exodus',

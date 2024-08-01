@@ -290,6 +290,9 @@ const huobiwallet: InjectedWalletModule = {
   platforms: ['mobile'],
 };
 
+/**
+ * @deprecated Defiant wallet is discontinued. Keeping this just in case someone still has it installed.
+ */
 const defiantwallet: InjectedWalletModule = {
   label: ProviderLabel.Defiant,
   injectedNamespace: InjectedNameSpace.Ethereum,

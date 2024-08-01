@@ -42,6 +42,7 @@ const WALLETS = {
       (await import('@sovryn/onboard-injected/dist/icons/taho.js')).default,
     isNew: false,
   },
+  /** @deprecated */
   Defiant: {
     title: 'Defiant',
     link: 'https://defiantapp.tech',
