@@ -16,25 +16,72 @@ import styles from './Wallet.module.css';
 const MESSAGE_TO_SIGN = 'hello world';
 
 const DATA_TO_SIGN = (chainId: number) => ({
+  // domain: {
+  //   chainId,
+  //   name: 'Ether Mail',
+  //   verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+  //   version: '1',
+  // },
+
+  // message: {
+  //   content: 'a signed message',
+  // },
+
+  // types: {
+  //   // EIP712Domain: [
+  //   //     { name: 'name', type: 'string' },
+  //   //     { name: 'version', type: 'string' },
+  //   //     { name: 'chainId', type: 'uint256' },
+  //   //     { name: 'verifyingContract', type: 'address' },
+  //   // ],
+  //   Message: [{ name: 'content', type: 'string' }],
+  // },
   domain: {
-    chainId,
-    name: 'Ether Mail',
-    verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
-    version: '1',
+    name: 'Permit2',
+    chainId: chainId,
+    verifyingContract: '0x000000000022D473030F116dDEE9F6B43aC78BA3',
   },
-
-  message: {
-    content: 'a signed message',
-  },
-
   types: {
-    // EIP712Domain: [
-    //     { name: 'name', type: 'string' },
-    //     { name: 'version', type: 'string' },
-    //     { name: 'chainId', type: 'uint256' },
-    //     { name: 'verifyingContract', type: 'address' },
-    // ],
-    Message: [{ name: 'content', type: 'string' }],
+    PermitTransferFrom: [
+      {
+        name: 'permitted',
+        type: 'TokenPermissions',
+      },
+      {
+        name: 'spender',
+        type: 'address',
+      },
+      {
+        name: 'nonce',
+        type: 'uint256',
+      },
+      {
+        name: 'deadline',
+        type: 'uint256',
+      },
+    ],
+    TokenPermissions: [
+      {
+        name: 'token',
+        type: 'address',
+      },
+      {
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+  },
+  values: {
+    permitted: {
+      token: '0xc1411567d2670e24d9c4daaa7cda95686e1250aa',
+      amount: '1000000000000000000',
+    },
+    spender: '0xd46c0225d1331b46700d64ff8c906709d15c9202',
+    nonce: {
+      type: 'BigNumber',
+      hex: '0x018da28d91b0',
+    },
+    deadline: 1710421203,
   },
 });
 
@@ -70,17 +117,17 @@ export const Wallet: FC<WalletProps> = ({ wallet }) => {
     const signature = await getSigner(wallet.provider)._signTypedData(
       data.domain,
       data.types,
-      data.message,
+      data.values,
     );
 
     const signer = utils.verifyTypedData(
       data.domain,
       data.types,
-      data.message,
+      data.values,
       signature,
     );
 
-    console.log({ address, signer, signature });
+    console.log(data, { address, signer, signature });
 
     alert(
       address.toLowerCase() === signer.toLowerCase()

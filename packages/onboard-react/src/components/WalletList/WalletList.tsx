@@ -117,7 +117,12 @@ export const WalletList: FC<WalletListProps> = ({
       ))}
 
       {(hasUserDeclinedTx || normalizedError) && (
-        <div className={styles.error}>{normalizedError}</div>
+        <div
+          className={styles.error}
+          dangerouslySetInnerHTML={{
+            __html: normalizedError || 'User declined transaction',
+          }}
+        />
       )}
     </div>
   );
