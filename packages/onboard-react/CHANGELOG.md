@@ -1,5 +1,11 @@
 # @sovryn/onboard-react
 
+## 1.0.14
+
+### Patch Changes
+
+- 0e04651: feat: bitget wallet package
+
 ## 1.0.13
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # web
 
+## 1.0.7
+
+### Patch Changes
+
+- 0e04651: feat: bitget wallet package
+- Updated dependencies [0e04651]
+  - @sovryn/onboard-bitget@1.0.1
+  - @sovryn/onboard-react@1.0.14
+
 ## 1.0.6
 
 ### Patch Changes
