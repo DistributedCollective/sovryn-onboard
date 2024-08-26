@@ -61,11 +61,11 @@ export const onboard = Onboard({
       blockExplorerUrl: 'https://explorer.gobob.xyz',
     },
     {
-      id: '0x6f',
-      rpcUrl: 'https://testnet.rpc.gobob.xyz',
+      id: '0xc576d',
+      rpcUrl: 'https://bob-sepolia.rpc.gobob.xyz/',
       label: 'BOB testnet',
       token: 'tETH',
-      blockExplorerUrl: 'https://testnet-explorer.gobob.xyz',
+      blockExplorerUrl: 'https://bob-sepolia.explorer.gobob.xyz/',
     },
   ],
   i18n: {
