@@ -50,6 +50,7 @@ export enum ProviderIdentityFlag {
   GameStop = 'isGamestop',
   BitKeep = 'isBitKeep',
   Sequence = 'isSequence',
+  Uniswap = 'isUniswapWallet',
 }
 
 export enum ProviderLabel {
@@ -90,6 +91,7 @@ export enum ProviderLabel {
   GameStop = 'GameStop Wallet',
   BitKeep = 'BitKeep',
   Sequence = 'Sequence',
+  Uniswap = 'Uniswap',
 }
 
 export interface MeetOneProvider extends ExternalProvider {

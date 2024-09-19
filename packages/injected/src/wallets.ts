@@ -559,6 +559,16 @@ const sequence: InjectedWalletModule = {
   platforms: ['all'],
 };
 
+const uniswap: InjectedWalletModule = {
+  label: ProviderLabel.Uniswap,
+  injectedNamespace: InjectedNameSpace.Ethereum,
+  checkProviderIdentity: ({ provider }) =>
+    !!provider && !!provider[ProviderIdentityFlag.Uniswap],
+  getIcon: async () => (await import('./icons/uniswap.js')).default,
+  getInterface: getInjectedInterface(ProviderIdentityFlag.Uniswap),
+  platforms: ['all'],
+};
+
 const wallets = [
   exodus,
   enkrypt,
@@ -594,6 +604,7 @@ const wallets = [
   gamestop,
   bitkeep,
   sequence,
+  uniswap,
 ];
 
 export default wallets;
