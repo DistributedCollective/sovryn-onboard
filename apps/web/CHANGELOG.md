@@ -1,5 +1,13 @@
 # web
 
+## 1.0.8
+
+### Patch Changes
+
+- fce3770: chore: update bob testnet addresses
+- Updated dependencies [f0e529c]
+  - @sovryn/onboard-injected@1.0.5
+
 ## 1.0.7
 
 ### Patch Changes

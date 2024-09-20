@@ -1,5 +1,11 @@
 # @sovryn/onboard-injected
 
+## 1.0.5
+
+### Patch Changes
+
+- f0e529c: SOV-4366: Uniswap wallet
+
 ## 1.0.4
 
 ### Patch Changes
