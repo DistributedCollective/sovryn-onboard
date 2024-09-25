@@ -604,7 +604,7 @@ const wallets = [
   gamestop,
   bitkeep,
   sequence,
-  uniswap,
+  //uniswap,
 ];
 
 export default wallets;
