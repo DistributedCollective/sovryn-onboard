@@ -1,5 +1,11 @@
 # @sovryn/onboard-injected
 
+## 1.0.6
+
+### Patch Changes
+
+- 9a3a066: feat: update bitkeep adapter
+
 ## 1.0.5
 
 ### Patch Changes
