@@ -1,6 +1,6 @@
 # @sovryn/onboard-trezor
 
-## 1.0.7
+## 1.0.8
 
 ### Patch Changes
 
